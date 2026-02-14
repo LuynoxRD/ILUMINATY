@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-900 overflow-x-hidden font-sans;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-sans font-bold;
+}
+
+h1 {
+  @apply text-5xl md:text-7xl;
+}
+
+h2 {
+  @apply text-4xl md:text-5xl;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl;
+}
+
+/* Glassmorphism */
+
+
+/* Button Styles */
+
+.btn-primary {
+  @apply px-6 py-3 bg-accent text-gray-900 font-semibold rounded-md transition-all duration-200 shadow-none hover:bg-accent/90 active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 border border-accent text-accent font-semibold rounded-md transition-all duration-200 hover:bg-accent hover:text-gray-900 active:scale-95;
+}
+
+/* Links */
+a {
+  @apply transition-colors duration-300;
+}
+
+/* Forms */
+input, textarea, select {
+  @apply bg-gray-50 border border-gray-200 rounded-md px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-200;
+}
+
+input:disabled, textarea:disabled, select:disabled {
+  @apply bg-gray-100 opacity-50 cursor-not-allowed;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  @apply w-3 h-3;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-accent/20 rounded-full hover:bg-accent/40;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(57, 255, 20, 0.8), 0 0 30px rgba(221, 0, 255, 0.3);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Utility Classes */
+.transition-smooth {
+  @apply transition-all duration-300 ease-out;
+}
+
+
+
+
+
+
