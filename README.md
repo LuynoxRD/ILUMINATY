@@ -1,7 +1,7 @@
 # ⚡ ILUMINATY - NYC Urban Artists Platform
 
 <p align="center">
-  <img src="https://alofoke.co/_next/image?url=%2Fss_1.png&w=384&q=75" width="200" alt="App Preview">
+  <img src="https://i.postimg.cc/C5BN8s1S/Ilumitany1.png" width="200" alt="App Preview">
 </p>
 
 ### 🚀 El futuro del arte urbano en Nueva York
