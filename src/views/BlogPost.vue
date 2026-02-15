@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-gray">
     <!-- Post Header -->
     <section class="py-16 bg-gradient-dark relative overflow-hidden">
       <div class="absolute inset-0 opacity-40 -z-10">
@@ -12,8 +12,8 @@
             {{ post.category }}
           </span>
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ post.title }}</h1>
-        <div class="flex items-center gap-4 text-gray-300 text-sm">
+        <h4 class="text-4xl md:text-5xl font-bold text-gray mb-4">{{ post.title }}</h4>
+        <div class="flex items-center gap-4 text-gray-500 text-sm">
           <div class="flex items-center gap-2">
             <span>✍️</span>
             <span>{{ post.author }}</span>
@@ -45,7 +45,7 @@
 
     <!-- Post Content -->
     <section class="py-16">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <article class="prose prose-lg text-gray-700">
           <div v-html="post.content" class="space-y-6 text-gray-800 leading-relaxed"></div>
         </article>
@@ -57,7 +57,7 @@
               👨‍🎤
             </div>
             <div>
-              <h4 class="font-bold text-gray-900">{{ post.author }}</h4>
+              <h4 class="font-bold text-black-900">{{ post.author }}</h4>
               <p class="text-sm text-gray-600">Editor de ILUMINATY Blog</p>
             </div>
           </div>
@@ -97,13 +97,13 @@
     <!-- Newsletter -->
     <section class="py-16 bg-gradient-dark">
       <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h3 class="text-2xl font-bold text-white mb-4">No te pierdas las últimas noticias</h3>
-        <p class="text-gray-300 mb-6">Suscríbete para recibir actualizaciones sobre arte urbano, eventos y artistas.</p>
+        <h3 class="text-2xl font-bold text-gray mb-4">No te pierdas las últimas noticias</h3>
+        <p class="text-gray-400 mb-6">Suscríbete para recibir actualizaciones sobre arte urbano, eventos y artistas.</p>
         <div class="flex gap-2">
           <input
             type="email"
             placeholder="Tu email"
-            class="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-400 border border-white/20 focus:border-neon-lime outline-none transition-colors"
+            class="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-400 border border-gray/20 focus:border-neon-lime outline-none transition-colors"
           />
           <button class="btn-primary">Suscribirse</button>
         </div>
@@ -133,17 +133,17 @@ const posts: Record<string, any> = {
     content: `
       <p>Tras meses de especulación y rumores en redes sociales, King Cipher finalmente reveló los detalles de su próximo álbum "Concreto Puro", una obra que promete redefinir el hip-hop urbano contemporáneo.</p>
       
-      <h2>Un Viaje Sonoro de 14 Tracks</h2>
+      <h3>Un Viaje Sonoro de 14 Tracks</h3>
       <p>El álbum cuenta con 14 tracks que abarcan desde temas introspectivos sobre la vida en el Harlem actual, hasta colaboraciones con productores de renombre internacional. Entre los adelantos ya liberados, destaca "Asfalto y Sueños", un track que ha acumulado más de 2.3 millones de reproducciones en streaming.</p>
       
       <p>"Concreto Puro representa mi madurez como artista", explicó King Cipher en la rueda de prensa virtual. "No es solo un álbum, es un documental sonoro de la realidad urbana. Cada track cuenta una historia que viví o presencié en mis 20 años en el Bronx".</p>
       
-      <h2>Colaboraciones de Clase Mundial</h2>
+      <h3>Colaboraciones de Clase Mundial</h3>
       <p>El álbum incluye colaboraciones con Luna Vibe Collective en el track sensible "Neon Dreams", y una producción especial del legendario DJ Premier para el cierre del álbum. También hay features sorpresa de artistas emergentes de ILUMINATY que traen frescura al proyecto.</p>
       
       <p>La producción ejecutiva estuvo a cargo de Sofia Records, quien garantiza una calidad de sonido impecable con mezcla en estudio de clase mundial.</p>
       
-      <h2>Lanzamiento y Disponibilidad</h2>
+      <h3>Lanzamiento y Disponibilidad</h3>
       <p>"Concreto Puro" estará disponible en todas las plataformas de streaming el 28 de marzo de 2026. Los fans pueden pre-ordenar el álbum en ILUMINATY a través de nuestro sistema exclusivo, que incluye acceso early bird a 48 horas antes del lanzamiento oficial.</p>
       
       <p>King Cipher también anunció una gira de presentación que incluye 15 ciudades, con inicio en Nueva York el 15 de abril en el Barclays Center.</p>
@@ -162,20 +162,20 @@ const posts: Record<string, any> = {
     content: `
       <p>2026 marca un hito histórico para la escena urbana de Nueva York. Las cifras hablan por sí solas: 85+ eventos confirmados, millones de dólares en inversión, y participación de artistas de más de 40 países.</p>
       
-      <h2>Cifras Récord de Asistencia</h2>
+      <h3>Cifras Récord de Asistencia</h3>
       <p>Los festivales más grandes de este año ya tienen sus entradas agotadas desde hace meses. El Brooklyn Neon Festival, que este año expande su capacidad a 50,000 personas, vendió sus entradas VIP en tan solo 6 horas después de su anunciación.</p>
       
       <p>El fenómeno no es casualidad. La pandemia dejó un hambre por experiencias en vivo, y Nueva York está satisfaciendo esa sed con eventos de calidad mundial.</p>
       
-      <h2>Inversión y Patrocinio</h2>
+      <h3>Inversión y Patrocinio</h3>
       <p>Marcas internacionales están invirtiendo masivamente en la escena urbanay artistas emergentes de Nueva York. Red Bull, Spotify, y Nike han anunciado acuerdos multimillonarios con promotores locales.</p>
       
       <p>Esta inversión también beneficia directamente a los artistas. Los cachets para actuaciones en festivales han aumentado un 300% en comparación con 2024, permitiendo que artistas emergentes vivan de su arte.</p>
       
-      <h2>Diversidad de Géneros</h2>
+      <h3>Diversidad de Géneros</h3>
       <p>Aunque el hip-hop sigue dominando, 2026 trae una explosión de géneros: desde drill hasta música experimental, graffiti-live performances, y colisiones entre arte visual y musical que nunca antes se habían visto.</p>
       
-      <h2>El Rol de ILUMINATY</h2>
+      <h3>El Rol de ILUMINATY</h3>
       <p>ILUMINATY ha sido fundamental en esta explosión. La plataforma ha facilitado conexiones entre 500+ artistas, promotores y fans, creando un ecosistema que antes no existía. Nuestro rol como catalizador ha posicionado a Nueva York como el epicentro indiscutible del arte urbano global.</p>
     `,
   },
@@ -192,12 +192,12 @@ const posts: Record<string, any> = {
     content: `
       <p>En una movida que sorprende a la industria, Luna Vibe Collective anuncia su colaboración con Takeshi Nakamura, uno de los productores electrónicos más innovadores de Japón.</p>
       
-      <h2>Un Encuentro de Culturas</h2>
+      <h3>Un Encuentro de Culturas</h3>
       <p>Nakamura, conocido por sus instalaciones sonoras inmersivas en Tokio y Seúl, viaja a Brooklyn para co-producir una experiencia audiovisual que combina la estética urbana de Nueva York con la tecnología y minimalismo japonés.</p>
       
       <p>"Los beats de Luna Vibe tienen ese pulse crudo de Nueva York, pero hay algo más profundo. Queremos explor esa fusión entre la energía urbana y la contemplación", explicó Nakamura en conversación con nosotros.</p>
       
-      <h2>Art Basel Miami Week 2026</h2>
+      <h3>Art Basel Miami Week 2026</h3>
       <p>El proyecto debutará en Art Basel Miami Week, uno de los eventos de arte más prestigiosos del mundo. Luna Vibe Collective presentará una instalación interactiva que fusiona música en vivo, visuales proyectados y participación del público.</p>
       
       <p>Será una oportunidad única para la plataforma ILUMINATY de mostrar que el arte urbano de Nueva York está en la vanguardia del arte contemporáneo global.</p>
@@ -225,16 +225,16 @@ const posts: Record<string, any> = {
       <h2>Paso 2: Invierte en Herramientas de Calidad</h2>
       <p>Las latas de buena calidad hacen una diferencia enorme. Recomiendo marcas como Montana Black, Molotow y Ironlak. También necesitarás diferentes boquillas (caps) para lograr distintos efectos.</p>
       
-      <h2>Paso 3: Encuentra Espacios Legales</h2>
+      <h3>Paso 3: Encuentra Espacios Legales</h3>
       <p>Nueva York tiene murales legales donde puedes practicar. El Graffiti Hall of Fame en Queens es legendario. También hay paredes comunitarias que permiten expresión artística. Comienza ahí antes de considerar espacios ilegales.</p>
       
-      <h2>Paso 4: Desarrolla tu Estilo</h2>
+      <h3>Paso 4: Desarrolla tu Estilo</h3>
       <p>La paciencia es clave. Dibuja mil veces el mismo diseño antes de perfeccionarlo. Tu firma (tag) es tu marca personal. Hazla distintiva, fluida y propia.</p>
       
-      <h2>Paso 5: Únete a la Comunidad</h2>
+      <h3>Paso 5: Únete a la Comunidad</h3>
       <p>En ILUMINATY conectamos artistas de graffiti con oportunidades de proyectos comunitarios, exhibiciones y encargos legales. La comunidad urbana es solidaria cuando ves pasión genuina.</p>
       
-      <h2>Respeto por la Cultura</h2>
+      <h3>Respeto por la Cultura</h3>
       <p>El graffiti tiene una historia profunda. Aprende sobre sus orígenes en el movimiento Hip-Hop. Respeta a los veteranos y la comunidad. El arte urbano es sobre expresión auténtica, no solo vandalismo.</p>
     `,
   },
@@ -251,19 +251,19 @@ const posts: Record<string, any> = {
     content: `
       <p>Nos sentamos con Luna Vibe Collective en su estudio de Williamsburg para una conversación profunda sobre su proceso creativo, influencias e impacto en la escena electrónica global.</p>
       
-      <h2>Orígenes del Colectivo</h2>
+      <h3>Orígenes del Colectivo</h3>
       <p><strong>Marcus:</strong> ¿Cómo nació Luna Vibe Collective?</p>
       <p><strong>Luna (Synth/Vocals):</strong> Comenzó como encuentros casuales en fiestas. Compartíamos gustos musicales similares y decidimos hacer algo juntos. Era informal, pero la química fue inmediata.</p>
       
-      <h2>Influencias Sonoras</h2>
+      <h3>Influencias Sonoras</h3>
       <p><strong>Marcus:</strong> ¿Cuáles son tus influencias principales?</p>
       <p><strong>Astro (Productor):</strong> Desde Aphex Twin hasta Burial, pero también mucha música ambiental, jazz experimental... Nueva York es una sinfonia de sonidos. El ruido, el tráfico, las conversaciones en las calles. Eso es inspiración pura.</p>
       
-      <h2>Impacto en ILUMINATY</h2>
+      <h3>Impacto en ILUMINATY</h3>
       <p><strong>Marcus:</strong> ¿Qué significa ser parte de ILUMINATY para ustedes?</p>
       <p><strong>Luna:</strong> ILUMINATY nos dio visibilidad cuando éramos desconocidos. Pero más que eso, nos conectó con una comunidad que valida nuestro arte. Eso es invaluable para artistas emergentes en Nueva York.</p>
       
-      <h2>Futuro del Proyecto</h2>
+      <h3>Futuro del Proyecto</h3>
       <p><strong>Marcus:</strong> ¿Qué sigue?</p>
       <p><strong>Astro:</strong> Queremos expandir hacia música visual más experimentada. Instalaciones inmersivas, realidad aumentada, colaboraciones con artistas visuales... el futuro de la música es multimedia.</p>
     `,

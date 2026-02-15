@@ -6,9 +6,9 @@
         <div class="absolute top-0 left-0 w-96 h-96 bg-neon-violet/20 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-lime/20 rounded-full blur-3xl"></div>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="mb-4 text-white">Blog ILUMINATY</h1>
-        <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <h1 class="mb-4 text-black text-4xl md:text-5xl font-bold">Blog Ilumitaty</h1>
+  <p class="text-black-100 max-w-2xl mx-auto text-lg">
           Historias, tendencias y perspectivas del arte urbano de Nueva York. Descubre las voces que están transformando la escena.
         </p>
       </div>
