@@ -11,25 +11,25 @@
       </div>
     </section>
 
-    <!-- Filters -->
-    <section class="sticky top-20 z-40 bg-dark-bg/80 backdrop-blur-xl border-b border-gray-300">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <!-- Genre Filter -->
-          <div>
-            <label class="block text-sm font-semibold mb-2">Género</label>
-            <select 
-              v-model="selectedGenre"
-              class="w-full"
-            >
-              <option value="">Todos los géneros</option>
-              <option value="hip-hop">Hip-Hop / Rap</option>
-              <option value="electronic">Electrónico</option>
-              <option value="visual">Arte Visual</option>
-              <option value="r-b">R&B / Soul</option>
-              <option value="reggaeton">Reggaeton</option>
-            </select>
-          </div>
+   <!-- Filters -->
+<section class="md:sticky md:top-20 z-40 bg-white/95 backdrop-blur-xl border-b border-gray-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Genre Filter -->
+      <div>
+        <label class="block text-sm font-semibold mb-2">Género</label>
+        <select 
+          v-model="selectedGenre"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-neon-lime focus:ring-2 focus:ring-neon-lime/20 outline-none transition-colors"
+        >
+          <option value="">Todos los géneros</option>
+          <option value="hip-hop">Hip-Hop / Rap</option>
+          <option value="electronic">Electrónico</option>
+          <option value="visual">Arte Visual</option>
+          <option value="r-b">R&B / Soul</option>
+          <option value="reggaeton">Reggaeton</option>
+        </select>
+      </div>
 
           <!-- Neighborhood Filter -->
           <div>

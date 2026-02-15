@@ -7,7 +7,7 @@
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-neon-lime/20 rounded-full blur-3xl"></div>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-center mb-4">Sobre ILUMINATY</h1>
+        <h2 class="text-center mb-4">Sobre ILUMINATY</h2>
         <p class="text-center text-gray-600 max-w-3xl mx-auto text-lg">
           Somos más que una plataforma. Somos un movimiento que amplifica las voces de artistas urbanos de Nueva York.
         </p>
@@ -62,33 +62,33 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🎨</div>
+            <div class="text-4xl mb-4">©️</div>
             <h4 class="font-bold mb-3">Autenticidad</h4>
-            <p class="text-gray-600 text-sm">
+            <p class="text-gray-600 text-60x">
               Celebramos el arte genuino, sin filtros ni compromisos comerciales forzados.
             </p>
           </div>
 
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🤝</div>
+            <div class="text-5xl mb-4">🗣️</div>
             <h4 class="font-bold mb-3">Comunidad</h4>
-            <p class="text-gray-600 text-sm">
+            <p class="text-gray-600 text-60x">
               Somos una familia. Los éxitos de cada artista son nuestros éxitos.
             </p>
           </div>
 
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🚀</div>
+            <div class="text-5xl mb-4">🛸​</div>
             <h4 class="font-bold mb-3">Innovación</h4>
-            <p class="text-gray-600 text-sm">
+            <p class="text-gray-600 text-60x">
               Impulsamos nuevos sonidos, visiones y formas de expresión urbana.
             </p>
           </div>
 
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🌍</div>
+            <div class="text-5xl mb-4">🌐</div>
             <h4 class="font-bold mb-3">Inclusión</h4>
-            <p class="text-gray-600 text-sm">
+            <p class="text-gray-600 text-60x">
               Todos los géneros, todos los barrios, todas las voces tienen espacio.
             </p>
           </div>
@@ -114,12 +114,12 @@
           <div class="p-6">
             <h4 class="font-bold mb-1">Marcus Rivera</h4>
             <p class="text-neon-lime text-sm mb-3">Fundador & CEO</p>
-            <p class="text-gray-600 text-sm mb-4">
+            <p class="text-gray-600 text-60x mb-4">
               Productor de hip-hop de Harlem con 20 años en la industria. Visión: democratizar el arte urbano.
             </p>
             <div class="flex gap-2 justify-center">
-              <a href="#" class="w-8 h-8 rounded glass-hover flex items-center justify-center text-xs hover:text-neon-lime">📧</a>
-              <a href="#" class="w-8 h-8 rounded glass-hover flex items-center justify-center text-xs hover:text-neon-lime">🔗</a>
+              <a href="mailto:marcus@iluminaty.com" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-lime transition-colors" title="Email">📧</a>
+              <a href="https://linkedin.com/in/marcusrivera" target="_blank" rel="noopener" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-lime transition-colors" title="LinkedIn">🔗</a>
             </div>
           </div>
         </div>
@@ -135,12 +135,12 @@
           <div class="p-6">
             <h4 class="font-bold mb-1">Sofia Chen</h4>
             <p class="text-neon-violet text-sm mb-3">CTO & Co-Founder</p>
-            <p class="text-gray-600 text-sm mb-4">
+            <p class="text-gray-600 text-60x mb-4">
               Ingeniera de software de Brooklyn. Experta en infraestructura web escalable y experiencia de usuario.
             </p>
             <div class="flex gap-2 justify-center">
-              <a href="#" class="w-8 h-8 rounded glass-hover flex items-center justify-center text-xs hover:text-neon-violet">📧</a>
-              <a href="#" class="w-8 h-8 rounded glass-hover flex items-center justify-center text-xs hover:text-neon-violet">🔗</a>
+              <a href="mailto:sofia@iluminaty.com" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-violet transition-colors" title="Email">📧</a>
+              <a href="https://github.com/sofiachen" target="_blank" rel="noopener" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-violet transition-colors" title="GitHub">🔗</a>
             </div>
           </div>
         </div>
@@ -156,12 +156,12 @@
           <div class="p-6">
             <h4 class="font-bold mb-1">James Thompson</h4>
             <p class="text-neon-cyan text-sm mb-3">Community Lead</p>
-            <p class="text-gray-600 text-sm mb-4">
+            <p class="text-gray-600 text-60x mb-4">
               Currador y promotor cultural del Bronx. Conecta artistas con oportunidades autênticas.
             </p>
             <div class="flex gap-2 justify-center">
-              <a href="#" class="w-8 h-8 rounded glass-hover flex items-center justify-center text-xs hover:text-neon-cyan">📧</a>
-              <a href="#" class="w-8 h-8 rounded glass-hover flex items-center justify-center text-xs hover:text-neon-cyan">🔗</a>
+              <a href="mailto:james@iluminaty.com" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-cyan transition-colors" title="Email">📧</a>
+              <a href="https://instagram.com/jamesthompson" target="_blank" rel="noopener" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-cyan transition-colors" title="Instagram">🔗</a>
             </div>
           </div>
         </div>

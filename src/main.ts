@@ -11,6 +11,9 @@ import Blog from './views/Blog.vue'
 import BlogPost from './views/BlogPost.vue'
 import Events from './views/Events.vue'
 import Contact from './views/Contact.vue'
+import Terms from './views/Terms.vue'
+import Privacy from './views/Privacy.vue'
+import Cookies from './views/Cookies.vue'
 
 const routes = [
   { path: '/', component: Home, meta: { title: 'Inicio' } },
@@ -20,6 +23,9 @@ const routes = [
   { path: '/blog/:id', component: BlogPost, meta: { title: 'Post' } },
   { path: '/eventos', component: Events, meta: { title: 'Eventos' } },
   { path: '/contacto', component: Contact, meta: { title: 'Contacto' } },
+  { path: '/terminos', component: Terms, meta: { title: 'Términos y Condiciones' } },
+  { path: '/privacidad', component: Privacy, meta: { title: 'Política de Privacidad' } },
+  { path: '/cookies', component: Cookies, meta: { title: 'Política de Cookies' } },
 ]
 
 const router = createRouter({

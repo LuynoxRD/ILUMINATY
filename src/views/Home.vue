@@ -154,15 +154,53 @@ const upcomingEvents = ref([
         </RouterLink>
       </div>
     </section>
+
+    <!-- Separador degradado -->
+    <div class="h-1 bg-gradient-to-r from-transparent via-neon-lime to-transparent opacity-3000"></div>
+
+    <!-- Sellos Discográficos -->
+    <section class="py-16 md:py-24 bg-white overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-center text-3xl md:text-4xl font-bold text-gray-900 mb-6">⚡ El futuro del arte urbano está aquí</h2>
+        <p class="text-center text-gray-600 text-base md:text-lg mb-12 md:mb-16">Trabajamos con los mejores Sellos</p>
+        <div class="relative">
+          <!-- Máscara de degradado para indicar scroll en móvil -->
+          <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none md:hidden"></div>
+          <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none md:hidden"></div>
+          
+          <div class="flex overflow-x-auto gap-6 md:gap-10 lg:gap-16 items-center justify-start md:justify-center pb-4 md:pb-0 scrollbar-hide" style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
+            <!-- AWAL -->
+            <div class="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+              <img src="https://cdn-p.smehost.net/sites/6dc1d53d1d7f4d7fac4636569eacd797/wp-content/uploads/2024/10/AWAL-Small.png" alt="AWAL" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[120px] sm:max-w-[150px]" />
+            </div>
+            <!-- Columbia -->
+            <div class="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+              <img src="https://cdn-p.smehost.net/sites/6dc1d53d1d7f4d7fac4636569eacd797/wp-content/uploads/2024/10/Columbia-1.png" alt="Columbia Records" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[120px] sm:max-w-[150px]" />
+            </div>
+            <!-- Epic -->
+            <div class="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+              <img src="https://cdn-p.smehost.net/sites/6dc1d53d1d7f4d7fac4636569eacd797/wp-content/uploads/2013/10/epic.png" alt="Epic Records" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[120px] sm:max-w-[150px]" />
+            </div>
+            <!-- Podcast -->
+            <div class="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+              <img src="https://cdn-p.smehost.net/sites/6dc1d53d1d7f4d7fac4636569eacd797/wp-content/uploads/2024/10/Podcast-Small.png" alt="Sony Music Podcasts" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[120px] sm:max-w-[150px]" />
+            </div>
+            <!-- Legacy -->
+            <div class="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+              <img src="https://cdn-p.smehost.net/sites/6dc1d53d1d7f4d7fac4636569eacd797/wp-content/uploads/2013/09/legacy.png" alt="Legacy Recordings" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[120px] sm:max-w-[150px]" />
+            </div>
+            <!-- Masterworks -->
+            <div class="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+              <img src="https://cdn-p.smehost.net/sites/6dc1d53d1d7f4d7fac4636569eacd797/wp-content/uploads/2013/10/Masterworks-Logo1.png" alt="Masterworks" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto object-contain max-w-[120px] sm:max-w-[150px]" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 <!-- Animated SVG Section -->
 <section class="py-24 relative overflow-hidden bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Título centrado -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900">
-        ⚡ El futuro del arte urbano está aquí
-      </h2>
-    </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- SVG Giratorio -->
@@ -221,11 +259,16 @@ const upcomingEvents = ref([
             <span class="text-gray-700">Visibilidad global para tu arte</span>
           </li>
         </ul>
+        <RouterLink to="/contacto" class="inline-block mt-8 px-8 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+          Solicitar Acceso
+        </RouterLink>
       </div>
     </div>
   </div>
 </section>
 
+    <!-- Separador degradado -->
+    <div class="h-1 bg-gradient-to-r from-transparent via-neon-cyan to-transparent opacity-30"></div>
 
     <!-- Artistas Destacados -->
     <section class="py-24 bg-gray-50">

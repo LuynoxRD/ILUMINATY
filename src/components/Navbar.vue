@@ -11,7 +11,7 @@
         <!-- Logo -->
         <RouterLink to="/" class="flex items-center gap-2 group">
           <div class="text-3xl font-bold animate-glow">⚡</div>
-          <span class="hidden sm:block text-xl font-display font-bold neon-text">ILUMINATY</span>
+          <span class="text-xl font-display font-bold neon-text">ILUMINATY</span>
         </RouterLink>
 
         <!-- Desktop Menu -->
@@ -40,13 +40,13 @@
 
       <!-- Mobile Menu -->
       <transition name="slide">
-        <div v-show="mobileMenuOpen" class="md:hidden border-t border-gray-300">
-          <div class="px-4 py-4 space-y-2">
+        <div v-show="mobileMenuOpen" class="md:hidden border-t border-gray-300 bg-white">
+          <div class="flex flex-col items-start px-4 py-4 space-y-4">
             <RouterLink 
               v-for="link in navLinks" 
               :key="link.path"
               :to="link.path"
-              class="block px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+              class="block px-4 py-2 text-lg rounded-lg hover:bg-black/10 transition-colors"
               @click="mobileMenuOpen = false"
             >
               {{ link.label }}
@@ -69,7 +69,7 @@ let lastScrollY = 0
 const navLinks = [
   { path: '/', label: 'Inicio' },
   { path: '/artistas', label: 'Artistas' },
-  { path: '/sobre-nosotros', label: 'Sobre' },
+  { path: '/sobre-nosotros', label: 'Sobre Nosotros' },
   { path: '/blog', label: 'Blog' },
   { path: '/eventos', label: 'Eventos' },
   { path: '/contacto', label: 'Contacto' },
