@@ -1,12 +1,7 @@
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Hero from '@/components/Hero.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
-import ArtistCard from '@/components/ArtistCard.vue'
-import BlogCard from '@/components/BlogCard.vue'
-import EventCard from '@/components/EventCard.vue'
 
 interface Artist {
   id: string
@@ -137,32 +132,14 @@ const upcomingEvents = ref([
 </script>
 
 <template>
-  <div class="bg-white text-neutral-900 relative overflow-x-clip">
-    <!-- Neon Animated Blobs Background (antes en Hero.vue) -->
+  <div class="bg-gray-50 text-neutral-900 relative overflow-x-clip">
+    <!-- Neon Animated Blobs Background -->
     <div class="absolute top-20 left-10 w-72 h-72 bg-neon-violet/20 rounded-full mix-blend-color-screen blur-3xl -z-10 animate-float"></div>
     <div class="absolute bottom-20 right-10 w-72 h-72 bg-neon-lime/20 rounded-full mix-blend-color-screen blur-3xl -z-10 animate-float" style="animation-delay: 1s;"></div>
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-neon-cyan/10 rounded-full mix-blend-screen blur-3xl -z-10" style="animation: float 4s ease-in-out infinite;"></div>
-    <!-- SVG Animation Background -->
-    <div class="pointer-events-none select-none absolute inset-0 flex items-center justify-center -z-10">
-      <svg viewBox="0 0 1026 1026" fill="none" class="absolute w-[800px] h-[800px] animate-[spin_15s_linear_infinite]">
-        <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z" stroke="#D4D4D4" stroke-opacity="0.3"></path>
-        <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#grad-outer)" stroke-width="3" stroke-linecap="round"></path>
-        <defs><linearGradient id="grad-outer" x1="1" y1="513" x2="1" y2="1025" gradientUnits="userSpaceOnUse"><stop stop-color="#06b6d4"></stop><stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop></linearGradient></defs>
-      </svg>
-      <svg viewBox="0 0 1026 1026" fill="none" class="absolute w-[800px] h-[800px] animate-[spin_20s_linear_infinite_reverse]">
-        <path d="M913 513c0 220.914-179.086 400-400 400S113 733.914 113 513s179.086-400 400-400 400 179.086 400 400Z" stroke="#D4D4D4" stroke-opacity="0.3"></path>
-        <path d="M913 513c0 220.914-179.086 400-400 400" stroke="url(#grad-inner)" stroke-width="3" stroke-linecap="round"></path>
-        <defs><linearGradient id="grad-inner" x1="913" y1="513" x2="913" y2="913" gradientUnits="userSpaceOnUse"><stop stop-color="#06b6d4"></stop><stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop></linearGradient></defs>
-      </svg>
-      <svg viewBox="0 0 1026 1026" fill="none" class="absolute w-[600px] h-[600px] scale-75 animate-[spin_35s_linear_infinite_reverse]">
-        <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z" stroke="#D4D4D4" stroke-opacity="0.1"></path>
-        <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#grad-third)" stroke-width="2" stroke-linecap="round"></path>
-        <defs><linearGradient id="grad-third" x1="1" y1="513" x2="1" y2="1025" gradientUnits="userSpaceOnUse"><stop stop-color="#06b6d4"></stop><stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop></linearGradient></defs>
-      </svg>
-    </div>
+    
     <!-- Hero Section -->
     <Hero />
-
 
     <!-- CTA Section -->
     <section class="py-20 relative overflow-hidden">
@@ -177,74 +154,81 @@ const upcomingEvents = ref([
         </RouterLink>
       </div>
     </section>
+<!-- Animated SVG Section -->
+<section class="py-24 relative overflow-hidden bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Título centrado -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900">
+        ⚡ El futuro del arte urbano está aquí
+      </h2>
+    </div>
 
-    <!-- Animated SVG Section -->
-    <section class="py-24 relative overflow-hidden bg-gray-50/50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- SVG Giratorio -->
-          <div class="flex justify-center">
-            <div class="relative w-[500px] h-[500px] flex items-center justify-center overflow-hidden">
-              <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true" class="absolute inset-0 h-full w-full animate-[spin_15s_linear_infinite]">
-                <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z" stroke="#D4D4D4" stroke-opacity="0.2"></path>
-                <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#gradient-outer)" stroke-width="2" stroke-linecap="round"></path>
-                <defs>
-                  <linearGradient id="gradient-outer" x1="1" y1="513" x2="1" y2="1025" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#06b6d4"></stop>
-                    <stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop>
-                  </linearGradient>
-                </defs>
-              </svg>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- SVG Giratorio -->
+      <div class="flex justify-center">
+        <div class="relative w-[500px] h-[500px] flex items-center justify-center overflow-hidden">
+          <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true" class="absolute inset-0 h-full w-full animate-[spin_15s_linear_infinite]">
+            <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z" stroke="#D4D4D4" stroke-opacity="0.2"></path>
+            <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#gradient-outer)" stroke-width="2" stroke-linecap="round"></path>
+            <defs>
+              <linearGradient id="gradient-outer" x1="1" y1="513" x2="1" y2="1025" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#06b6d4"></stop>
+                <stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
 
-              <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true" class="absolute inset-0 h-full w-full animate-[spin_20s_linear_infinite_reverse]">
-                <path d="M913 513c0 220.914-179.086 400-400 400S113 733.914 113 513s179.086-400 400-400 400 179.086 400 400Z" stroke="#D4D4D4" stroke-opacity="0.2"></path>
-                <path d="M913 513c0 220.914-179.086 400-400 400" stroke="url(#gradient-inner)" stroke-width="2" stroke-linecap="round"></path>
-                <defs>
-                  <linearGradient id="gradient-inner" x1="913" y1="513" x2="913" y2="913" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#06b6d4"></stop>
-                    <stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop>
-                  </linearGradient>
-                </defs>
-              </svg>
+          <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true" class="absolute inset-0 h-full w-full animate-[spin_20s_linear_infinite_reverse]">
+            <path d="M913 513c0 220.914-179.086 400-400 400S113 733.914 113 513s179.086-400 400-400 400 179.086 400 400Z" stroke="#D4D4D4" stroke-opacity="0.2"></path>
+            <path d="M913 513c0 220.914-179.086 400-400 400" stroke="url(#gradient-inner)" stroke-width="2" stroke-linecap="round"></path>
+            <defs>
+              <linearGradient id="gradient-inner" x1="913" y1="513" x2="913" y2="913" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#06b6d4"></stop>
+                <stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
 
-              <div class="relative z-10 w-64 h-auto bg-gray-900 text-white p-6 rounded-2xl shadow-xl">
-                <h3 class="text-xl font-bold mb-2">500+ Artistas</h3>
-                <p class="text-sm text-gray-300">Conectados y creando arte urbano de clase mundial</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contenido -->
-          <div class="space-y-6">
-            <h2 class="text-4xl font-bold text-gray-900">Una Comunidad que Crece</h2>
-            <p class="text-lg text-gray-600">
-              ILUMINATY es más que una plataforma. Es un movimiento de artistas urbanos, productores y creadores que comparten una visión: democratizar el arte sin límites.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-start gap-3">
-                <span class="text-neon-lime text-xl font-bold">✓</span>
-                <span class="text-gray-700">Acceso a oportunidades de booking y colaboraciones</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-neon-lime text-xl font-bold">✓</span>
-                <span class="text-gray-700">Herramientas para gestionar tu carrera artística</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-neon-lime text-xl font-bold">✓</span>
-                <span class="text-gray-700">Eventos exclusivos y mentorías de expertos</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-neon-lime text-xl font-bold">✓</span>
-                <span class="text-gray-700">Visibilidad global para tu arte</span>
-              </li>
-            </ul>
+          <div class="relative z-10 w-64 h-auto bg-gray-900 text-white p-6 rounded-2xl shadow-xl">
+            <h3 class="text-xl font-bold mb-2">500+ Artistas</h3>
+            <p class="text-sm text-gray-300">Conectados y creando arte urbano de clase mundial</p>
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- Contenido -->
+      <div class="space-y-6">
+        <h2 class="text-4xl font-bold text-gray-900">Una Comunidad que Crece</h2>
+        <p class="text-lg text-gray-600">
+          ILUMINATY es más que una plataforma. Es un movimiento de artistas urbanos, productores y creadores que comparten una visión: democratizar el arte sin límites.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="text-neon-lime text-xl font-bold">✓</span>
+            <span class="text-gray-700">Acceso a oportunidades de booking y colaboraciones</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-neon-lime text-xl font-bold">✓</span>
+            <span class="text-gray-700">Herramientas para gestionar tu carrera artística</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-neon-lime text-xl font-bold">✓</span>
+            <span class="text-gray-700">Eventos exclusivos y mentorías de expertos</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-neon-lime text-xl font-bold">✓</span>
+            <span class="text-gray-700">Visibilidad global para tu arte</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- Artistas Destacados -->
-    <section class="py-24 bg-white">
+    <section class="py-24 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-gray-900 text-center mb-16">Artistas Destacados</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -286,7 +270,7 @@ const upcomingEvents = ref([
           <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <div class="relative h-80 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1500634148957-331a6199fbc7?w=500&h=500&fit=crop" 
+                src="https://images.milenio.com/greRiDrr4aS3_ZDtWDGhmrxMz28=/942x532/uploads/media/2017/09/23/cantante-soul-charles-bradley-murio.jpg" 
                 alt="Grafik Soul" 
                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
               />
