@@ -73,26 +73,27 @@
       </div>
     </section>
 
-    <!-- Newsletter Subscription -->
-    <section class="py-20 bg-gradient-dark">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Suscríbete al Blog</h2>
-        <p class="text-gray-300 mb-8">
-          Recibe las últimas historias, análisis y tendencias del arte urbano directamente en tu inbox.
-        </p>
-        <div class="flex gap-2">
-          <input
-            type="email"
-            placeholder="Tu email"
-            class="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-400 border border-white/20 focus:border-neon-lime outline-none transition-colors"
-          />
-          <button class="btn-primary">
-            Suscribirse
-          </button>
-        </div>
-      </div>
-    </section>
+  <!-- Newsletter Subscription -->
+<section class="py-20 bg-gradient-dark">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-gray mb-4">Suscríbete al Blog</h2>
+    <p class="text-gray-500 mb-8">
+      Recibe las últimas historias, análisis y tendencias del arte urbano directamente en tu inbox.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="email"
+        placeholder="Tu email"
+        class="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-500 border border-gray/20 focus:border-neon-lime outline-none transition-colors"
+      />
+      <button class="btn-primary whitespace-nowrap">
+        Suscribirse
+      </button>
+    </div>
   </div>
+</section>
+<!-- Asegúrate que después de esto esté el </div> que cierra <div class="bg-white"> -->
+</div>
 </template>
 
 <script setup lang="ts">

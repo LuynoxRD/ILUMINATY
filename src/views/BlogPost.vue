@@ -1,36 +1,36 @@
 <template>
-  <div class="bg-gray">
-    <!-- Post Header -->
-    <section class="py-16 bg-gradient-dark relative overflow-hidden">
-      <div class="absolute inset-0 opacity-40 -z-10">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-neon-violet/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-lime/20 rounded-full blur-3xl"></div>
+<div class="bg-gray-50">
+  <!-- Post Header -->
+  <section class="py-16 bg-gradient-dark relative overflow-hidden">
+    <div class="absolute inset-0 opacity-40 -z-10">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-neon-violet/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-lime/20 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-6">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold" :class="getCategoryColor(post.category)">
+          {{ post.category }}
+        </span>
       </div>
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-6">
-          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold" :class="getCategoryColor(post.category)">
-            {{ post.category }}
-          </span>
+      <h4 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray mb-4">{{ post.title }}</h4>
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-gray-500 text-xs sm:text-sm">
+        <div class="flex items-center gap-1.5">
+          <span>✍️</span>
+          <span>{{ post.author }}</span>
         </div>
-        <h4 class="text-4xl md:text-5xl font-bold text-gray mb-4">{{ post.title }}</h4>
-        <div class="flex items-center gap-4 text-gray-500 text-sm">
-          <div class="flex items-center gap-2">
-            <span>✍️</span>
-            <span>{{ post.author }}</span>
-          </div>
-          <span>•</span>
-          <div class="flex items-center gap-2">
-            <span>📅</span>
-            <span>{{ formatDate(post.date) }}</span>
-          </div>
-          <span>•</span>
-          <div class="flex items-center gap-2">
-            <span>⏱️</span>
-            <span>{{ post.readTime }} min</span>
-          </div>
+        <span class="hidden sm:inline">•</span>
+        <div class="flex items-center gap-1.5">
+          <span>📅</span>
+          <span>{{ formatDate(post.date) }}</span>
+        </div>
+        <span class="hidden sm:inline">•</span>
+        <div class="flex items-center gap-1.5">
+          <span>⏱️</span>
+          <span>{{ post.readTime }} min</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- Featured Image -->
     <section class="py-8">
@@ -94,22 +94,27 @@
       </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="py-16 bg-gradient-dark">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h3 class="text-2xl font-bold text-gray mb-4">No te pierdas las últimas noticias</h3>
-        <p class="text-gray-400 mb-6">Suscríbete para recibir actualizaciones sobre arte urbano, eventos y artistas.</p>
-        <div class="flex gap-2">
-          <input
-            type="email"
-            placeholder="Tu email"
-            class="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-400 border border-gray/20 focus:border-neon-lime outline-none transition-colors"
-          />
-          <button class="btn-primary">Suscribirse</button>
-        </div>
-      </div>
-    </section>
+  <!-- Newsletter Subscription -->
+<section class="py-20 bg-gradient-dark">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-gray mb-4">Suscríbete al Blog</h2>
+    <p class="text-gray-500 mb-8">
+      Recibe las últimas historias, análisis y tendencias del arte urbano directamente en tu inbox.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="email"
+        placeholder="Tu email"
+        class="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-500 border border-gray/20 focus:border-neon-lime outline-none transition-colors"
+      />
+      <button class="btn-primary whitespace-nowrap">
+        Suscribirse
+      </button>
+    </div>
   </div>
+</section>
+<!-- Asegúrate que después de esto esté el </div> que cierra <div class="bg-white"> -->
+</div>
 </template>
 
 <script setup lang="ts">
@@ -202,7 +207,7 @@ const posts: Record<string, any> = {
       
       <p>Será una oportunidad única para la plataforma ILUMINATY de mostrar que el arte urbano de Nueva York está en la vanguardia del arte contemporáneo global.</p>
       
-      <h2>Gira Posterior</h2>
+      <h3>Gira Posterior</h3>
       <p>Tras el evento en Miami, la colaboración continuará con presentaciones en Tokio, Berlín y Nueva York como parte de una gira de 8 ciudades.</p>
     `,
   },
@@ -219,10 +224,10 @@ const posts: Record<string, any> = {
     content: `
       <p>Como artista que ha creado cientos de murales en Nueva York, a menudo me preguntan cómo comenzar en el graffiti. Aquí comparto mi guía definitiva para principiantes.</p>
       
-      <h2>Paso 1: Entiende los Estilos</h2>
+      <h3>Paso 1: Entiende los Estilos</h3>
       <p>Antes de comenzar, estudia los diferentes estilos: Tag, Throw-up, Wildstyle y Piece. Cada uno tiene sus reglas y características. Prefiero comenzar como muchos: dibujando Tags (firmas) en papel antes de tocar una lata.</p>
       
-      <h2>Paso 2: Invierte en Herramientas de Calidad</h2>
+      <h3>Paso 2: Invierte en Herramientas de Calidad</h3>
       <p>Las latas de buena calidad hacen una diferencia enorme. Recomiendo marcas como Montana Black, Molotow y Ironlak. También necesitarás diferentes boquillas (caps) para lograr distintos efectos.</p>
       
       <h3>Paso 3: Encuentra Espacios Legales</h3>
@@ -266,6 +271,183 @@ const posts: Record<string, any> = {
       <h3>Futuro del Proyecto</h3>
       <p><strong>Marcus:</strong> ¿Qué sigue?</p>
       <p><strong>Astro:</strong> Queremos expandir hacia música visual más experimentada. Instalaciones inmersivas, realidad aumentada, colaboraciones con artistas visuales... el futuro de la música es multimedia.</p>
+    `,
+  },
+  '6': {
+    id: '6',
+    title: '2026: Tendencias Clave en Arte Urbano y Hip-Hop',
+    excerpt: 'Analizamos los principales movimientos, sonidos y tendencias que dominarán la escena del arte urbano en Nueva York este año.',
+    category: 'Tendencias',
+    date: '2026-02-01',
+    author: 'Sofia Records',
+    image: 'https://tecache.cl/wp-content/uploads/2022/04/272190621_237760698514185_8101544741089932644_n-1024x650.jpg',
+    readTime: 10,
+    authorBio: 'Analista de tendencias musicales y productora. Especialista en identificar los próximos grandes movimientos del arte urbano.',
+    content: `
+      <p>El año 2026 marca un punto de inflexión para el arte urbano de Nueva York. Nuevos sonidos, tecnologías y formas de expresión están redefiniendo lo que significa ser un artista urbano en la capital mundial del hip-hop.</p>
+      
+      <h3>1. El Resurgimiento del Drill Melódico</h3>
+      <p>El drill está evolucionando más allá de sus raíces agresivas. Artistas como King Cipher están incorporando elementos melódicos, creando un subgénero que mantiene la crudeza lírica pero añade capas de complejidad musical. Este "drill melódico" está ganando tracción tanto en el underground como en las listas principales.</p>
+      
+      <h3>2. NFTs y Arte Digital</h3>
+      <p>Los artistas urbanos están adoptando blockchain y NFTs para monetizar su trabajo de nuevas formas. Desde álbumes tokenizados hasta experiencias virtuales exclusivas, la tecnología está democratizando el acceso al mercado del arte.</p>
+      
+      <h3>3. Colaboraciones Transatlánticas</h3>
+      <p>La colaboración entre artistas de NYC y Europa (especialmente Londres y Berlín) está produciendo sonidos híbridos únicos. El intercambio cultural está enriqueciendo ambas escenas.</p>
+      
+      <h3>4. Arte Urbano como Activismo</h3>
+      <p>Cada vez más artistas utilizan su plataforma para abordar temas sociales: justicia racial, desigualdad económica y cambio climático. El arte se ha convertido en un vehículo de concienciación y cambio.</p>
+      
+      <h3>5. Producción DIY de Alta Calidad</h3>
+      <p>Con el acceso a tecnología asequible, artistas independientes están produciendo música de calidad profesional desde sus hogares. Esto está nivelando el campo de juego y permitiendo que el talento brille por encima de los recursos.</p>
+      
+      <h3>Conclusión</h3>
+      <p>2026 es un año de evolución y experimentación. Los artistas que logren adaptarse a estas tendencias mientras mantienen su autenticidad serán los que definan la próxima década del arte urbano.</p>
+    `,
+  },
+  '7': {
+    id: '7',
+    title: 'Del Bronx al Mundo: La Historia de King Cipher',
+    excerpt: 'Un recorrido por la carrera del rapero que comenzó en los freestyles del Bronx y ahora es celebrado internacionalmente.',
+    category: 'Entrevistas',
+    date: '2026-01-28',
+    author: 'DJ Remix',
+    image: 'https://m.media-amazon.com/images/I/81x1YwSgayL.png',
+    readTime: 9,
+    authorBio: 'DJ, productor y periodista musical. Ha seguido la carrera de King Cipher desde sus inicios en el underground del Bronx.',
+    content: `
+      <p>De los freestyles en las esquinas del Bronx a los escenarios más grandes del mundo, la trayectoria de King Cipher es un testimonio del poder del talento y la perseverancia. En esta entrevista exclusiva, recorremos su historia.</p>
+      
+      <h3>Los Comienzos (2006-2010)</h3>
+      <p>Todo comenzó en las batallas de freestyle del Bronx. Con apenas 16 años, King Cipher (entonces conocido como "Cipha") dominaba los círculos de rima con su aguda inteligencia y flows imparables. "Era el único lugar donde me sentía completo", recuerda.</p>
+      
+      <p>Sus primeras grabaciones fueron caseras: un micrófono de $20 en el armario de su abuela convertido en estudio. Esas cintas caseras circulaban por el barrio, creando un buzz que pronto llamaría la atención de productores locales.</p>
+      
+      <h3>La Transición al Estudio (2011-2015)</h3>
+      <p>Su EP debut "Concrete Jungle" (2012) marcó un antes y un después. Grabado en estudios improvisados de Brooklyn, el proyecto mostraba un artista que ya había trascendido el formato de batallas. Letras profundas, beats innovadores y una voz única.</p>
+      
+      <p>"No quería ser solo un MC de batallas. Quería contar historias, crear mundos sonoros", explica King Cipher sobre su evolución.</p>
+      
+      <h3>El Reconocimiento Internacional (2016-2020)</h3>
+      <p>Su álbum "NYC State of Mind" (2017) lo catapultó a la fama internacional. Giras por Europa, Asia y Sudamérica. Colaboraciones con artistas de renombre mundial. De repente, el chico del Bronx estaba vendiendo out shows en Londres y Tokio.</p>
+      
+      <h3>La Madurez Artística (2021-Presente)</h3>
+      <p>Ahora, con 20 años de carrera, King Cipher se siente más creativo que nunca. Su próximo álbum "Concreto Puro" promete ser su trabajo más ambicioso. "He vivido lo suficiente como para saber quién soy como artista. Ahora es sobre perfeccionar esa voz", afirma.</p>
+      
+      <h3>Legado y Futuro</h3>
+      <p>Más allá de la música, King Cipher es un mentor para jóvenes artistas del Bronx. A través de talleres y programas comunitarios, está devolviendo a su comunidad lo que esta le dio. "Si puedo ayudar a un solo chico o chica a evitar los errores que yo cometí, mi trabajo habrá valido la pena", concluye.</p>
+    `,
+  },
+  '8': {
+    id: '8',
+    title: 'Producción de Música Electrónica: Herramientas Esenciales',
+    excerpt: 'Una guía completa sobre el software, hardware y técnicas necesarias para producir música electrónica de calidad profesional.',
+    category: 'Tutoriales',
+    date: '2026-01-25',
+    author: 'Sofia Records',
+    image: 'https://www.corazon.cl/wp-content/uploads/2022/06/Dainesitta-768x480.jpg',
+    readTime: 11,
+    authorBio: 'Productora de música electrónica e ingeniera de sonido. Ha trabajado con artistas de ILUMINATY y enseña producción musical en Brooklyn.',
+    content: `
+      <p>Producir música electrónica de calidad profesional requiere más que talento: necesitas las herramientas adecuadas. En esta guía completa, cubrimos todo lo que necesitas para comenzar o llevar tu producción al siguiente nivel.</p>
+      
+      <h3>Software (DAWs)</h3>
+      <p>El corazón de tu estudio es el DAW (Digital Audio Workstation). Aquí tus ideas cobran vida. Las opciones principales incluyen:</p>
+      
+      <p><strong>Ableton Live:</strong> Ideal para producción en vivo y electronic music. Su interfaz de session view es perfecta para improvisar y experimentar.</p>
+      
+      <p><strong>FL Studio:</strong> Popular entre productores de hip-hop y EDM. Su patrón de step sequencer es intuitivo y potente.</p>
+      
+      <p><strong>Logic Pro X:</strong> Exclusivo para Mac. Ofrece una biblioteca de sonidos impresionante y es excelente para mezcla.</p>
+      
+      <h3>Hardware Esencial</h3>
+      <p><strong>Interfaz de Audio:</strong> Convierte señales analógicas a digitales. Recomendamos Focusrite Scarlett o Universal Audio para calidad profesional.</p>
+      
+      <p><strong>Monitores de Estudio:</strong> No uses auriculares de consumo para mezclar. Invierte en monitores planos como KRK Rokit o Yamaha HS.</p>
+      
+      <p><strong>MIDI Controller:</strong> Un teclado MIDI de 49 teclas es suficiente para empezar. Akai, Novation y Arturia ofrecen excelentes opciones.</p>
+      
+      <h3>Plugins y Librerías de Sonido</h3>
+      <p><strong>Sintetizadores Virtuales:</strong> Serum, Massive y Sylenth1 son estándares de la industria para crear sonidos únicos.</p>
+      
+      <p><strong>Bibliotecas de Samples:</strong> Splice es una suscripción invaluable. Acceso a millones de samples, loops y one-shots de calidad profesional.</p>
+      
+      <h3>Técnicas Fundamentales</h3>
+      <p><strong>EQ:</strong> Aprende a cortar frecuencias en lugar de solo boostear. Un buen EQ hace que tu mezcla respire.</p>
+      
+      <p><strong>Compresión:</strong> Controla el rango dinámico. La compresión paralela en drums añade punch sin perder dinámica.</p>
+      
+      <p><strong>Sidechain:</strong> Técnica esencial en música electrónica. Crea ese efecto de "pumping" que hace que el kick brille.</p>
+      
+      <h3>El Entorno de Trabajo</h3>
+      <p>No subestimes la importancia del tratamiento acústico. Incluso en un dormitorio, paneles de espuma acústica y bass traps pueden mejorar drásticamente la precisión de tu monitoreo.</p>
+      
+      <h3>Conclusión</h3>
+      <p>La mejor herramienta es la que conoces en profundidad. No caigas en la trampa de comprar más gear pensando que mejorará tu música. Domina lo que tienes, entiende cada parámetro, y tu sonido mejorará naturalmente.</p>
+    `,
+  },
+  '9': {
+    id: '9',
+    title: 'Cómo Monetizar tu Arte en ILUMINATY',
+    excerpt: 'Estrategias prácticas para artistas urbanos: desde sponsorships hasta distribución digital y oportunidades de booking.',
+    category: 'Tutoriales',
+    date: '2026-01-22',
+    author: 'Marcus Jay',
+    image: 'https://d1zdxptf8tk3f9.cloudfront.net/ckeditor_assets/pictures/1586/content_andrew-neel-218073.jpg',
+    readTime: 7,
+    authorBio: 'Estratega digital especializado en monetización para artistas. Ha ayudado a más de 100 artistas a generar ingresos sostenibles con su arte.',
+    content: `
+      <p>El arte es pasión, pero también puede ser un negocio sostenible. ILUMINATY ofrece múltiples vías para que los artistas urbanos monetizen su talento. Aquí te presentamos las estrategias más efectivas.</p>
+      
+      <h3>1. Distribución Digital Directa</h3>
+      <p>ILUMINATY permite distribuir tu música directamente a plataformas como Spotify, Apple Music y Tidal. Pero vamos más allá: ofrecemos splits de ingresos más justos que los distribuidores tradicionales, y te mantenemos en control total de tu masters.</p>
+      
+      <p><strong>Tip:</strong> Usa nuestra herramienta de release planning para sincronizar tus lanzamientos con eventos locales y maximizar el impacto.</p>
+      
+      <h3>2. Merchandising y Productos Digitales</h3>
+      <p>No limites tu merch a camisetas. En ILUMINATY puedes vender:</p>
+      <ul>
+        <li>Beat packs y sample packs</li>
+        <li>Stems de tus canciones para remixes</li>
+        <li>Tickets para shows exclusivos</li>
+        <li>Experiencias VIP (backstage, estudios)</li>
+        <li>Arte digital y NFTs</li>
+      </ul>
+      
+      <h3>3. Oportunidades de Booking</h3>
+      <p>Nuestra red de promotores y venues está constantemente buscando talento. Mantén tu perfil actualizado con:</p>
+      <ul>
+        <li>Videos de performances en vivo</li>
+        <li>Press kit profesional</li>
+        <li>Rider técnico claro</li>
+        <li>Referencias de shows anteriores</li>
+      </ul>
+      
+      <h3>4. Patrocinios y Brand Deals</h3>
+      <p>Conectamos artistas con marcas que buscan autenticidad urbana. Desde ropa streetwear hasta tecnología y bebidas, hay oportunidades para todos los niveles de carrera.</p>
+      
+      <p><strong>Importante:</strong> Solo acepta patrocinios que resonen con tu marca personal. La autenticidad es tu activo más valioso.</p>
+      
+      <h3>5. Servicios Freelance</h3>
+      <p>Muchos artistas generan ingresos estables ofreciendo servicios:</p>
+      <ul>
+        <li>Producción para otros artistas</li>
+        <li>Clases de música o arte</li>
+        <li>Diseño gráfico y branding</li>
+        <li>Fotografía y videografía</li>
+        <li>Ghostwriting</li>
+      </ul>
+      
+      <h3>6. Crowdfunding y Fan Support</h3>
+      <p>Plataformas como Patreon integradas en ILUMINATY permiten a tus fans más dedicados apoyarte mensualmente a cambio de contenido exclusivo: demos, behind-the-scenes, Q&As mensuales.</p>
+      
+      <h3>7. Sincronización y Licencias</h3>
+      <p>Tu música en películas, series, videojuegos y comerciales puede generar ingresos significativos. ILUMINATY tiene conexiones directas con music supervisors que buscan sonidos urbanos auténticos.</p>
+      
+      <h3>Construyendo un Negocio Sostenible</h3>
+      <p>La clave es diversificación. No dependas de una sola fuente de ingresos. Comienza con 2-3 estrategias, domínalas, y luego expande. Recuerda: el negocio del arte es un maratón, no un sprint.</p>
+      
+      <p>En ILUMINATY creemos que los artistas merecen vivir de su arte. Estamos aquí para proporcionarte las herramientas y conexiones que necesitas para hacerlo realidad.</p>
     `,
   },
 }

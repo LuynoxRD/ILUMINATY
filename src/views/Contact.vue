@@ -63,17 +63,17 @@
             <div class="mt-12 pt-8 border-t border-gray-300">
               <h4 class="font-semibold mb-4">Síguenos en Redes</h4>
               <div class="flex gap-4">
-                <a href="https://instagram.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:text-neon-lime transition-colors" aria-label="Instagram">
-                  <span class="text-2xl">📸</span>
+                <a href="https://instagram.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="Instagram">
+                  <img src="https://cdn-icons-png.flaticon.com/128/4138/4138124.png" alt="Instagram" class="w-6 h-6 object-contain" />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:text-neon-violet transition-colors" aria-label="Twitter">
                   <span class="text-2xl">𝕏</span>
                 </a>
-                <a href="https://tiktok.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:text-neon-cyan transition-colors" aria-label="TikTok">
-                  <span class="text-2xl">🎵</span>
+                <a href="https://tiktok.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="TikTok">
+                  <img src="https://cdn-icons-png.flaticon.com/128/3046/3046120.png" alt="TikTok" class="w-6 h-6 object-contain" />
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:text-neon-lime transition-colors" aria-label="YouTube">
-                  <span class="text-2xl">▶️</span>
+                <a href="https://youtube.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="YouTube">
+                  <img src="https://cdn-icons-png.flaticon.com/128/1384/1384060.png" alt="YouTube" class="w-6 h-6 object-contain" />
                 </a>
               </div>
             </div>
@@ -189,7 +189,7 @@
                 <p class="text-gray-500 text-xs mt-2">{{ form.message.length }}/1000 caracteres</p>
               </div>
 
-              <!-- Privacy -->
+               <!-- Privacy -->
               <div class="mb-6">
                 <label class="flex items-start gap-3 cursor-pointer">
                   <input 
@@ -199,7 +199,7 @@
                     class="w-4 h-4 mt-1"
                   />
                   <span class="text-gray-600 text-sm">
-                    Acepto la política de privacidad y deseo recibir comunicaciones de ILUMINATY *
+                    He leído y acepto los <RouterLink to="/terminos" class="text-neon-lime hover:underline">Términos y Condiciones</RouterLink> y la <RouterLink to="/privacidad" class="text-neon-lime hover:underline">Política de Privacidad</RouterLink>. Deseo recibir comunicaciones de ILUMINATY *
                   </span>
                 </label>
               </div>
@@ -263,6 +263,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import DOMPurify from 'dompurify'
 
 interface ContactForm {

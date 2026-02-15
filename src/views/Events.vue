@@ -260,7 +260,7 @@ const allEvents = ref<Event[]>([
     price: 'Free - $15',
     image: 'https://source.unsplash.com/random/800x600/?battle,hiphop,cypher',
     artists: ['Street Poets Network'],
-    isSoldOut: False,
+    isSoldOut: false,
   },
   {
     id: '7',
