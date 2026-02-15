@@ -1,11 +1,11 @@
 # ⚡ ILUMINATY - NYC Urban Artists Platform
 
 <p align="center">
-  <img src="https://i.postimg.cc/C5BN8s1S/Ilumitany1.png" width="full" alt="App Preview">
+  <img src="https://i.postimg.cc/sXqKtdh6/Ilumitany1.png" width="full" alt="App Preview">
 </p>
 
 ### 🚀 El futuro del arte urbano en Nueva York
-**ILUMINATY** es una arquitectura Front-end de alto rendimiento diseñada para centralizar y potenciar el ecosistema del arte urbano en NYC. Conecta de forma fluida a raperos, productores y artistas visuales con su audiencia y oportunidades de booking.
+**ILUMINATY** es una arquitectura Front-end de alto rendimiento diseñada para que una Casa Disquera pueda centralizar y potenciar el ecosistema del arte urbano en NYC. Conecta de forma fluida a raperos, productores y artistas visuales con su audiencia y oportunidades de booking.
 
 ---
 
