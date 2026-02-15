@@ -1,12 +1,10 @@
 <template>
-  <section class="relative overflow-hidden pt-12 md:pt-24 pb-16">
-    
 
-    <!-- Content Grid Layout -->
+  <section class="relative overflow-hidden pt-12 md:pt-24 pb-16">
     <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 w-full">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <!-- Text Content (Left Column) -->
-        <div class="text-center lg:text-left">
+        <div class="text-center lg:text-left flex flex-col items-center lg:items-start">
           <!-- Eyebrow -->
           <div ref="eyebrow" class="mb-6">
             <span class="inline-block px-4 py-2 rounded-full glass text-neon-lime font-semibold text-sm">
@@ -87,13 +85,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce mt-24 md:mt-32">
-      <svg class="w-6 h-6 text-neon-lime" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-      </svg>
     </div>
   </section>
 </template>
