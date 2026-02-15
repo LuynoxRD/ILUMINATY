@@ -7,7 +7,7 @@
         <div class="text-center lg:text-left flex flex-col items-center lg:items-start">
           <!-- Eyebrow -->
           <div ref="eyebrow" class="mb-6">
-            <span class="inline-block px-4 py-2 rounded-full glass text-neon-lime font-semibold text-sm">
+            <span class="inline-block px- py-2 rounded-full glass text-neon-lime font-semibold text-sm">
               ⚡ El futuro del arte urbano está aquí
             </span>
           </div>
