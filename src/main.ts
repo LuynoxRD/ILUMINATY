@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+// 1. Cambiamos createWebHistory por createWebHashHistory
+import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import './style.css'
 
@@ -23,7 +24,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  // 2. Activamos el modo Hash
+  history: createWebHashHistory(),
   routes,
   scrollBehavior() {
     return { top: 0, behavior: 'smooth' }
