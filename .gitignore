@@ -1,0 +1,5 @@
+node_modules/
+agentes/
+.env
+dist/
+AGENTS.md
