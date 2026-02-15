@@ -78,7 +78,7 @@
               <div class="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-7 bg-black rounded-b-3xl z-20"></div>
               <div class="absolute top-2 right-6 w-12 h-3 bg-white/20 rounded-full z-20"></div>
               <img 
-                src="https://alofoke.co/_next/image?url=%2Fss_1.png&w=384&q=75" 
+                src="https://i.postimg.cc/Yqt0hqsw/Ilumitany.png" 
                 alt="App Preview" 
                 class="w-full h-full object-cover object-top" 
               />
