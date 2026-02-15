@@ -1,3 +1,141 @@
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import Hero from '@/components/Hero.vue'
+import SectionTitle from '@/components/SectionTitle.vue'
+import ArtistCard from '@/components/ArtistCard.vue'
+import BlogCard from '@/components/BlogCard.vue'
+import EventCard from '@/components/EventCard.vue'
+
+interface Artist {
+  id: string
+  name: string
+  genre: string
+  bio: string
+  image: string
+  neighborhoods: string[]
+  badge: string
+}
+
+interface BlogPost {
+  id: string
+  title: string
+  excerpt: string
+  category: string
+  date: string
+  author: string
+  image: string
+  readTime: number
+}
+
+interface Event {
+  id: string
+  title: string
+  description: string
+  date: string
+  time: string
+  doorsOpen: string
+  venue: string
+  price: string
+  image: string
+  artists: string[]
+  isSoldOut: boolean
+}
+
+const featuredArtists = ref<Artist[]>([
+  {
+    id: '1',
+    name: 'King Cipher',
+    genre: 'Hip-Hop / Rap',
+    bio: 'Rapero veterano de Harlem. Sus líricas crudas sobre la realidad urbana lo han convertido en una leyenda del East Side.',
+    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/06165055/nicki-minaj1.jpg',
+    neighborhoods: ['Harlem', 'East Side'],
+    badge: '🎤',
+  },
+  {
+    id: '2',
+    name: 'Luna Vibe Collective',
+    genre: 'Electronic / Trip-Hop',
+    bio: 'Colectivo de Brooklyn especializado en beats experimentales y soundscapes hipnóticos. Perfecto para sesiones nocturnas.',
+    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/06164918/50-cent-biggest-beefs-getty-jordan-darville.jpg',
+    neighborhoods: ['Brooklyn', 'Williamsburg'],
+    badge: '🎧',
+  },
+  {
+    id: '3',
+    name: 'Spray Angel',
+    genre: 'Graffiti / Visual Art',
+    bio: 'Artista visual de Queens. Sus murales han decorado las paredes más icónicas del bajo Manhattan.',
+    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/31121053/DJ-Premier-1536x1180.jpg',
+    neighborhoods: ['Queens', 'Manhattan'],
+    badge: '🎨',
+  },
+])
+
+const latestPosts = ref<BlogPost[]>([
+  {
+    id: '1',
+    title: 'King Cipher Anuncia Nuevo Álbum "Concreto Puro"',
+    excerpt: 'Tras meses de especulación, el rapero de Harlem revela los detalles de su próxima obra. Un viaje sonoro de 14 tracks que promete redefinir el hip-hop urbano.',
+    category: 'Noticias',
+    date: '2026-02-12',
+    author: 'Marcus Jay',
+    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/06165055/nicki-minaj1.jpg',
+    readTime: 5,
+  },
+  {
+    id: '2',
+    title: 'La Escena Urbana de NYC Explota en 2026',
+    excerpt: 'Con más de 85 eventos confirmados para este año, Nueva York se posiciona como epicentro global del arte urbano. Las entradas para los festivales más esperados ya están agotadas.',
+    category: 'Análisis',
+    date: '2026-02-10',
+    author: 'DJ Remix',
+    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/31121202/Mase.jpg',
+    readTime: 7,
+  },
+  {
+    id: '3',
+    title: 'Luna Vibe Collective Colabora con Productor Japonés',
+    excerpt: 'El colectivo de Brooklyn se une a Takeshi Nakamura para crear una experiencia audiovisual sin precedentes. El proyecto se estrenará en Art Basel Miami Week.',
+    category: 'Colaboraciones',
+    date: '2026-02-08',
+    author: 'Sofia Records',
+    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/31121301/Cappadonna.jpg',
+    readTime: 4,
+  },
+])
+
+const upcomingEvents = ref([
+  {
+    id: '1',
+    title: 'ILUMINATY Sessions: King Cipher Live',
+    description: 'Concierto íntimo en el corazón de Manhattan. El rapero interpretará clásicos y adelantos de su nuevo álbum "Concreto Puro".',
+    date: '2026-02-28',
+    time: '21:00',
+    doorsOpen: '20:30',
+    venue: 'Bowery Ballroom',
+    price: '$45 - $75',
+    image: 'https://source.unsplash.com/random/800x600/?concert,stage,lights',
+    artists: ['King Cipher', 'DJ Remix'],
+    isSoldOut: false,
+  },
+  {
+    id: '2',
+    title: 'Brooklyn Neon Festival 2026',
+    description: 'Festival de 2 días con 40+ artistas. El evento más importante del año reúne a lo mejor de la escena urbana de NYC.',
+    date: '2026-03-15',
+    time: '18:00',
+    doorsOpen: '17:30',
+    venue: 'Prospect Park, Brooklyn',
+    price: '$85 - $150',
+    image: 'https://source.unsplash.com/random/800x600/?festival,neon,night',
+    artists: ['Luna Vibe Collective', 'Spray Angel', 'King Cipher', '+37 más'],
+    isSoldOut: true,
+  },
+])
+</script>
+
 <template>
   <div class="bg-white text-neutral-900 relative overflow-x-clip">
     <!-- Neon Animated Blobs Background (antes en Hero.vue) -->
@@ -165,142 +303,3 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import Hero from '@/components/Hero.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
-import ArtistCard from '@/components/ArtistCard.vue'
-import BlogCard from '@/components/BlogCard.vue'
-import EventCard from '@/components/EventCard.vue'
-
-interface Artist {
-  id: string
-  name: string
-  genre: string
-  bio: string
-  image: string
-  neighborhoods: string[]
-  badge: string
-}
-
-interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  category: string
-  date: string
-  author: string
-  image: string
-  readTime: number
-}
-
-interface Event {
-  id: string
-  title: string
-  description: string
-  date: string
-  time: string
-  doorsOpen: string
-  venue: string
-  price: string
-  image: string
-  artists: string[]
-  isSoldOut: boolean
-}
-
-const featuredArtists = ref<Artist[]>([
-  {
-    id: '1',
-    name: 'King Cipher',
-    genre: 'Hip-Hop / Rap',
-    bio: 'Rapero veterano de Harlem. Sus líricas crudas sobre la realidad urbana lo han convertido en una leyenda del East Side.',
-    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/06165055/nicki-minaj1.jpg',
-    neighborhoods: ['Harlem', 'East Side'],
-    badge: '🎤',
-  },
-  {
-    id: '2',
-    name: 'Luna Vibe Collective',
-    genre: 'Electronic / Trip-Hop',
-    bio: 'Colectivo de Brooklyn especializado en beats experimentales y soundscapes hipnóticos. Perfecto para sesiones nocturnas.',
-    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/06164918/50-cent-biggest-beefs-getty-jordan-darville.jpg',
-    neighborhoods: ['Brooklyn', 'Williamsburg'],
-    badge: '🎧',
-  },
-  {
-    id: '3',
-    name: 'Spray Angel',
-    genre: 'Graffiti / Visual Art',
-    bio: 'Artista visual de Queens. Sus murales han decorado las paredes más icónicas del bajo Manhattan.',
-    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/31121053/DJ-Premier-1536x1180.jpg',
-    neighborhoods: ['Queens', 'Manhattan'],
-    badge: '🎨',
-  },
-])
-
-const latestPosts = ref<BlogPost[]>([
-  {
-    id: '1',
-    title: 'King Cipher Anuncia Nuevo Álbum "Concreto Puro"',
-    excerpt: 'Tras meses de especulación, el rapero de Harlem revela los detalles de su próxima obra. Un viaje sonoro de 14 tracks que promete redefinir el hip-hop urbano.',
-    category: 'Noticias',
-    date: '2026-02-12',
-    author: 'Marcus Jay',
-    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/06165055/nicki-minaj1.jpg',
-    readTime: 5,
-  },
-  {
-    id: '2',
-    title: 'La Escena Urbana de NYC Explota en 2026',
-    excerpt: 'Con más de 85 eventos confirmados para este año, Nueva York se posiciona como epicentro global del arte urbano. Las entradas para los festivales más esperados ya están agotadas.',
-    category: 'Análisis',
-    date: '2026-02-10',
-    author: 'DJ Remix',
-    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/31121202/Mase.jpg',
-    readTime: 7,
-  },
-  {
-    id: '3',
-    title: 'Luna Vibe Collective Colabora con Productor Japonés',
-    excerpt: 'El colectivo de Brooklyn se une a Takeshi Nakamura para crear una experiencia audiovisual sin precedentes. El proyecto se estrenará en Art Basel Miami Week.',
-    category: 'Colaboraciones',
-    date: '2026-02-08',
-    author: 'Sofia Records',
-    image: 'https://dailymusicroll.s3.us-west-2.amazonaws.com/wp-content/uploads/2021/07/31121301/Cappadonna.jpg',
-    readTime: 4,
-  },
-])
-
-const upcomingEvents = ref([
-  {
-    id: '1',
-    title: 'ILUMINATY Sessions: King Cipher Live',
-    description: 'Concierto íntimo en el corazón de Manhattan. El rapero interpretará clásicos y adelantos de su nuevo álbum "Concreto Puro".',
-    date: '2026-02-28',
-    time: '21:00',
-    doorsOpen: '20:30',
-    venue: 'Bowery Ballroom',
-    price: '$45 - $75',
-    image: 'https://source.unsplash.com/random/800x600/?concert,stage,lights',
-    artists: ['King Cipher', 'DJ Remix'],
-    isSoldOut: false,
-  },
-  {
-    id: '2',
-    title: 'Brooklyn Neon Festival 2026',
-    description: 'Festival de 2 días con 40+ artistas. El evento más importante del año reúne a lo mejor de la escena urbana de NYC.',
-    date: '2026-03-15',
-    time: '18:00',
-    doorsOpen: '17:30',
-    venue: 'Prospect Park, Brooklyn',
-    price: '$85 - $150',
-    image: 'https://source.unsplash.com/random/800x600/?festival,neon,night',
-    artists: ['Luna Vibe Collective', 'Spray Angel', 'King Cipher', '+37 más'],
-    isSoldOut: true,
-  },
-])
-
-
-</script>
