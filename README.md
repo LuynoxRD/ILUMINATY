@@ -17,8 +17,12 @@ Use cases: music platforms, creator directories, editorial websites, event promo
 
 <p align="center">
   <a href="https://luynoxrd.github.io/ILUMINATY/"><img src="https://img.shields.io/badge/Demo-Live_Site-111827?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live demo" /></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=for-the-badge" alt="License MIT" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-16a34a?style=for-the-badge" alt="License Apache 2.0" /></a>
   <a href="https://github.com/LuynoxRD"><img src="https://img.shields.io/badge/GitHub-Follow_LuynoxRD-181717?style=for-the-badge&logo=github&logoColor=white" alt="Follow LuynoxRD" /></a>
+</p>
+
+<p align="center">
+  If this project helps you, consider leaving a star on the repository.
 </p>
 
 ## Overview
@@ -650,6 +654,17 @@ sanity-template/
 
 ## License
 
-MIT. See `LICENSE`.
+Apache 2.0. See `LICENSE` and `NOTICE`.
+
+This repository is open source and permits reuse, modification and commercial use under Apache License 2.0.
+
+Practical effect:
+
+- redistributed versions must preserve the license and applicable notices
+- modified files should be marked as changed when redistributed
+- attribution notices in `NOTICE` must travel with qualifying redistributions
+- the ILUMINATY name, logo and branding are not granted for trademark use beyond reasonable attribution of origin
+
+Important: Apache 2.0 helps preserve authorship and notices, but it does not prohibit commercial use, resale, forks or large-scale redistribution by itself. If someone wants white-label or OEM-style commercial terms beyond the open source license, contact the author separately.
 
 Made with love by [LuynoxRD](https://luynoxrd.com/) and [Vue.js](https://vuejs.org/) &#x1F49A;

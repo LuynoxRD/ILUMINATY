@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Professional Vue 3 + Vite template for blog, app download landing pages, event promotion, Sanity-ready content and webhook-ready forms.",
   "author": "LuynoxRD",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/LuynoxRD/ILUMINATY",
   "repository": {
     "type": "git",
