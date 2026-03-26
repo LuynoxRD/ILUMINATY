@@ -4,8 +4,8 @@ Esta carpeta deja el repositorio listo para usar Sanity como CMS principal del t
 
 ## Qué Incluye
 
-- schemas base para artistas, eventos, blog y contenido global
-- estructura de singletons para home, about y settings
+- schemas base para artistas, eventos, blog, legal y contenido global
+- estructura de singletons para home, about, artists, legal pages y settings
 - modelos que reflejan la forma actual del frontend
 
 ## Flujo Recomendado
@@ -27,10 +27,14 @@ Ese adapter espera estos tipos documentales:
 - `siteSettings`
 - `homePage`
 - `aboutPage`
+- `artistsPage`
 - `brandLogo`
 - `artist`
 - `testimonial`
 - `teamMember`
+- `termsPage`
+- `privacyPage`
+- `cookiesPage`
 - `post`
 - `event`
 

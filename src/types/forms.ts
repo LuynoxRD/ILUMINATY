@@ -1,4 +1,4 @@
-export type FormProvider = 'mock' | 'webhook' | 'brevo' | 'mailchimp' | 'custom'
+export type FormProvider = 'mock' | 'webhook' | 'custom'
 
 export interface ContactFormPayload {
   name: string

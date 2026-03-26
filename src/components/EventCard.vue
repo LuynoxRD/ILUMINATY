@@ -16,10 +16,12 @@
               'rounded-full px-3 py-1 text-xs font-semibold',
               isSoldOut
                 ? 'border border-red-500/30 bg-red-500/20 text-red-400'
-                : 'border border-neon-lime/30 bg-neon-lime/20 text-neon-lime',
+                : isComingSoon
+                  ? 'border border-amber-500/30 bg-amber-500/20 text-amber-400'
+                  : 'border border-neon-lime/30 bg-neon-lime/20 text-neon-lime',
             ]"
           >
-            {{ isSoldOut ? soldOutLabel : availableLabel }}
+            {{ statusLabel }}
           </span>
         </div>
 
@@ -59,7 +61,7 @@
       </div>
 
       <a
-        v-if="!isSoldOut && ticketUrl"
+        v-if="isAvailable"
         :href="ticketUrl"
         target="_blank"
         rel="noreferrer"
@@ -71,9 +73,9 @@
         v-else
         :class="[
           'btn-primary w-full md:w-auto',
-          (isSoldOut || !ticketUrl) && 'cursor-not-allowed opacity-50',
+          !isAvailable && 'cursor-not-allowed opacity-50',
         ]"
-        :disabled="isSoldOut || !ticketUrl"
+        :disabled="!isAvailable"
       >
         {{ actionLabel }}
       </button>
@@ -117,11 +119,31 @@ const props = withDefaults(defineProps<Props>(), {
   doorsOpenPrefix: 'Puertas abren a las',
 })
 
+const isSoldOut = computed(() => Boolean(props.isSoldOut))
+const isAvailable = computed(() => Boolean(props.ticketUrl) && !isSoldOut.value)
+const isComingSoon = computed(() => !props.ticketUrl && !isSoldOut.value)
+
 const cardElement = ref<HTMLElement>()
 
-const actionLabel = computed(() =>
-  props.isSoldOut ? props.soldOutLabel : (props.ticketUrl ? props.buyTicketsLabel : props.comingSoonLabel),
-)
+const statusLabel = computed(() => {
+  if (isSoldOut.value)
+    return props.soldOutLabel
+
+  if (isComingSoon.value)
+    return props.comingSoonLabel
+
+  return props.availableLabel
+})
+
+const actionLabel = computed(() => {
+  if (isAvailable.value)
+    return props.buyTicketsLabel
+
+  if (isComingSoon.value)
+    return props.comingSoonLabel
+
+  return props.soldOutLabel
+})
 
 const formatDate = (dateStr: string) =>
   new Intl.DateTimeFormat('es-ES', {

@@ -3,3 +3,4 @@ agentes/
 .env
 dist/
 AGENTS.md
+vite-dev.log

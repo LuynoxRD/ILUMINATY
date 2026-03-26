@@ -20,6 +20,9 @@ export const useNewsletterForm = (source: string) => {
   }
 
   const submit = async (copy: NewsletterBlock) => {
+    if (submitStatus.value === 'loading')
+      return
+
     const normalizedCopy = normalizeNewsletterBlock(copy)
     const sanitizedEmail = email.value.trim()
 

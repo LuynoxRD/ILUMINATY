@@ -25,6 +25,12 @@ html {
   --text-subtle: #94a3b8;
   --border-default: #d1d5db;
   --accent-red: #d7263d;
+  --hero-bg-dot-1: #06b6d4;
+  --hero-bg-dot-2: #14b8a6;
+  --hero-bg-dot-3: #22c55e;
+  --hero-bg-dot-4: #f59e0b;
+  --hero-bg-dot-5: #f97316;
+  --hero-bg-dot-6: #e879f9;
 }
 
 html.dark {
@@ -44,6 +50,12 @@ html.dark {
   --text-muted: #94a3b8;
   --text-subtle: #cbd5e1;
   --border-default: #334155;
+  --hero-bg-dot-1: #38bdf8;
+  --hero-bg-dot-2: #2dd4bf;
+  --hero-bg-dot-3: #a3e635;
+  --hero-bg-dot-4: #fbbf24;
+  --hero-bg-dot-5: #fb923c;
+  --hero-bg-dot-6: #c084fc;
 }
 
 body {
@@ -348,6 +360,12 @@ footer {
   background-color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.92);
   color: #ff0000;
+}
+
+.social-icon-facebook {
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  color: #1877f2;
 }
 
 .social-icon-neutral {

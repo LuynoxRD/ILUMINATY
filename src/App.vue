@@ -17,6 +17,9 @@ import { useHead } from '@unhead/vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
+import { useTheme } from './composables/useTheme'
+
+useTheme()
 
 useHead({
   htmlAttrs: {

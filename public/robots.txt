@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://luynoxrd.github.io/ILUMINATY/sitemap.xml
+Sitemap: https://example.com/sitemap.xml

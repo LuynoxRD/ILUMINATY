@@ -1,26 +1,38 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import AppDownloadCta from '@/components/AppDownloadCta.vue'
+import ArtistPopup from '@/components/ArtistPopup.vue'
 import ArtistsShowcase from '@/components/ArtistsShowcase.vue'
 import FollowersMarquee from '@/components/FollowersMarquee.vue'
 import Hero from '@/components/Hero.vue'
 import { useContent } from '@/composables/useContent'
 import { useNewsletterForm } from '@/composables/useNewsletterForm'
 import { getBlogCategoryColor } from '@/lib/blog'
+import { parseLocalDate } from '@/lib/date'
 import { normalizeNewsletterBlock } from '@/lib/formFeedback'
+import type { ArtistDirectoryEntry } from '@/types/content'
 
-const { featuredArtists, homePage, sortedBlogPosts, uiAssets } = useContent()
+const { artistDirectoryEntries, featuredArtists, homePage, sortedBlogPosts, uiAssets } = useContent()
 const featuredPosts = computed(() => sortedBlogPosts.slice(0, 3))
 const newsletterForm = useNewsletterForm('home-newsletter')
 const newsletterCopy = computed(() => normalizeNewsletterBlock(homePage.newsletterSection))
+const selectedFeaturedArtist = ref<ArtistDirectoryEntry | null>(null)
 
 const formatDate = (date: string) =>
-  new Date(`${date}T00:00:00`).toLocaleDateString('es-ES', {
+  parseLocalDate(date).toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   })
+
+const openFeaturedArtist = (artistId: string) => {
+  selectedFeaturedArtist.value = artistDirectoryEntries.find(artist => artist.id === artistId) || null
+}
+
+const closeFeaturedArtist = () => {
+  selectedFeaturedArtist.value = null
+}
 </script>
 
 <template>
@@ -31,7 +43,7 @@ const formatDate = (date: string) =>
 
     <Hero />
 
-    <div class="h-1 bg-gradient-to-r from-transparent via-neon-lime to-transparent opacity-3000"></div>
+    <div class="h-1 bg-gradient-to-r from-transparent via-neon-lime to-transparent opacity-100"></div>
 
     <section class="overflow-hidden bg-gray-50 py-16 md:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -52,9 +64,17 @@ const formatDate = (date: string) =>
 
     <section class="bg-gray-50 py-24">
       <div class="mx-auto mb-12 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-center text-4xl font-bold text-gray-900">Artistas Destacados</h2>
+        <h2 class="text-center text-4xl font-bold text-gray-900">{{ homePage.featuredArtistsSection.title }}</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-center text-base text-gray-600">
+          {{ homePage.featuredArtistsSection.description }}
+        </p>
       </div>
-      <ArtistsShowcase :items="featuredArtists" />
+      <ArtistsShowcase :items="featuredArtists" @view="openFeaturedArtist" />
+      <ArtistPopup
+        :show="Boolean(selectedFeaturedArtist)"
+        :artist="selectedFeaturedArtist"
+        @close="closeFeaturedArtist"
+      />
     </section>
 
     <section class="relative overflow-hidden bg-gray-50 py-24">

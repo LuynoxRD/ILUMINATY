@@ -7,9 +7,30 @@
     <meta name="description" content="Iluminaty - Plataforma de artistas urbanos de Nueva York" />
     <meta name="theme-color" content="#0a0e27" />
     <title>Iluminaty - NYC Urban Artists Platform</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('iluminaty-theme')
+          var preference = stored === 'light' || stored === 'dark' || stored === 'system'
+            ? stored
+            : 'system'
+          var theme = preference === 'system'
+            ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            : preference
+
+          if (!stored)
+            localStorage.setItem('iluminaty-theme', 'system')
+
+          document.documentElement.classList.add(theme)
+          document.documentElement.setAttribute('data-theme', theme)
+          document.documentElement.setAttribute('data-theme-preference', preference)
+        }
+        catch (e) {}
+      })()
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="light bg-white text-neutral-900">
+  <body class="bg-white text-neutral-900">
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

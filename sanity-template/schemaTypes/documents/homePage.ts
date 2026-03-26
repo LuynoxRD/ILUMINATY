@@ -70,6 +70,14 @@ export const homePageType = defineType({
       ],
     }),
     defineField({
+      name: 'featuredArtistsSection',
+      type: 'object',
+      fields: [
+        defineField({ name: 'title', type: 'string' }),
+        defineField({ name: 'description', type: 'text', rows: 2 }),
+      ],
+    }),
+    defineField({
       name: 'communitySection',
       type: 'object',
       fields: [

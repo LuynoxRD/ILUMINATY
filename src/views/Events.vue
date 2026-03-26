@@ -73,7 +73,7 @@
           :price="event.price"
           :image="event.image"
           :artists="event.artists"
-          :is-sold-out="event.isSoldOut"
+          :is-sold-out="isEventSoldOut(event)"
           :ticket-url="event.ticketUrl"
           :artists-label="eventsPage.cardLabels.artists"
           :available-label="eventsPage.cardLabels.available"
@@ -130,6 +130,7 @@ import { computed, ref } from 'vue'
 import EventCard from '@/components/EventCard.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import { useContent } from '@/composables/useContent'
+import { parseLocalDate } from '@/lib/date'
 import { useNewsletterForm } from '@/composables/useNewsletterForm'
 import { normalizeNewsletterBlock } from '@/lib/formFeedback'
 
@@ -140,6 +141,12 @@ const notificationCopy = computed(() => normalizeNewsletterBlock(eventsPage.noti
 const selectedMonth = ref('')
 const selectedVenue = ref('')
 const showAvailableOnly = ref(false)
+const now = new Date()
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+const isEventSoldOut = (event: (typeof eventEntries)[number]) => Boolean(event.isSoldOut)
+const isEventAvailable = (event: (typeof eventEntries)[number]) =>
+  Boolean(event.ticketUrl) && !isEventSoldOut(event)
 
 const monthFormatter = new Intl.DateTimeFormat('es-ES', {
   month: 'long',
@@ -163,13 +170,15 @@ const filteredEvents = computed(() =>
   eventEntries.filter((event) => {
     const matchesMonth = !selectedMonth.value || event.date.slice(0, 7) === selectedMonth.value
     const matchesVenue = !selectedVenue.value || event.venue === selectedVenue.value
-    const matchesAvailability = !showAvailableOnly.value || !event.isSoldOut
+    const matchesAvailability = !showAvailableOnly.value || isEventAvailable(event)
 
     return matchesMonth && matchesVenue && matchesAvailability
   }),
 )
 
-const upcomingCount = computed(() => eventEntries.length)
-const soldOutCount = computed(() => eventEntries.filter(event => event.isSoldOut).length)
-const availableCount = computed(() => eventEntries.filter(event => !event.isSoldOut).length)
+const upcomingCount = computed(() =>
+  eventEntries.filter(event => parseLocalDate(event.date).getTime() >= today.getTime()).length,
+)
+const soldOutCount = computed(() => eventEntries.filter(isEventSoldOut).length)
+const availableCount = computed(() => eventEntries.filter(isEventAvailable).length)
 </script>

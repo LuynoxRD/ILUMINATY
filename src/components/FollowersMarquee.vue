@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useContent } from '@/composables/useContent'
+import { toSafeHref } from '@/lib/safeUrl'
 
 const { followerTestimonials, socialProfiles } = useContent()
 
 const rowOne = [...followerTestimonials, ...followerTestimonials]
 const rowTwo = [...followerTestimonials.slice().reverse(), ...followerTestimonials.slice().reverse()]
+const instagramUrl = toSafeHref(socialProfiles.instagram)
 </script>
 
 <template>
@@ -17,7 +19,7 @@ const rowTwo = [...followerTestimonials.slice().reverse(), ...followerTestimonia
     <div class="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
       <div class="theme-fade-left-soft absolute left-0 top-0 h-full w-20 z-10 pointer-events-none"></div>
       <div class="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5">
-        <div v-for="card in rowOne" :key="`${card.handle}-${card.date}`" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
+        <div v-for="(card, index) in rowOne" :key="`${card.handle}-${card.date}-${index}`" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
           <div class="flex gap-2">
             <img class="size-11 rounded-full object-cover" :src="card.image" :alt="card.name">
             <div class="flex flex-col">
@@ -34,7 +36,8 @@ const rowTwo = [...followerTestimonials.slice().reverse(), ...followerTestimonia
           <div class="flex items-center justify-between text-slate-500 text-xs">
             <div class="flex items-center gap-1">
               <span>Publicado en</span>
-              <a :href="socialProfiles.instagram" target="_blank" rel="noreferrer" class="hover:text-pink-500">Instagram</a>
+              <a v-if="instagramUrl" :href="instagramUrl" target="_blank" rel="noreferrer" class="hover:text-pink-500">Instagram</a>
+              <span v-else>Instagram</span>
             </div>
             <p>{{ card.date }}</p>
           </div>
@@ -46,7 +49,7 @@ const rowTwo = [...followerTestimonials.slice().reverse(), ...followerTestimonia
     <div class="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
       <div class="theme-fade-left-soft absolute left-0 top-0 h-full w-20 z-10 pointer-events-none"></div>
       <div class="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10">
-        <div v-for="card in rowTwo" :key="`${card.handle}-${card.date}-reverse`" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
+        <div v-for="(card, index) in rowTwo" :key="`${card.handle}-${card.date}-reverse-${index}`" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
           <div class="flex gap-2">
             <img class="size-11 rounded-full object-cover" :src="card.image" :alt="card.name">
             <div class="flex flex-col">
@@ -63,7 +66,8 @@ const rowTwo = [...followerTestimonials.slice().reverse(), ...followerTestimonia
           <div class="flex items-center justify-between text-slate-500 text-xs">
             <div class="flex items-center gap-1">
               <span>Publicado en</span>
-              <a :href="socialProfiles.instagram" target="_blank" rel="noreferrer" class="hover:text-pink-500">Instagram</a>
+              <a v-if="instagramUrl" :href="instagramUrl" target="_blank" rel="noreferrer" class="hover:text-pink-500">Instagram</a>
+              <span v-else>Instagram</span>
             </div>
             <p>{{ card.date }}</p>
           </div>

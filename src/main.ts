@@ -1,5 +1,6 @@
 import { nextTick } from 'vue'
 import { ViteSSG } from 'vite-ssg'
+import type { RouteLocationNormalized } from 'vue-router'
 import App from './App.vue'
 import './style.css'
 import 'lenis/dist/lenis.css'
@@ -13,7 +14,7 @@ const staticRoutes = [
   {
     path: '/blog/:slug',
     component: () => import('./views/BlogPost.vue'),
-    props: route => ({ initialSlug: String(route.params.slug || '') }),
+    props: (route: RouteLocationNormalized) => ({ initialSlug: String(route.params.slug || '') }),
     meta: { title: 'Blog' },
   },
   { path: '/eventos', component: () => import('./views/Events.vue'), meta: { title: 'Eventos' } },

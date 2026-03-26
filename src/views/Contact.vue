@@ -16,11 +16,12 @@
           <div class="lg:col-span-1">
             <h3 class="mb-8">{{ contactPage.infoTitle }}</h3>
 
-            <div v-for="method in contactPage.methods" :key="method.title" class="mb-8">
+            <div v-for="method in safeMethods" :key="method.title" class="mb-8">
               <h4 class="mb-2 font-semibold" :class="method.accentClass">{{ method.icon }} {{ method.title }}</h4>
-              <a :href="method.href" class="text-gray-600 transition-colors hover:text-neon-lime">
+              <a v-if="method.safeHref" :href="method.safeHref" class="text-gray-600 transition-colors hover:text-neon-lime">
                 {{ method.value }}
               </a>
+              <span v-else class="text-gray-600">{{ method.value }}</span>
               <p class="mt-2 text-sm text-gray-500">{{ method.description }}</p>
             </div>
 
@@ -72,12 +73,19 @@
 
               <div class="mb-6">
                 <label for="subject" class="mb-2 block text-sm font-semibold">{{ contactPage.form.subjectLabel }}</label>
-                <select id="subject" v-model="form.subject" class="w-full">
+                <select
+                  id="subject"
+                  v-model="form.subject"
+                  class="w-full"
+                  :class="{ 'border-red-500': errors.subject }"
+                  @change="validateField('subject')"
+                >
                   <option value="">{{ contactPage.form.subjectPlaceholder }}</option>
                   <option v-for="option in contactPage.form.subjectOptions" :key="option.value" :value="option.value">
                     {{ option.label }}
                   </option>
                 </select>
+                <p v-if="errors.subject" class="mt-1 text-xs text-red-400">{{ errors.subject }}</p>
               </div>
 
               <div class="mb-6">
@@ -180,11 +188,12 @@
 
 <script setup lang="ts">
 import DOMPurify from 'dompurify'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import SocialLinks from '@/components/SocialLinks.vue'
 import { useContent } from '@/composables/useContent'
 import { readPlainText, resolveSubmissionMessage } from '@/lib/formFeedback'
+import { toSafeHref } from '@/lib/safeUrl'
 import { submitContactForm } from '@/services/forms'
 
 interface ContactFormState {
@@ -201,6 +210,7 @@ interface ContactFormState {
 interface ValidationErrors {
   name?: string
   email?: string
+  subject?: string
   phone?: string
   message?: string
 }
@@ -223,6 +233,12 @@ const errors = ref<ValidationErrors>({})
 const submitStatus = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const feedbackMessage = ref('')
 const expandedFaq = ref<number | null>(null)
+const safeMethods = computed(() =>
+  contactPage.methods.map(method => ({
+    ...method,
+    safeHref: toSafeHref(method.href),
+  })),
+)
 
 const validateField = (field: keyof ContactFormState) => {
   delete errors.value[field as keyof ValidationErrors]
@@ -236,6 +252,10 @@ const validateField = (field: keyof ContactFormState) => {
     if (!emailRegex.test(form.value.email)) {
       errors.value.email = 'Por favor ingresa un email valido'
     }
+  }
+
+  if (field === 'subject' && !form.value.subject.trim()) {
+    errors.value.subject = 'Selecciona un asunto'
   }
 
   if (field === 'phone' && form.value.phone) {
@@ -256,9 +276,13 @@ const validateField = (field: keyof ContactFormState) => {
 }
 
 const submitForm = async () => {
+  if (submitStatus.value === 'loading')
+    return
+
   errors.value = {}
   validateField('name')
   validateField('email')
+  validateField('subject')
   validateField('phone')
   validateField('message')
 
