@@ -4,11 +4,43 @@
 
 /* Base Styles */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+:root {
+  --bg-page: #f9fafb;
+  --bg-surface: #ffffff;
+  --bg-soft: #f9fafb;
+  --bg-elevated: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.82);
+  --bg-footer: rgba(255, 255, 255, 0.92);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-subtle: #94a3b8;
+  --border-default: #d1d5db;
+  --accent-red: #d7263d;
+}
+
+html.dark {
+  --bg-page: #0b1120;
+  --bg-surface: #111827;
+  --bg-soft: #0f172a;
+  --bg-elevated: #1e293b;
+  --bg-glass: rgba(15, 23, 42, 0.84);
+  --bg-footer: rgba(15, 23, 42, 0.92);
+  --text-primary: #f3f4f6;
+  --text-secondary: #d1d5db;
+  --text-muted: #94a3b8;
+  --text-subtle: #cbd5e1;
+  --border-default: #334155;
 }
 
 body {
-  @apply bg-white text-gray-900 overflow-x-hidden font-sans;
+  @apply overflow-x-hidden font-sans;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Typography */
@@ -29,6 +61,10 @@ h3 {
 }
 
 /* Glassmorphism */
+.glass {
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(18px);
+}
 
 
 /* Button Styles */
@@ -113,6 +149,257 @@ input:disabled, textarea:disabled, select:disabled {
 /* Utility Classes */
 .transition-smooth {
   @apply transition-all duration-300 ease-out;
+}
+
+.theme-selector {
+  @apply relative;
+}
+
+.theme-dropdown {
+  @apply relative;
+}
+
+.theme-trigger {
+  @apply inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition-colors duration-200;
+  background-color: var(--bg-surface);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+.theme-trigger:hover {
+  background-color: var(--bg-soft);
+}
+
+.theme-menu {
+  @apply absolute right-0 top-full z-50 mt-2 min-w-[11rem] rounded-2xl border p-2 shadow-lg;
+  background-color: var(--bg-surface);
+  border-color: var(--border-default);
+}
+
+.theme-menu-item {
+  @apply flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors duration-200;
+  color: var(--text-secondary);
+}
+
+.theme-menu-item:hover {
+  background-color: var(--bg-soft);
+  color: var(--text-primary);
+}
+
+.theme-menu-item-active {
+  background-color: var(--bg-soft);
+  color: var(--text-primary);
+}
+
+.theme-trigger-icon {
+  @apply inline-flex h-4 w-4 rounded-full border;
+  border-color: var(--text-primary);
+}
+
+.theme-trigger-icon-light {
+  background: #ffffff;
+}
+
+.theme-trigger-icon-dark {
+  background: #111827;
+}
+
+.theme-trigger-icon-system {
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #111827 50%, #111827 100%);
+}
+
+footer {
+  background-color: var(--bg-footer) !important;
+}
+
+.theme-surface-card {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.theme-filter-shell {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.theme-filter-control {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.theme-fade-left-soft {
+  background: linear-gradient(to right, var(--bg-soft), transparent);
+}
+
+.theme-fade-right-soft {
+  background: linear-gradient(to left, var(--bg-soft), transparent);
+}
+
+.theme-fade-left-surface {
+  background: linear-gradient(to right, var(--bg-surface), transparent);
+}
+
+.theme-fade-right-surface {
+  background: linear-gradient(to left, var(--bg-surface), transparent);
+}
+
+.theme-logo {
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.theme-logo-wrapper {
+  filter: grayscale(1);
+  opacity: 0.6;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.theme-logo-wrapper:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.theme-highlight-card {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+.theme-highlight-button {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+.theme-store-button {
+  background-color: #ffffff;
+  color: #111827;
+  border-color: var(--border-default);
+}
+
+.theme-link-accent {
+  color: var(--accent-red);
+}
+
+.theme-link-accent:hover {
+  color: #b91c1c;
+}
+
+.theme-newsletter-input {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.social-icon-brand {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-200;
+}
+
+.social-icon-large {
+  @apply h-12 w-12;
+}
+
+.social-icon-brand:hover {
+  transform: translateY(-1px);
+}
+
+.social-icon-instagram {
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  color: #e1306c;
+}
+
+.social-icon-youtube {
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  color: #ff0000;
+}
+
+.social-icon-neutral {
+  color: #111111;
+}
+
+html.dark .bg-white {
+  background-color: var(--bg-surface) !important;
+}
+
+html.dark .bg-gray-50 {
+  background-color: var(--bg-soft) !important;
+}
+
+html.dark .text-gray-900,
+html.dark .text-neutral-900,
+html.dark .text-black {
+  color: var(--text-primary) !important;
+}
+
+html.dark .text-gray-700,
+html.dark .text-gray-600,
+html.dark .text-gray-500 {
+  color: var(--text-secondary) !important;
+}
+
+html.dark .text-gray-300,
+html.dark .text-gray-200 {
+  color: var(--text-subtle) !important;
+}
+
+html.dark .text-gray-800,
+html.dark .text-slate-500,
+html.dark .text-slate-400 {
+  color: var(--text-secondary) !important;
+}
+
+html.dark .border-gray-300,
+html.dark .border-gray-200 {
+  border-color: var(--border-default) !important;
+}
+
+html.dark .theme-logo {
+  filter: brightness(0) invert(1) contrast(1.05);
+}
+
+html.dark .theme-logo-wrapper {
+  filter: none;
+  opacity: 0.88;
+}
+
+html.dark .theme-highlight-card,
+html.dark .theme-highlight-button {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+html.dark .theme-store-button {
+  background-color: #ffffff;
+  color: #111827;
+  border-color: #ffffff;
+}
+
+html.dark .social-icon-neutral {
+  background-color: #ffffff;
+  border: 1px solid #111827;
+  color: #111827;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: var(--bg-surface);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+html.dark .theme-filter-shell {
+  background-color: rgba(15, 23, 42, 0.94);
+}
+
+html.dark .theme-filter-control {
+  background-color: rgba(15, 23, 42, 0.92);
+  border-color: rgba(255, 255, 255, 0.88);
+  color: var(--text-primary);
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: var(--bg-soft);
 }
 
 

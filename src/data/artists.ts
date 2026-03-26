@@ -1,0 +1,125 @@
+import { imageAssets } from '@/data/assets'
+
+export interface FeaturedArtist {
+  id: string
+  name: string
+  genre: string
+  image: string
+}
+
+export interface ArtistDirectoryEntry extends FeaturedArtist {
+  bio: string
+  neighborhoods: string[]
+  badge: string
+}
+
+export const featuredArtists: FeaturedArtist[] = [
+  {
+    id: '1',
+    name: 'Lil Flow NYC',
+    genre: 'Rap / Hip-Hop',
+    image: imageAssets.homeArtists.lilFlow,
+  },
+  {
+    id: '2',
+    name: 'Monica Beats',
+    genre: 'Productora / Beatmaker',
+    image: imageAssets.homeArtists.monicaBeats,
+  },
+  {
+    id: '3',
+    name: 'Grafik Soul',
+    genre: 'Artista Visual / Pintor',
+    image: imageAssets.homeArtists.grafikSoul,
+  },
+  {
+    id: '4',
+    name: 'King Cipher',
+    genre: 'Hip-Hop / Rap',
+    image: imageAssets.homeArtists.kingCipher,
+  },
+]
+
+export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
+  {
+    id: '1',
+    name: 'King Cipher',
+    genre: 'Hip-Hop / Rap',
+    bio: 'Rapero veterano de Harlem. Sus letras crudas sobre la realidad urbana lo han convertido en una referencia del East Side.',
+    image: imageAssets.artistDirectory.kingCipher,
+    neighborhoods: ['Harlem', 'East Side'],
+    badge: '🎤',
+  },
+  {
+    id: '2',
+    name: 'Luna Vibe Collective',
+    genre: 'Electronic',
+    bio: 'Colectivo de Brooklyn especializado en beats experimentales. Su sonido funciona entre club culture y performance inmersivo.',
+    image: imageAssets.artistDirectory.lunaVibeCollective,
+    neighborhoods: ['Brooklyn', 'Williamsburg'],
+    badge: '🎧',
+  },
+  {
+    id: '3',
+    name: 'Spray Angel',
+    genre: 'Visual',
+    bio: 'Artista visual de Queens. Sus murales han ocupado paredes icónicas del bajo Manhattan y galerías emergentes.',
+    image: imageAssets.artistDirectory.sprayAngel,
+    neighborhoods: ['Queens', 'Manhattan'],
+    badge: '🎨',
+  },
+  {
+    id: '4',
+    name: 'Soul Maya',
+    genre: 'R&B / Soul',
+    bio: 'Cantante y productora del Bronx. Fusiona soul clásico con producción contemporánea y una puesta en escena íntima.',
+    image: imageAssets.artistDirectory.soulMaya,
+    neighborhoods: ['Bronx', 'Manhattan'],
+    badge: '🎵',
+  },
+  {
+    id: '5',
+    name: 'DJ Remix Master',
+    genre: 'Hip-Hop / Rap',
+    bio: 'Productor de Manhattan enfocado en beats de hip-hop con sello underground y colaboraciones internacionales.',
+    image: imageAssets.artistDirectory.djRemixMaster,
+    neighborhoods: ['Manhattan'],
+    badge: '🎚️',
+  },
+  {
+    id: '6',
+    name: 'Street Poet Alex',
+    genre: 'Hip-Hop / Rap',
+    bio: 'Poeta performático de Brooklyn. Sus textos activan conversaciones en cada presentación en vivo.',
+    image: imageAssets.artistDirectory.streetPoetAlex,
+    neighborhoods: ['Brooklyn', 'Queens'],
+    badge: '📝',
+  },
+  {
+    id: '7',
+    name: 'Visual Nexus',
+    genre: 'Visual',
+    bio: 'Colectivo visual de Williamsburg. Crean instalaciones inmersivas y piezas que mezclan calle, moda y arte digital.',
+    image: imageAssets.artistDirectory.visualNexus,
+    neighborhoods: ['Williamsburg', 'Brooklyn'],
+    badge: '✨',
+  },
+  {
+    id: '8',
+    name: 'Reggaeton Fuego',
+    genre: 'Reggaeton',
+    bio: 'Productor y DJ de Harlem. Mezcla reggaetón clásico con diseño sonoro contemporáneo y sets de alta energía.',
+    image: imageAssets.artistDirectory.reggaetonFuego,
+    neighborhoods: ['Harlem', 'Manhattan'],
+    badge: '🔥',
+  },
+  {
+    id: '9',
+    name: 'Techno Prophet',
+    genre: 'Electronic',
+    bio: 'Productor del East Village con sets largos e hipnóticos. Habita el cruce entre club nocturno y arte inmersivo.',
+    image: imageAssets.artistDirectory.technoProphet,
+    neighborhoods: ['Manhattan', 'Brooklyn'],
+    badge: '🎛️',
+  },
+]

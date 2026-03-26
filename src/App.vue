@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white text-neutral-900">
+  <div class="min-h-screen transition-colors duration-300">
     <Navbar />
     <main class="pt-20">
       <RouterView v-slot="{ Component }">
@@ -13,9 +13,16 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
+
+useHead({
+  htmlAttrs: {
+    lang: 'es',
+  },
+})
 </script>
 
 <style scoped>

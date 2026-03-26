@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" fill="none">
+  <rect width="320" height="96" rx="12" fill="transparent"/>
+  <circle cx="38" cy="48" r="22" stroke="#111111" stroke-width="5"/>
+  <path d="M26 48h24M38 26c6 6.8 9.5 13.8 9.5 22S44 63.2 38 70M38 26c-6 6.8-9.5 13.8-9.5 22S32 63.2 38 70" stroke="#111111" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M16 39.5c7.5 4.5 14.8 6.8 22 6.8 7.2 0 14.5-2.3 22-6.8M16 56.5c7.5-4.5 14.8-6.8 22-6.8 7.2 0 14.5 2.3 22 6.8" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
+  <text x="76" y="41" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#111111">Universal Music</text>
+  <text x="76" y="69" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#111111">Group</text>
+</svg>

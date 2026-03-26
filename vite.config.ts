@@ -3,8 +3,11 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 export default defineConfig({
-  base: '/ILUMINATY/', // ✅ ESTO ES CORRECTO - NO LO QUITES
+  base: '/ILUMINATY/',
   plugins: [vue()],
+  ssgOptions: {
+    dirStyle: 'nested',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -14,4 +17,3 @@ export default defineConfig({
     port: 5173,
   },
 })
-

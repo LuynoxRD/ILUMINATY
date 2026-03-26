@@ -1,35 +1,33 @@
 <template>
-  <nav 
+  <nav
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0',
-      'glass border-b border-gray-300'
+      'glass border-b border-gray-300',
     ]"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <!-- Logo -->
-        <RouterLink to="/" class="flex items-center gap-2 group">
-          <div class="text-3xl font-bold animate-glow">⚡</div>
+      <div class="flex h-20 items-center justify-between">
+        <RouterLink to="/" class="group flex items-center gap-2">
+          <LogoMark class-name="h-7 w-7 text-[#f90000] transition-transform duration-300 group-hover:scale-110" />
           <span class="text-xl font-display font-bold neon-text">ILUMINATY</span>
         </RouterLink>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-8">
-          <RouterLink 
-            v-for="link in navLinks" 
+        <div class="hidden items-center gap-8 md:flex">
+          <RouterLink
+            v-for="link in navLinks"
             :key="link.path"
             :to="link.path"
-            class="font-medium hover:text-neon-lime transition-colors"
+            class="font-medium transition-colors hover:text-neon-lime"
           >
             {{ link.label }}
           </RouterLink>
+          <ThemeSelector />
         </div>
 
-        <!-- Mobile Menu Button -->
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
+          class="rounded-lg p-2 transition-colors hover:bg-white/10 md:hidden"
           aria-label="Toggle menu"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,15 +36,15 @@
         </button>
       </div>
 
-      <!-- Mobile Menu -->
       <transition name="slide">
-        <div v-show="mobileMenuOpen" class="md:hidden border-t border-gray-300 bg-white">
-          <div class="flex flex-col items-start px-4 py-4 space-y-4">
-            <RouterLink 
-              v-for="link in navLinks" 
+        <div v-show="mobileMenuOpen" class="border-t border-gray-300 bg-white md:hidden">
+          <div class="flex flex-col items-start space-y-4 px-4 py-4">
+            <ThemeSelector />
+            <RouterLink
+              v-for="link in navLinks"
               :key="link.path"
               :to="link.path"
-              class="block px-4 py-2 text-lg rounded-lg hover:bg-black/10 transition-colors"
+              class="block rounded-lg px-4 py-2 text-lg transition-colors hover:bg-black/10"
               @click="mobileMenuOpen = false"
             >
               {{ link.label }}
@@ -59,8 +57,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import LogoMark from './LogoMark.vue'
+import ThemeSelector from './ThemeSelector.vue'
 
 const isVisible = ref(true)
 const mobileMenuOpen = ref(false)
@@ -78,15 +78,12 @@ const navLinks = [
 const handleScroll = () => {
   const currentScroll = window.scrollY
 
-  if (currentScroll <= 0) {
+  if (currentScroll <= 0)
     isVisible.value = true
-  } else if (currentScroll > lastScrollY) {
-    // Scrolling down
+  else if (currentScroll > lastScrollY)
     isVisible.value = false
-  } else {
-    // Scrolling up
+  else
     isVisible.value = true
-  }
 
   lastScrollY = currentScroll
 }
