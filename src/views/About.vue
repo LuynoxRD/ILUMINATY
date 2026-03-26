@@ -1,195 +1,127 @@
 <template>
   <div>
-    <!-- Hero Section -->
-    <section class="py-20 bg-gradient-dark relative overflow-hidden">
-      <div class="absolute inset-0 opacity-40 -z-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-neon-violet/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-neon-lime/20 rounded-full blur-3xl"></div>
+    <section class="relative overflow-hidden bg-gradient-dark py-20">
+      <div class="absolute inset-0 -z-10 opacity-40">
+        <div class="absolute right-0 top-0 h-96 w-96 rounded-full bg-neon-violet/20 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-neon-lime/20 blur-3xl"></div>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-center mb-4">Sobre ILUMINATY</h2>
-        <p class="text-center text-gray-600 max-w-3xl mx-auto text-lg">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h1 class="mb-4 text-center">Sobre ILUMINATY</h1>
+        <p class="mx-auto max-w-3xl text-center text-lg text-gray-600">
           Somos más que una plataforma. Somos un movimiento que amplifica las voces de artistas urbanos de Nueva York.
         </p>
       </div>
     </section>
 
-    <!-- Mission -->
     <SectionTitle
       subtitle="Propósito"
       title="Nuestra Misión"
       description="Crear un ecosistema donde el talento urbano prospera sin límites"
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
         <div>
-          <h3 class="mb-4">Democratizar la Visibilidad</h3>
-          <p class="text-gray-600 mb-6 leading-relaxed">
-            En ILUMINATY creemos que cada artista merece ser descubierto. No importa si estás comenzando en un sótano de Brooklyn o ya eres una leyenda del Bronx. 
-            Nuestra plataforma elimina las barreras tradicionales de la industria musical y visual.
+          <h2 class="mb-4 text-3xl font-bold text-gray-900">Democratizar la Visibilidad</h2>
+          <p class="mb-6 leading-relaxed text-gray-600">
+            En ILUMINATY creemos que cada artista merece ser descubierto. No importa si estás comenzando en un sótano de Brooklyn o si ya eres una leyenda del Bronx.
+            Nuestra plataforma reduce barreras y abre un espacio más claro para mostrar trabajo, conectar comunidad y activar oportunidades reales.
           </p>
           <ul class="space-y-3 text-gray-700">
             <li class="flex items-start gap-3">
-              <span class="text-neon-lime flex-shrink-0 mt-1">⚡</span>
+              <span class="mt-1 flex-shrink-0 text-neon-lime">⚡</span>
               <span>Conexión directa entre artistas y audiencia</span>
             </li>
             <li class="flex items-start gap-3">
-              <span class="text-neon-lime flex-shrink-0 mt-1">⚡</span>
+              <span class="mt-1 flex-shrink-0 text-neon-lime">⚡</span>
               <span>Promoción igualitaria sin sesgos corporativos</span>
             </li>
             <li class="flex items-start gap-3">
-              <span class="text-neon-lime flex-shrink-0 mt-1">⚡</span>
+              <span class="mt-1 flex-shrink-0 text-neon-lime">⚡</span>
               <span>Comunidad segura y colaborativa</span>
             </li>
           </ul>
         </div>
-        <div class="rounded-xl overflow-hidden glass">
-          <img 
-            src="https://img.freepik.com/fotos-premium/dos-raperos-negros-posan-calle-ciudad-noche-rascacielos-artistas-rap-contra-paisaje-urbano-concierto-musica-underground-estilo-urbano_266732-13097.jpg"
-            alt="Comunidad"
-            class="w-full h-full object-cover"
-          />
+        <div class="glass overflow-hidden rounded-xl">
+          <img :src="aboutContent.missionImage" alt="Comunidad ILUMINATY reunida en Nueva York" class="h-full w-full object-cover">
         </div>
       </div>
     </SectionTitle>
 
-    <!-- Values -->
     <section class="py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <span class="text-neon-lime font-semibold text-sm uppercase tracking-widest">VALORES CORE</span>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <span class="text-sm font-semibold uppercase tracking-widest text-neon-lime">Valores Core</span>
           <h2 class="mt-4">Lo que nos Define</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-4xl mb-4">©️</div>
-            <h4 class="font-bold mb-3">Autenticidad</h4>
-            <p class="text-gray-600 text-60x">
+            <div class="mb-4 text-4xl">©️</div>
+            <h3 class="mb-3 text-xl font-bold">Autenticidad</h3>
+            <p class="text-gray-600">
               Celebramos el arte genuino, sin filtros ni compromisos comerciales forzados.
             </p>
           </div>
-
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🗣️</div>
-            <h4 class="font-bold mb-3">Comunidad</h4>
-            <p class="text-gray-600 text-60x">
-              Somos una familia. Los éxitos de cada artista son nuestros éxitos.
+            <div class="mb-4 text-5xl">🗣️</div>
+            <h3 class="mb-3 text-xl font-bold">Comunidad</h3>
+            <p class="text-gray-600">
+              Somos una red creativa. Los avances de cada artista elevan a todo el ecosistema.
             </p>
           </div>
-
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🛸​</div>
-            <h4 class="font-bold mb-3">Innovación</h4>
-            <p class="text-gray-600 text-60x">
-              Impulsamos nuevos sonidos, visiones y formas de expresión urbana.
+            <div class="mb-4 text-5xl">🛰️</div>
+            <h3 class="mb-3 text-xl font-bold">Innovación</h3>
+            <p class="text-gray-600">
+              Impulsamos nuevos sonidos, formatos y cruces entre música, visuales y comunidad.
             </p>
           </div>
-
           <div class="glass rounded-xl p-8 text-center card-hover">
-            <div class="text-5xl mb-4">🌐</div>
-            <h4 class="font-bold mb-3">Inclusión</h4>
-            <p class="text-gray-600 text-60x">
-              Todos los géneros, todos los barrios, todas las voces tienen espacio.
+            <div class="mb-4 text-5xl">🌐</div>
+            <h3 class="mb-3 text-xl font-bold">Inclusión</h3>
+            <p class="text-gray-600">
+              Todos los géneros, barrios y voces tienen lugar dentro de la plataforma.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Team -->
     <SectionTitle
       subtitle="Las Mentes"
       title="Nuestro Equipo"
-      description="Apasionados por el arte urbano y la tecnología"
+      description="Personas que mezclan cultura urbana, producto y tecnología"
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="glass rounded-xl overflow-hidden text-center card-hover">
-          <div class="h-48 bg-gradient-dark overflow-hidden">
-            <img 
-              src="https://media.istockphoto.com/id/2218333101/es/foto/hombre-maduro-seguro-de-s%C3%AD-mismo-sonriendo-en-atuendo-profesional-con-un-fondo-tranquilo.jpg?s=612x612&w=0&k=20&c=3WaQoCEcLjUQN-spK2tFP6CkyQ1u0WdHmpE6ScBQ0kU="
-              alt="Fundador"
-              class="w-full h-full object-cover"
-            />
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div v-for="member in aboutContent.team" :key="member.id" class="glass overflow-hidden rounded-xl text-center card-hover">
+          <div class="h-48 overflow-hidden bg-gradient-dark">
+            <img :src="member.image" :alt="member.name" class="h-full w-full object-cover">
           </div>
           <div class="p-6">
-            <h4 class="font-bold mb-1">Marcus Rivera</h4>
-            <p class="text-neon-lime text-sm mb-3">Fundador & CEO</p>
-            <p class="text-gray-600 text-60x mb-4">
-              Productor de hip-hop de Harlem con 20 años en la industria. Visión: democratizar el arte urbano.
+            <h3 class="mb-1 text-xl font-bold text-gray-900">{{ member.name }}</h3>
+            <p class="mb-3 text-sm" :class="member.accentClass">{{ member.role }}</p>
+            <p class="mb-4 text-gray-600">
+              {{ member.bio }}
             </p>
-            <div class="flex gap-2 justify-center">
-              <a href="mailto:marcus@iluminaty.com" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-lime transition-colors" title="Email">📧</a>
-              <a href="https://linkedin.com/in/marcusrivera" target="_blank" rel="noopener" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-lime transition-colors" title="LinkedIn">🔗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass rounded-xl overflow-hidden text-center card-hover">
-          <div class="h-48 bg-gradient-dark overflow-hidden">
-            <img 
-              src="https://media.istockphoto.com/id/2174363314/es/foto/hombre-de-negocios-mirando-a-la-c%C3%A1mara.jpg?s=612x612&w=0&k=20&c=BLKhpY9mvhD3aI95wdALxIWwQsUlbfEde3gabKz6MY0="
-              alt="CTO"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          <div class="p-6">
-            <h4 class="font-bold mb-1">Sofia Chen</h4>
-            <p class="text-neon-violet text-sm mb-3">CTO & Co-Founder</p>
-            <p class="text-gray-600 text-60x mb-4">
-              Ingeniera de software de Brooklyn. Experta en infraestructura web escalable y experiencia de usuario.
-            </p>
-            <div class="flex gap-2 justify-center">
-              <a href="mailto:sofia@iluminaty.com" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-violet transition-colors" title="Email">📧</a>
-              <a href="https://github.com/sofiachen" target="_blank" rel="noopener" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-violet transition-colors" title="GitHub">🔗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass rounded-xl overflow-hidden text-center card-hover">
-          <div class="h-48 bg-gradient-dark overflow-hidden">
-            <img 
-              src="https://media.istockphoto.com/id/2198763720/es/foto/retrato-de-una-mujer-de-negocios-sonriente-de-pie-en-el-pasillo.jpg?s=612x612&w=0&k=20&c=TZyC54Bw7aMcSRUWnuOp3EZud6kvdTj7d827BO2zQs8="
-              alt="Community Manager"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          <div class="p-6">
-            <h4 class="font-bold mb-1">James Thompson</h4>
-            <p class="text-neon-cyan text-sm mb-3">Community Lead</p>
-            <p class="text-gray-600 text-60x mb-4">
-              Currador y promotor cultural del Bronx. Conecta artistas con oportunidades autênticas.
-            </p>
-            <div class="flex gap-2 justify-center">
-              <a href="mailto:james@iluminaty.com" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-cyan transition-colors" title="Email">📧</a>
-              <a href="https://instagram.com/jamesthompson" target="_blank" rel="noopener" class="w-10 h-10 rounded glass-hover flex items-center justify-center text-lg hover:text-neon-cyan transition-colors" title="Instagram">🔗</a>
+            <div class="flex justify-center gap-2">
+              <a :href="member.email" class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors" :class="member.accentClass" title="Email">📧</a>
+              <a :href="member.secondaryLink" target="_blank" rel="noopener" class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors" :class="member.accentClass" :title="member.secondaryLabel">🔗</a>
             </div>
           </div>
         </div>
       </div>
     </SectionTitle>
 
-    <!-- Manifesto -->
-    <section class="py-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-neon opacity-5 -z-10"></div>
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative overflow-hidden py-20">
+      <div class="absolute inset-0 -z-10 bg-gradient-neon opacity-5"></div>
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div class="glass rounded-2xl p-12 md:p-16">
-          <h2 class="text-center mb-8">El Manifiesto ILUMINATY</h2>
-          <div class="space-y-6 text-gray-700 leading-relaxed">
-            <p>
-              <span class="text-neon-lime font-bold">Creemos</span> que el arte urbano es la voz más honesta de Nueva York. Cada beat, cada letra, cada trazo es un grito de autenticidad.
-            </p>
-            <p>
-              <span class="text-neon-violet font-bold">Rechazamos</span> las gatekeepers tradicionales que decidían quién merecía ser escuchado. En ILUMINATY, todos tienen voz.
-            </p>
-            <p>
-              <span class="text-neon-cyan font-bold">Promovemos</span> colaboraciones sin ego, donde artistas de diferentes géneros y barrios forman comunidades creativas.
-            </p>
-            <p>
-              <span class="text-neon-lime font-bold">Protegemos</span> la libertad creativa, la privacidad y los derechos intelectuales de cada creador.
-            </p>
-            <p>
-              <span class="text-neon-violet font-bold">Soñamos</span> con un mundo donde el talento define el éxito, no el conexionismo ni el dinero.
-            </p>
+          <h2 class="mb-8 text-center">El Manifiesto ILUMINATY</h2>
+          <div class="space-y-6 leading-relaxed text-gray-700">
+            <p><span class="font-bold text-neon-lime">Creemos</span> que el arte urbano es la voz más honesta de Nueva York. Cada beat, cada letra y cada trazo registra una realidad que merece archivo y visibilidad.</p>
+            <p><span class="font-bold text-neon-violet">Rechazamos</span> la lógica de puertas cerradas que decide quién merece ser visto. ILUMINATY está diseñado para reducir fricción y abrir contexto.</p>
+            <p><span class="font-bold text-neon-cyan">Promovemos</span> colaboraciones sin ego entre artistas, productores, promotores y públicos que sí entienden la escena.</p>
+            <p><span class="font-bold text-neon-lime">Protegemos</span> la libertad creativa, la privacidad y el trabajo intelectual de cada creador que usa la plataforma.</p>
+            <p><span class="font-bold text-neon-violet">Soñamos</span> con una industria donde el talento y la constancia pesen más que la fricción de acceso.</p>
           </div>
         </div>
       </div>
@@ -199,4 +131,5 @@
 
 <script setup lang="ts">
 import SectionTitle from '@/components/SectionTitle.vue'
+import { aboutContent } from '@/data/about'
 </script>

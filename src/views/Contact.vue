@@ -1,125 +1,96 @@
 <template>
   <div>
-    <!-- Page Header -->
-    <section class="py-20 bg-gradient-dark relative overflow-hidden">
-      <div class="absolute inset-0 opacity-40 -z-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-neon-cyan/20 rounded-full blur-3xl"></div>
+    <section class="relative overflow-hidden bg-gradient-dark py-20">
+      <div class="absolute inset-0 -z-10 opacity-40">
+        <div class="absolute right-0 top-0 h-96 w-96 rounded-full bg-neon-cyan/20 blur-3xl"></div>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="mb-4">Contacto & Booking</h1>
-        <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+      <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <h1 class="mb-4">Contacto &amp; Booking</h1>
+        <p class="mx-auto max-w-2xl text-lg text-gray-600">
           ¿Preguntas? ¿Booking? ¿Colaboraciones? Estamos aquí para escucharte.
         </p>
       </div>
     </section>
 
-    <!-- Main Content -->
     <section class="py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <!-- Contact Info -->
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div class="lg:col-span-1">
             <h3 class="mb-8">Información de Contacto</h3>
 
-            <!-- Email -->
             <div class="mb-8">
-              <h4 class="font-semibold text-neon-lime mb-2">📧 Email</h4>
-              <a href="mailto:info@iluminaty.nyc" class="text-gray-600 hover:text-neon-lime transition-colors">
+              <h4 class="mb-2 font-semibold text-neon-lime">📧 Email</h4>
+              <a href="mailto:info@iluminaty.nyc" class="text-gray-600 transition-colors hover:text-neon-lime">
                 info@iluminaty.nyc
               </a>
-              <p class="text-gray-500 text-sm mt-2">Respuesta en 24 horas hábiles</p>
+              <p class="mt-2 text-sm text-gray-500">Respuesta en 24 horas hábiles</p>
             </div>
 
-            <!-- Booking -->
             <div class="mb-8">
-              <h4 class="font-semibold text-neon-violet mb-2">🎤 Booking & Partnership</h4>
-              <a href="mailto:booking@iluminaty.nyc" class="text-gray-600 hover:text-neon-violet transition-colors">
+              <h4 class="mb-2 font-semibold text-neon-violet">🎤 Booking &amp; Partnership</h4>
+              <a href="mailto:booking@iluminaty.nyc" class="text-gray-600 transition-colors hover:text-neon-violet">
                 booking@iluminaty.nyc
               </a>
-              <p class="text-gray-500 text-sm mt-2">Colaboraciones, eventos y features</p>
+              <p class="mt-2 text-sm text-gray-500">Colaboraciones, eventos y features</p>
             </div>
 
-            <!-- Support -->
             <div class="mb-8">
-              <h4 class="font-semibold text-neon-cyan mb-2">🆘 Soporte Técnico</h4>
-              <a href="mailto:support@iluminaty.nyc" class="text-gray-600 hover:text-neon-cyan transition-colors">
+              <h4 class="mb-2 font-semibold text-neon-cyan">🆘 Soporte Técnico</h4>
+              <a href="mailto:support@iluminaty.nyc" class="text-gray-600 transition-colors hover:text-neon-cyan">
                 support@iluminaty.nyc
               </a>
-              <p class="text-gray-500 text-sm mt-2">Problemas con la plataforma</p>
+              <p class="mt-2 text-sm text-gray-500">Problemas con la plataforma</p>
             </div>
 
-            <!-- Location -->
             <div>
-              <h4 class="font-semibold text-neon-lime mb-2">📍 Oficina</h4>
+              <h4 class="mb-2 font-semibold text-neon-lime">📍 Oficina</h4>
               <p class="text-gray-600">
-                325 Lafayette Street<br/>
-                New York, NY 10012<br/>
+                325 Lafayette Street<br>
+                New York, NY 10012<br>
                 USA
               </p>
-              <p class="text-gray-500 text-sm mt-2">Abierto: Lunes - Viernes, 10am-6pm EST</p>
+              <p class="mt-2 text-sm text-gray-500">Abierto: Lunes - Viernes, 10am-6pm EST</p>
             </div>
 
-            <!-- Social -->
-            <div class="mt-12 pt-8 border-t border-gray-300">
-              <h4 class="font-semibold mb-4">Síguenos en Redes</h4>
-              <div class="flex gap-4">
-                <a href="https://instagram.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="Instagram">
-                  <img src="https://cdn-icons-png.flaticon.com/128/4138/4138124.png" alt="Instagram" class="w-6 h-6 object-contain" />
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:text-neon-violet transition-colors" aria-label="Twitter">
-                  <span class="text-2xl">𝕏</span>
-                </a>
-                <a href="https://tiktok.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="TikTok">
-                  <img src="https://cdn-icons-png.flaticon.com/128/3046/3046120.png" alt="TikTok" class="w-6 h-6 object-contain" />
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener" class="w-12 h-12 rounded-lg glass-hover flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="YouTube">
-                  <img src="https://cdn-icons-png.flaticon.com/128/1384/1384060.png" alt="YouTube" class="w-6 h-6 object-contain" />
-                </a>
-              </div>
+            <div class="mt-12 border-t border-gray-300 pt-8">
+              <h4 class="mb-4 font-semibold">Síguenos en Redes</h4>
+              <SocialLinks size="lg" />
             </div>
           </div>
 
-          <!-- Contact Form -->
           <div class="lg:col-span-2">
-            <form @submit.prevent="submitForm" class="glass rounded-2xl p-8 md:p-12">
+            <form class="glass rounded-2xl p-8 md:p-12" @submit.prevent="submitForm">
               <h3 class="mb-8">Envía un Mensaje</h3>
 
-              <!-- Name -->
               <div class="mb-6">
-                <label for="name" class="block text-sm font-semibold mb-2">Nombre Completo *</label>
-                <input 
+                <label for="name" class="mb-2 block text-sm font-semibold">Nombre Completo *</label>
+                <input
                   id="name"
                   v-model="form.name"
                   type="text"
                   required
-                  @input="validateField('name')"
                   :class="{ 'border-red-500': errors.name }"
-                />
-                <p v-if="errors.name" class="text-red-400 text-xs mt-1">{{ errors.name }}</p>
+                  @input="validateField('name')"
+                >
+                <p v-if="errors.name" class="mt-1 text-xs text-red-400">{{ errors.name }}</p>
               </div>
 
-              <!-- Email -->
               <div class="mb-6">
-                <label for="email" class="block text-sm font-semibold mb-2">Email *</label>
-                <input 
+                <label for="email" class="mb-2 block text-sm font-semibold">Email *</label>
+                <input
                   id="email"
                   v-model="form.email"
                   type="email"
                   required
-                  @input="validateField('email')"
                   :class="{ 'border-red-500': errors.email }"
-                />
-                <p v-if="errors.email" class="text-red-400 text-xs mt-1">{{ errors.email }}</p>
+                  @input="validateField('email')"
+                >
+                <p v-if="errors.email" class="mt-1 text-xs text-red-400">{{ errors.email }}</p>
               </div>
 
-              <!-- Subject -->
               <div class="mb-6">
-                <label for="subject" class="block text-sm font-semibold mb-2">Asunto</label>
-                <select 
-                  id="subject"
-                  v-model="form.subject"
-                  class="w-full"
-                >
+                <label for="subject" class="mb-2 block text-sm font-semibold">Asunto</label>
+                <select id="subject" v-model="form.subject" class="w-full">
                   <option value="">Selecciona un tema...</option>
                   <option value="booking">Booking / Partnership</option>
                   <option value="artist">Registro como Artista</option>
@@ -130,42 +101,35 @@
                 </select>
               </div>
 
-              <!-- Phone (Optional) -->
               <div class="mb-6">
-                <label for="phone" class="block text-sm font-semibold mb-2">Teléfono (Opcional)</label>
-                <input 
+                <label for="phone" class="mb-2 block text-sm font-semibold">Teléfono (Opcional)</label>
+                <input
                   id="phone"
                   v-model="form.phone"
                   type="tel"
-                  @input="validateField('phone')"
                   :class="{ 'border-red-500': errors.phone }"
-                />
-                <p v-if="errors.phone" class="text-red-400 text-xs mt-1">{{ errors.phone }}</p>
+                  @input="validateField('phone')"
+                >
+                <p v-if="errors.phone" class="mt-1 text-xs text-red-400">{{ errors.phone }}</p>
               </div>
 
-              <!-- Artist Info (Conditional) -->
               <div v-if="form.subject === 'artist'" class="mb-6">
-                <label for="artistName" class="block text-sm font-semibold mb-2">Nombre Artístico</label>
-                <input 
+                <label for="artistName" class="mb-2 block text-sm font-semibold">Nombre Artístico</label>
+                <input
                   id="artistName"
                   v-model="form.artistName"
                   type="text"
                   placeholder="Tu nombre artístico..."
-                />
+                >
               </div>
 
-              <!-- Genre (Conditional) -->
               <div v-if="form.subject === 'artist'" class="mb-6">
-                <label for="genre" class="block text-sm font-semibold mb-2">Género/Disciplina</label>
-                <select 
-                  id="genre"
-                  v-model="form.genre"
-                  class="w-full"
-                >
+                <label for="genre" class="mb-2 block text-sm font-semibold">Género/Disciplina</label>
+                <select id="genre" v-model="form.genre" class="w-full">
                   <option value="">Selecciona un género...</option>
                   <option value="hip-hop">Hip-Hop / Rap</option>
                   <option value="electronic">Electrónico</option>
-                  <option value="r-b">R&B / Soul</option>
+                  <option value="r-b">R&amp;B / Soul</option>
                   <option value="reggaeton">Reggaeton</option>
                   <option value="visual">Arte Visual / Graffiti</option>
                   <option value="production">Producción Musical</option>
@@ -173,53 +137,49 @@
                 </select>
               </div>
 
-              <!-- Message -->
               <div class="mb-6">
-                <label for="message" class="block text-sm font-semibold mb-2">Mensaje *</label>
-                <textarea 
+                <label for="message" class="mb-2 block text-sm font-semibold">Mensaje *</label>
+                <textarea
                   id="message"
                   v-model="form.message"
                   required
                   rows="6"
                   placeholder="Cuéntanos más sobre ti o tu propuesta..."
-                  @input="validateField('message')"
                   :class="{ 'border-red-500': errors.message }"
+                  @input="validateField('message')"
                 ></textarea>
-                <p v-if="errors.message" class="text-red-400 text-xs mt-1">{{ errors.message }}</p>
-                <p class="text-gray-500 text-xs mt-2">{{ form.message.length }}/1000 caracteres</p>
+                <p v-if="errors.message" class="mt-1 text-xs text-red-400">{{ errors.message }}</p>
+                <p class="mt-2 text-xs text-gray-500">{{ form.message.length }}/1000 caracteres</p>
               </div>
 
-               <!-- Privacy -->
               <div class="mb-6">
-                <label class="flex items-start gap-3 cursor-pointer">
-                  <input 
+                <label class="flex cursor-pointer items-start gap-3">
+                  <input
                     v-model="form.privacy"
                     type="checkbox"
                     required
-                    class="w-4 h-4 mt-1"
-                  />
-                  <span class="text-gray-600 text-sm">
+                    class="mt-1 h-4 w-4"
+                  >
+                  <span class="text-sm text-gray-600">
                     He leído y acepto los <RouterLink to="/terminos" class="text-neon-lime hover:underline">Términos y Condiciones</RouterLink> y la <RouterLink to="/privacidad" class="text-neon-lime hover:underline">Política de Privacidad</RouterLink>. Deseo recibir comunicaciones de ILUMINATY *
                   </span>
                 </label>
               </div>
 
-              <!-- Status Messages -->
-              <div v-if="submitStatus === 'loading'" class="mb-6 p-4 rounded-lg bg-neon-lime/10 text-neon-lime border border-neon-lime/30">
+              <div v-if="submitStatus === 'loading'" class="mb-6 rounded-lg border border-neon-lime/30 bg-neon-lime/10 p-4 text-neon-lime">
                 ⏳ Enviando tu mensaje...
               </div>
-              <div v-if="submitStatus === 'success'" class="mb-6 p-4 rounded-lg bg-neon-lime/10 text-neon-lime border border-neon-lime/30">
+              <div v-if="submitStatus === 'success'" class="mb-6 rounded-lg border border-neon-lime/30 bg-neon-lime/10 p-4 text-neon-lime">
                 ✅ ¡Mensaje enviado correctamente! Te contactaremos pronto.
               </div>
-              <div v-if="submitStatus === 'error'" class="mb-6 p-4 rounded-lg bg-red-500/10 text-red-400 border border-red-500/30">
+              <div v-if="submitStatus === 'error'" class="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-red-400">
                 ❌ Error al enviar. Intenta de nuevo o escribe directamente a info@iluminaty.nyc
               </div>
 
-              <!-- Submit Button -->
-              <button 
+              <button
                 type="submit"
                 :disabled="submitStatus === 'loading'"
-                class="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="btn-primary w-full py-3 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {{ submitStatus === 'loading' ? 'Enviando...' : 'Enviar Mensaje' }}
               </button>
@@ -229,28 +189,27 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="py-20 bg-dark-secondary/50 border-y border-gray-300">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-center mb-12">Preguntas Frecuentes</h2>
+    <section class="border-y border-gray-300 bg-dark-secondary/50 py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="mb-12 text-center">Preguntas Frecuentes</h2>
 
         <div class="space-y-4">
-          <div 
+          <div
             v-for="(faq, index) in faqs"
             :key="index"
-            class="glass rounded-xl overflow-hidden"
+            class="glass overflow-hidden rounded-xl"
           >
-            <button 
+            <button
+              class="w-full p-6 text-left transition-colors hover:bg-white/5"
               @click="toggleFaq(index)"
-              class="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors"
             >
-              <h4 class="font-semibold text-left">{{ faq.question }}</h4>
-              <span :class="{ 'rotate-180': expandedFaq === index }" class="transition-transform">
-                ▼
-              </span>
+              <div class="flex items-center justify-between">
+                <h4 class="font-semibold">{{ faq.question }}</h4>
+                <span :class="{ 'rotate-180': expandedFaq === index }" class="transition-transform">▼</span>
+              </div>
             </button>
             <transition name="faq">
-              <div v-show="expandedFaq === index" class="px-6 pb-6 text-gray-600 border-t border-gray-300">
+              <div v-show="expandedFaq === index" class="border-t border-gray-300 px-6 pb-6 text-gray-600">
                 {{ faq.answer }}
               </div>
             </transition>
@@ -262,9 +221,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import DOMPurify from 'dompurify'
+import SocialLinks from '@/components/SocialLinks.vue'
 
 interface ContactForm {
   name: string
@@ -329,10 +289,8 @@ const faqs = [
 const validateField = (field: keyof ContactForm) => {
   errors.value = {}
 
-  if (field === 'name') {
-    if (form.value.name.length < 2) {
-      errors.value.name = 'El nombre debe tener al menos 2 caracteres'
-    }
+  if (field === 'name' && form.value.name.length < 2) {
+    errors.value.name = 'El nombre debe tener al menos 2 caracteres'
   }
 
   if (field === 'email') {
@@ -343,7 +301,7 @@ const validateField = (field: keyof ContactForm) => {
   }
 
   if (field === 'phone' && form.value.phone) {
-    const phoneRegex = /^[\d\s\-\+\(\)]+$/
+    const phoneRegex = /^[\d\s\-+()]+$/
     if (!phoneRegex.test(form.value.phone) || form.value.phone.length < 10) {
       errors.value.phone = 'Por favor ingresa un teléfono válido'
     }
@@ -360,7 +318,6 @@ const validateField = (field: keyof ContactForm) => {
 }
 
 const submitForm = async () => {
-  // Validate all fields
   validateField('name')
   validateField('email')
   validateField('phone')
@@ -373,10 +330,8 @@ const submitForm = async () => {
   submitStatus.value = 'loading'
 
   try {
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000))
 
-    // Sanitize form data to prevent XSS
     const sanitizedForm = {
       ...form.value,
       name: DOMPurify.sanitize(form.value.name),
@@ -389,8 +344,6 @@ const submitForm = async () => {
     console.log('Formulario sanitizado enviado:', sanitizedForm)
 
     submitStatus.value = 'success'
-
-    // Reset form
     form.value = {
       name: '',
       email: '',
@@ -402,11 +355,11 @@ const submitForm = async () => {
       privacy: false,
     }
 
-    // Clear success message after 5 seconds
     setTimeout(() => {
       submitStatus.value = 'idle'
     }, 5000)
-  } catch (error) {
+  }
+  catch (error) {
     submitStatus.value = 'error'
     console.error('Error:', error)
   }
