@@ -1,4 +1,5 @@
 import { imageAssets } from '@/data/assets'
+import { sectionsToBlocks } from '@/lib/blogContent'
 
 export type BlogCategory =
   | 'Noticias'
@@ -27,10 +28,12 @@ export interface BlogPost {
   image: string
   imageAlt: string
   readTime: number
-  sections: BlogSection[]
+  tags?: string[]
+  blocks: import('@/types/content').BlogContentBlock[]
+  sections?: BlogSection[]
 }
 
-export const blogPosts: BlogPost[] = [
+const rawBlogPosts: Omit<BlogPost, 'blocks'>[] = [
   {
     id: '1',
     slug: 'king-cipher-anuncia-concreto-puro',
@@ -47,6 +50,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.kingCipherAlbum,
     imageAlt: 'King Cipher presentando la dirección visual de su nuevo álbum',
     readTime: 5,
+    tags: ['Harlem', 'Hip-Hop', 'Lanzamiento'],
     sections: [
       {
         title: 'Un álbum pensado como documento urbano',
@@ -92,6 +96,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.nycUrbanScene,
     imageAlt: 'Panorámica de un evento urbano masivo en Nueva York',
     readTime: 7,
+    tags: ['NYC', 'Escena urbana', 'Análisis'],
     sections: [
       {
         title: 'Una densidad de eventos que no existía hace dos años',
@@ -137,6 +142,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.lunaVibeJapan,
     imageAlt: 'Escena visual que representa la colaboración internacional de Luna Vibe Collective',
     readTime: 4,
+    tags: ['Brooklyn', 'Colaboración', 'Electrónico'],
     sections: [
       {
         title: 'Una alianza que expande el lenguaje del colectivo',
@@ -177,6 +183,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.graffitiGuide,
     imageAlt: 'Mural urbano usado como referencia para una guía de graffiti',
     readTime: 6,
+    tags: ['Graffiti', 'Guía', 'Street Art'],
     sections: [
       {
         title: 'Empieza por entender el lenguaje visual',
@@ -222,6 +229,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.lunaVibeInterview,
     imageAlt: 'Luna Vibe Collective en una sesión de estudio',
     readTime: 8,
+    tags: ['Entrevista', 'Brooklyn', 'Colectivo'],
     sections: [
       {
         title: 'El origen del colectivo',
@@ -262,6 +270,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.trends2026,
     imageAlt: 'Escena urbana representando tendencias creativas para 2026',
     readTime: 10,
+    tags: ['Tendencias', 'Hip-Hop', '2026'],
     sections: [
       {
         title: 'Menos géneros puros, más mezclas con criterio',
@@ -302,6 +311,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.kingCipherStory,
     imageAlt: 'Portada visual sobre la trayectoria de King Cipher',
     readTime: 9,
+    tags: ['Bronx', 'Historia', 'Trayectoria'],
     sections: [
       {
         title: 'Las primeras batallas y el oído de barrio',
@@ -342,6 +352,7 @@ export const blogPosts: BlogPost[] = [
     image: imageAssets.blog.productionTools,
     imageAlt: 'Setup de producción musical con herramientas electrónicas',
     readTime: 11,
+    tags: ['Producción', 'Electrónico', 'Herramientas'],
     sections: [
       {
         title: 'El software es importante, pero el flujo importa más',
@@ -372,6 +383,11 @@ export const blogPosts: BlogPost[] = [
     ],
   },
 ]
+
+export const blogPosts: BlogPost[] = rawBlogPosts.map(post => ({
+  ...post,
+  blocks: sectionsToBlocks(post.sections || []),
+}))
 
 export const sortedBlogPosts = [...blogPosts].sort(
   (left, right) => new Date(right.date).getTime() - new Date(left.date).getTime(),

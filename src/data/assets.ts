@@ -7,10 +7,11 @@ import legacyLogo from '@/assets/labels/legacy-recordings.png'
 import masterworksLogo from '@/assets/labels/masterworks.svg'
 import universalLogo from '@/assets/labels/universal-music-group.svg'
 import interscopeLogo from '@/assets/labels/interscope-records.svg'
+import type { ImageAssets, UiAssets } from '@/types/content'
 
 const fromPublic = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
-export const uiAssets = {
+export const uiAssets: UiAssets = {
   appPreview,
   labelLogos: [
     { id: 'awal', name: 'AWAL', src: awalLogo },
@@ -24,7 +25,7 @@ export const uiAssets = {
   ],
 }
 
-export const imageAssets = {
+export const imageAssets: ImageAssets = {
   blog: {
     kingCipherAlbum: fromPublic('/data/blog/king-cipher-concreto-puro.webp'),
     nycUrbanScene: fromPublic('/data/blog/nyc-escena-urbana-2026.webp'),

@@ -1,12 +1,5 @@
 import { imageAssets } from '@/data/assets'
-
-export interface FollowerCard {
-  image: string
-  name: string
-  handle: string
-  date: string
-  message: string
-}
+import type { FollowerCard } from '@/types/content'
 
 export const followerTestimonials: FollowerCard[] = [
   {

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { socialProfiles } from '@/data/socialLinks'
+import { useContent } from '@/composables/useContent'
+
+const { socialProfiles } = useContent()
 
 withDefaults(
   defineProps<{
     size?: 'md' | 'lg'
-    justify?: 'start' | 'center'
+    justify?: 'start' | 'center' | 'end'
   }>(),
   {
     size: 'md',
@@ -14,7 +16,14 @@ withDefaults(
 </script>
 
 <template>
-  <div class="flex gap-4" :class="justify === 'center' ? 'justify-center' : 'justify-start'">
+  <div
+    class="flex gap-4"
+    :class="{
+      'justify-start': justify === 'start',
+      'justify-center': justify === 'center',
+      'justify-end': justify === 'end',
+    }"
+  >
     <a
       :href="socialProfiles.instagram"
       target="_blank"

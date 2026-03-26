@@ -1,18 +1,5 @@
 import { imageAssets } from '@/data/assets'
-
-export interface EventEntry {
-  id: string
-  title: string
-  description: string
-  date: string
-  time: string
-  doorsOpen: string
-  venue: string
-  price: string
-  image: string
-  artists: string[]
-  isSoldOut: boolean
-}
+import type { EventEntry } from '@/types/content'
 
 export const eventEntries: EventEntry[] = [
   {
@@ -27,6 +14,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.kingCipherLive,
     artists: ['King Cipher', 'DJ Remix'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/king-cipher-live',
   },
   {
     id: '2',
@@ -53,6 +41,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.soulMayaRelease,
     artists: ['Soul Maya', 'Strings Arranged by NYC Philharmonic'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/soul-maya-release',
   },
   {
     id: '4',
@@ -66,6 +55,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.lunaVibeMidnight,
     artists: ['Luna Vibe Collective'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/luna-vibe-midnight-sessions',
   },
   {
     id: '5',
@@ -79,6 +69,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.sprayAngelWorkshop,
     artists: ['Spray Angel'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/spray-angel-workshop',
   },
   {
     id: '6',
@@ -92,6 +83,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.cypherBattles,
     artists: ['Street Poets Network'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/east-village-cypher-battles',
   },
   {
     id: '7',
@@ -105,6 +97,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.reggaetonFuegoParty,
     artists: ['Reggaeton Fuego', 'DJ Mambo'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/reggaeton-fuego-release-party',
   },
   {
     id: '8',
@@ -118,6 +111,7 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.producersSymposium,
     artists: ['Industry Leaders'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/producers-symposium',
   },
   {
     id: '9',
@@ -131,5 +125,6 @@ export const eventEntries: EventEntry[] = [
     image: imageAssets.events.technoProphetSet,
     artists: ['Techno Prophet'],
     isSoldOut: false,
+    ticketUrl: 'https://example.com/tickets/techno-prophet-all-night',
   },
 ]
