@@ -20,6 +20,19 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+      - name: Resolve site URL
+        env:
+          CONFIGURED_SITE_URL: ${{ vars.VITE_SITE_URL }}
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
+        run: |
+          if [ -n "$CONFIGURED_SITE_URL" ]; then
+            echo "VITE_SITE_URL=$CONFIGURED_SITE_URL" >> "$GITHUB_ENV"
+          elif [ "$REPOSITORY_NAME" = "${REPOSITORY_OWNER}.github.io" ]; then
+            echo "VITE_SITE_URL=https://${REPOSITORY_OWNER}.github.io" >> "$GITHUB_ENV"
+          else
+            echo "VITE_SITE_URL=https://${REPOSITORY_OWNER}.github.io/${REPOSITORY_NAME}" >> "$GITHUB_ENV"
+          fi
       - name: Install dependencies
         run: npm install
       - name: Build
