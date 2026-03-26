@@ -1,10 +1,6 @@
 <h1 align="center">
-  <span style="display:inline-flex;align-items:center;gap:10px;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54" width="26" height="26" aria-hidden="true">
-      <path d="M53.49 28.677c-.8.967-12.539 1.123-13.269 3.477-1.078 3.473 9.212 11 5.7 13.279-4.009 2.607-9.607-6.575-13.744-5.205-3.046 1.009-.414 12.817-5.81 13.285-3.49-1.9-2.19-12.377-4.894-13.288-4.135-1.392-8.762 7.244-13.717 5.659-1.572-4.339 6.691-10.49 5.676-13.725-1.02-3.26-14.931-1-13.3-6.763.778-2.752 12.512-2.549 13.393-3.86C15.468 18.913 3.265 7.929 9.208 6.784c2.686-.517 9.14 7.618 12.283 6.639 3.389-1.055.559-14.595 5.8-13.342 4.738 1.135 1.472 12.447 5.875 13.25 3.54.645 9.474-9.325 12.8-5.155 2.417 3.031-6.208 9.239-5.651 12.3.689 3.778 9.966 2.274 12.3 3.914 1.051.742 1.333 3.731.877 4.282Z" fill="#f90000"></path>
-    </svg>
-    <span>ILUMINATY</span>
-  </span>
+  <img src="./.github/assets/logo.svg" alt="ILUMINATY Logo" width="26" height="26" align="absmiddle" />
+  ILUMINATY
 </h1>
 
 Professional Vue 3 template for editorial and commercial websites. It includes a blog, app download landing page, profile directory, event promotion, Sanity-ready content and forms ready to connect to Brevo, Mailchimp or any custom backend through webhooks.
@@ -19,6 +15,15 @@ Use cases: music platforms, creator directories, editorial websites, event promo
   <a href="https://luynoxrd.github.io/ILUMINATY/"><img src="https://img.shields.io/badge/Demo-Live_Site-111827?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live demo" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-16a34a?style=for-the-badge" alt="License Apache 2.0" /></a>
   <a href="https://github.com/LuynoxRD"><img src="https://img.shields.io/badge/GitHub-Follow_LuynoxRD-181717?style=for-the-badge&logo=github&logoColor=white" alt="Follow LuynoxRD" /></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Vue_3-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" alt="Vue 3" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-0F172A?style=for-the-badge&logo=tailwind-css&logoColor=38BDF8" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/GSAP-0A0A0A?style=for-the-badge&logo=greensock&logoColor=88CE02" alt="GSAP" />
+  <img src="https://img.shields.io/badge/Sanity-F03E2F?style=for-the-badge&logo=sanity&logoColor=white" alt="Sanity" />
 </p>
 
 <p align="center">
