@@ -26,7 +26,7 @@
           </p>
           <ul class="space-y-3 text-gray-700">
             <li v-for="bullet in aboutPage.missionSection.bullets" :key="bullet" class="flex items-start gap-3">
-              <span class="mt-1 flex-shrink-0 text-neon-lime">⚡</span>
+              <span class="mt-1 flex-shrink-0 text-neon-lime">&#9889;</span>
               <span>{{ bullet }}</span>
             </li>
           </ul>
@@ -69,8 +69,34 @@
             <p class="mb-3 text-sm" :class="member.accentClass">{{ member.role }}</p>
             <p class="mb-4 text-gray-600">{{ member.bio }}</p>
             <div class="flex justify-center gap-2">
-              <a :href="member.email" class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors" :class="member.accentClass" title="Email">📧</a>
-              <a :href="member.secondaryLink" target="_blank" rel="noopener" class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors" :class="member.accentClass" :title="member.secondaryLabel">🔗</a>
+              <a
+                v-if="toSafeHref(member.email)"
+                :href="toSafeHref(member.email)"
+                class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors"
+                :class="member.accentClass"
+                title="Email"
+              >&#128231;</a>
+              <span
+                v-else
+                class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors opacity-50"
+                :class="member.accentClass"
+                title="Email"
+              >&#128231;</span>
+              <a
+                v-if="toSafeHref(member.secondaryLink)"
+                :href="toSafeHref(member.secondaryLink)"
+                target="_blank"
+                rel="noopener"
+                class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors"
+                :class="member.accentClass"
+                :title="member.secondaryLabel"
+              >&#128279;</a>
+              <span
+                v-else
+                class="glass-hover flex h-10 w-10 items-center justify-center rounded text-lg transition-colors opacity-50"
+                :class="member.accentClass"
+                :title="member.secondaryLabel"
+              >&#128279;</span>
             </div>
           </div>
         </div>
@@ -97,6 +123,7 @@
 <script setup lang="ts">
 import SectionTitle from '@/components/SectionTitle.vue'
 import { useContent } from '@/composables/useContent'
+import { toSafeHref } from '@/lib/safeUrl'
 
 const { aboutContent, aboutPage } = useContent()
 </script>

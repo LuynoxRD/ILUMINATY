@@ -31,11 +31,11 @@
       </div>
 
       <!-- Action Button -->
-      <button 
+      <button
         class="w-full btn-secondary py-2 text-sm"
         @click="$emit('view')"
       >
-        Ver Perfil
+        {{ artistsPage.actions.viewProfileLabel }}
       </button>
     </div>
 
@@ -50,8 +50,10 @@
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useContent } from '@/composables/useContent'
 
 gsap.registerPlugin(ScrollTrigger)
+const { artistsPage } = useContent()
 
 interface Props {
   name: string

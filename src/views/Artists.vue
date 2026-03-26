@@ -3,9 +3,9 @@
     <section class="relative overflow-hidden bg-gradient-dark py-20">
       <div class="absolute right-0 top-0 -z-10 h-96 w-96 rounded-full bg-neon-lime/10 blur-3xl"></div>
       <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <h1 class="mb-4">Directorio de Artistas</h1>
+        <h1 class="mb-4">{{ artistsPage.heroTitle }}</h1>
         <p class="mx-auto max-w-2xl text-lg text-gray-600">
-          Explora los perfiles de 500+ artistas urbanos de Nueva York. Filtra por género, barrio y descubre tu próximo favorito.
+          {{ artistsPage.heroDescription }}
         </p>
       </div>
     </section>
@@ -14,39 +14,34 @@
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
-            <label class="mb-2 block text-sm font-semibold">Género</label>
+            <label class="mb-2 block text-sm font-semibold">{{ artistsPage.filters.genreLabel }}</label>
             <select
               v-model="selectedGenre"
               class="theme-filter-control w-full rounded-lg border px-4 py-2 outline-none transition-colors focus:border-neon-lime focus:ring-2 focus:ring-neon-lime/20"
             >
-              <option value="">Todos los géneros</option>
-              <option value="hip-hop">Hip-Hop / Rap</option>
-              <option value="electronic">Electrónico</option>
-              <option value="visual">Arte Visual</option>
-              <option value="r-b">R&B / Soul</option>
-              <option value="reggaeton">Reggaeton</option>
+              <option value="">{{ artistsPage.filters.allGenresLabel }}</option>
+              <option v-for="option in artistsPage.genreOptions" :key="option.value" :value="option.value">
+                {{ option.label }}
+              </option>
             </select>
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-semibold">Barrio</label>
+            <label class="mb-2 block text-sm font-semibold">{{ artistsPage.filters.neighborhoodLabel }}</label>
             <select v-model="selectedNeighborhood" class="theme-filter-control w-full">
-              <option value="">Todos los barrios</option>
-              <option value="Manhattan">Manhattan</option>
-              <option value="Brooklyn">Brooklyn</option>
-              <option value="Queens">Queens</option>
-              <option value="Bronx">Bronx</option>
-              <option value="Harlem">Harlem</option>
-              <option value="Williamsburg">Williamsburg</option>
+              <option value="">{{ artistsPage.filters.allNeighborhoodsLabel }}</option>
+              <option v-for="option in artistsPage.neighborhoodOptions" :key="option" :value="option">
+                {{ option }}
+              </option>
             </select>
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-semibold">Buscar</label>
+            <label class="mb-2 block text-sm font-semibold">{{ artistsPage.filters.searchLabel }}</label>
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="Nombre del artista..."
+              :placeholder="artistsPage.filters.searchPlaceholder"
               class="theme-filter-control w-full"
             >
           </div>
@@ -54,7 +49,7 @@
       </div>
     </section>
 
-    <SectionTitle subtitle="Comunidad Urbana" :title="`${filteredArtists.length} Artistas Encontrados`">
+    <SectionTitle :subtitle="artistsPage.resultsSection.subtitle" :title="`${filteredArtists.length} ${artistsPage.resultsSection.countSuffix}`">
       <div v-if="filteredArtists.length > 0" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <ArtistCard
           v-for="artist in filteredArtists"
@@ -65,28 +60,34 @@
           :image="artist.image"
           :neighborhoods="artist.neighborhoods"
           :badge="artist.badge"
-          @view="selectArtist(artist.id)"
+          @view="openArtist(artist.id)"
         />
       </div>
 
       <div v-else class="py-20 text-center">
-        <div class="mb-4 text-6xl">🔍</div>
-        <h2 class="mb-2 text-2xl font-bold text-gray-900">No se encontraron artistas</h2>
+        <div class="mb-4 text-6xl">{{ artistsPage.emptyState.icon }}</div>
+        <h2 class="mb-2 text-2xl font-bold text-gray-900">{{ artistsPage.emptyState.title }}</h2>
         <p class="text-gray-600">
-          Intenta cambiar los filtros para ver más resultados.
+          {{ artistsPage.emptyState.description }}
         </p>
       </div>
     </SectionTitle>
+
+    <ArtistPopup :show="Boolean(selectedArtist)" :artist="selectedArtist" @close="closeArtist" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import ArtistCard from '@/components/ArtistCard.vue'
+import ArtistPopup from '@/components/ArtistPopup.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import { useContent } from '@/composables/useContent'
 
-const { artistDirectoryEntries } = useContent()
+const { artistDirectoryEntries, artistsPage } = useContent()
+const route = useRoute()
+const router = useRouter()
 
 const selectedGenre = ref('')
 const selectedNeighborhood = ref('')
@@ -102,5 +103,45 @@ const filteredArtists = computed(() =>
   }),
 )
 
-const selectArtist = (_artistId: string) => {}
+const selectedArtist = computed(() => {
+  const rawArtistId = route.query.artist
+  const artistId = Array.isArray(rawArtistId) ? rawArtistId[0] : rawArtistId
+
+  if (!artistId)
+    return null
+
+  return artistDirectoryEntries.find(artist => artist.id === artistId) || null
+})
+
+const openArtist = (artistId: string) => {
+  router.replace({
+    query: {
+      ...route.query,
+      artist: artistId,
+    },
+  })
+}
+
+const closeArtist = () => {
+  const { artist: _artist, ...restQuery } = route.query
+
+  router.replace({
+    query: restQuery,
+  })
+}
+
+watch(
+  () => route.query.artist,
+  (artistId) => {
+    if (!artistId)
+      return
+
+    const normalizedArtistId = Array.isArray(artistId) ? artistId[0] : artistId
+    const exists = artistDirectoryEntries.some(artist => artist.id === normalizedArtistId)
+
+    if (!exists)
+      closeArtist()
+  },
+  { immediate: true },
+)
 </script>

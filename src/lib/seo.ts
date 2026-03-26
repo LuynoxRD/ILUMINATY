@@ -16,6 +16,14 @@ const normalizePath = (path = '') => path.replace(/^\/+/, '')
 export const resolveSiteUrl = (path = '') =>
   new URL(normalizePath(path), `${siteConfig.siteUrl.replace(/\/$/, '')}/`).toString()
 
+export const serializeJsonLd = (value: Record<string, unknown>) =>
+  JSON.stringify(value)
+    .replace(/</g, '\\u003C')
+    .replace(/>/g, '\\u003E')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')
+
 export const useSeo = ({
   title,
   description,
@@ -51,10 +59,10 @@ export const useSeo = ({
     link: [{ rel: 'canonical', href: absoluteUrl }],
     meta,
     script: jsonLd
-      ? [
+        ? [
           {
             type: 'application/ld+json',
-            innerHTML: JSON.stringify(jsonLd),
+            innerHTML: serializeJsonLd(jsonLd),
           },
         ]
       : [],

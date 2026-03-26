@@ -91,9 +91,10 @@
               </blockquote>
 
               <div v-else-if="block.type === 'embed'" class="rounded-[2rem] border border-gray-200 bg-gray-50 p-6">
-                <a :href="block.url" target="_blank" rel="noreferrer" class="text-sm font-semibold text-neon-lime transition-colors hover:text-neon-cyan">
+                <a v-if="getSafeHref(block.url)" :href="getSafeHref(block.url)" target="_blank" rel="noreferrer" class="text-sm font-semibold text-neon-lime transition-colors hover:text-neon-cyan">
                   {{ block.title || block.url }}
                 </a>
+                <span v-else class="text-sm font-semibold text-gray-500">{{ block.title || block.url }}</span>
               </div>
             </template>
           </div>
@@ -205,8 +206,10 @@ import { useContent } from '@/composables/useContent'
 import { useNewsletterForm } from '@/composables/useNewsletterForm'
 import { siteConfig } from '@/config/site'
 import { getBlogCategoryColor } from '@/lib/blog'
+import { parseLocalDate } from '@/lib/date'
 import { normalizeNewsletterBlock } from '@/lib/formFeedback'
-import { resolveSiteUrl } from '@/lib/seo'
+import { toSafeHref } from '@/lib/safeUrl'
+import { resolveSiteUrl, serializeJsonLd } from '@/lib/seo'
 
 const props = defineProps<{
   initialSlug?: string
@@ -253,9 +256,10 @@ const tocSections = computed(() =>
     || [],
 )
 const getHeadingId = (heading: string) => slugify(heading)
+const getSafeHref = (value: string) => toSafeHref(value)
 
 const formatDate = (date: string) =>
-  new Date(`${date}T00:00:00`).toLocaleDateString('es-ES', {
+  parseLocalDate(date).toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -271,7 +275,7 @@ useHead(() => {
   const canonicalPath = `blog/${post.value.slug}`
   const canonicalUrl = resolveSiteUrl(canonicalPath)
   const imageUrl = resolveSiteUrl(post.value.image)
-  const publishedIso = new Date(post.value.date).toISOString()
+  const publishedIso = parseLocalDate(post.value.date).toISOString()
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -315,7 +319,7 @@ useHead(() => {
     script: [
       {
         type: 'application/ld+json',
-        innerHTML: JSON.stringify(schema),
+        innerHTML: serializeJsonLd(schema),
       },
     ],
   }

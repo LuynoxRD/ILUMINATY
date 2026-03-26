@@ -1,33 +1,6 @@
 import { imageAssets } from '@/data/assets'
 import type { ArtistDirectoryEntry, FeaturedArtist } from '@/types/content'
 
-export const featuredArtists: FeaturedArtist[] = [
-  {
-    id: '1',
-    name: 'Lil Flow NYC',
-    genre: 'Rap / Hip-Hop',
-    image: imageAssets.homeArtists.lilFlow,
-  },
-  {
-    id: '2',
-    name: 'Monica Beats',
-    genre: 'Productora / Beatmaker',
-    image: imageAssets.homeArtists.monicaBeats,
-  },
-  {
-    id: '3',
-    name: 'Grafik Soul',
-    genre: 'Artista Visual / Pintor',
-    image: imageAssets.homeArtists.grafikSoul,
-  },
-  {
-    id: '4',
-    name: 'King Cipher',
-    genre: 'Hip-Hop / Rap',
-    image: imageAssets.homeArtists.kingCipher,
-  },
-]
-
 export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
   {
     id: '1',
@@ -35,8 +8,17 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Hip-Hop / Rap',
     bio: 'Rapero veterano de Harlem. Sus letras crudas sobre la realidad urbana lo han convertido en una referencia del East Side.',
     image: imageAssets.artistDirectory.kingCipher,
+    locationLabel: 'Harlem, New York',
     neighborhoods: ['Harlem', 'East Side'],
     badge: '🎤',
+    links: {
+      spotify: 'https://open.spotify.com/artist/king-cipher',
+      youtube: 'https://www.youtube.com/@kingcipher',
+      appleMusic: 'https://music.apple.com/us/artist/king-cipher',
+      instagram: 'https://www.instagram.com/kingcipher',
+      x: 'https://x.com/kingcipher',
+      soundcloud: 'https://soundcloud.com/kingcipher',
+    },
   },
   {
     id: '2',
@@ -44,8 +26,17 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Electronic',
     bio: 'Colectivo de Brooklyn especializado en beats experimentales. Su sonido funciona entre club culture y performance inmersivo.',
     image: imageAssets.artistDirectory.lunaVibeCollective,
+    locationLabel: 'Brooklyn, New York',
     neighborhoods: ['Brooklyn', 'Williamsburg'],
     badge: '🎧',
+    links: {
+      spotify: 'https://open.spotify.com/artist/luna-vibe-collective',
+      youtube: 'https://www.youtube.com/@lunavibecollective',
+      appleMusic: 'https://music.apple.com/us/artist/luna-vibe-collective',
+      instagram: 'https://www.instagram.com/lunavibecollective',
+      tiktok: 'https://www.tiktok.com/@lunavibecollective',
+      soundcloud: 'https://soundcloud.com/lunavibecollective',
+    },
   },
   {
     id: '3',
@@ -53,8 +44,15 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Visual',
     bio: 'Artista visual de Queens. Sus murales han ocupado paredes icónicas del bajo Manhattan y galerías emergentes.',
     image: imageAssets.artistDirectory.sprayAngel,
+    locationLabel: 'Queens, New York',
     neighborhoods: ['Queens', 'Manhattan'],
     badge: '🎨',
+    links: {
+      instagram: 'https://www.instagram.com/sprayangel',
+      tiktok: 'https://www.tiktok.com/@sprayangel',
+      x: 'https://x.com/sprayangel',
+      youtube: 'https://www.youtube.com/@sprayangelstudio',
+    },
   },
   {
     id: '4',
@@ -62,8 +60,16 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'R&B / Soul',
     bio: 'Cantante y productora del Bronx. Fusiona soul clásico con producción contemporánea y una puesta en escena íntima.',
     image: imageAssets.artistDirectory.soulMaya,
+    locationLabel: 'Bronx, New York',
     neighborhoods: ['Bronx', 'Manhattan'],
     badge: '🎵',
+    links: {
+      spotify: 'https://open.spotify.com/artist/soul-maya',
+      youtube: 'https://www.youtube.com/@soulmaya',
+      appleMusic: 'https://music.apple.com/us/artist/soul-maya',
+      instagram: 'https://www.instagram.com/soulmaya',
+      tiktok: 'https://www.tiktok.com/@soulmaya',
+    },
   },
   {
     id: '5',
@@ -71,8 +77,16 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Hip-Hop / Rap',
     bio: 'Productor de Manhattan enfocado en beats de hip-hop con sello underground y colaboraciones internacionales.',
     image: imageAssets.artistDirectory.djRemixMaster,
+    locationLabel: 'Manhattan, New York',
     neighborhoods: ['Manhattan'],
     badge: '🎚️',
+    links: {
+      spotify: 'https://open.spotify.com/artist/dj-remix-master',
+      youtube: 'https://www.youtube.com/@djremixmaster',
+      appleMusic: 'https://music.apple.com/us/artist/dj-remix-master',
+      instagram: 'https://www.instagram.com/djremixmaster',
+      soundcloud: 'https://soundcloud.com/djremixmaster',
+    },
   },
   {
     id: '6',
@@ -80,8 +94,15 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Hip-Hop / Rap',
     bio: 'Poeta performático de Brooklyn. Sus textos activan conversaciones en cada presentación en vivo.',
     image: imageAssets.artistDirectory.streetPoetAlex,
+    locationLabel: 'Brooklyn, New York',
     neighborhoods: ['Brooklyn', 'Queens'],
     badge: '📝',
+    links: {
+      youtube: 'https://www.youtube.com/@streetpoetalex',
+      instagram: 'https://www.instagram.com/streetpoetalex',
+      x: 'https://x.com/streetpoetalex',
+      tiktok: 'https://www.tiktok.com/@streetpoetalex',
+    },
   },
   {
     id: '7',
@@ -89,8 +110,15 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Visual',
     bio: 'Colectivo visual de Williamsburg. Crean instalaciones inmersivas y piezas que mezclan calle, moda y arte digital.',
     image: imageAssets.artistDirectory.visualNexus,
+    locationLabel: 'Williamsburg, Brooklyn',
     neighborhoods: ['Williamsburg', 'Brooklyn'],
     badge: '✨',
+    links: {
+      instagram: 'https://www.instagram.com/visualnexus',
+      youtube: 'https://www.youtube.com/@visualnexus',
+      x: 'https://x.com/visualnexus',
+      soundcloud: 'https://soundcloud.com/visualnexus',
+    },
   },
   {
     id: '8',
@@ -98,8 +126,16 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Reggaeton',
     bio: 'Productor y DJ de Harlem. Mezcla reggaetón clásico con diseño sonoro contemporáneo y sets de alta energía.',
     image: imageAssets.artistDirectory.reggaetonFuego,
+    locationLabel: 'Harlem, New York',
     neighborhoods: ['Harlem', 'Manhattan'],
     badge: '🔥',
+    links: {
+      spotify: 'https://open.spotify.com/artist/reggaeton-fuego',
+      youtube: 'https://www.youtube.com/@reggaetonfuego',
+      appleMusic: 'https://music.apple.com/us/artist/reggaeton-fuego',
+      instagram: 'https://www.instagram.com/reggaetonfuego',
+      tiktok: 'https://www.tiktok.com/@reggaetonfuego',
+    },
   },
   {
     id: '9',
@@ -107,7 +143,27 @@ export const artistDirectoryEntries: ArtistDirectoryEntry[] = [
     genre: 'Electronic',
     bio: 'Productor del East Village con sets largos e hipnóticos. Habita el cruce entre club nocturno y arte inmersivo.',
     image: imageAssets.artistDirectory.technoProphet,
+    locationLabel: 'East Village, New York',
     neighborhoods: ['Manhattan', 'Brooklyn'],
     badge: '🎛️',
+    links: {
+      spotify: 'https://open.spotify.com/artist/techno-prophet',
+      youtube: 'https://www.youtube.com/@technoprophet',
+      appleMusic: 'https://music.apple.com/us/artist/techno-prophet',
+      instagram: 'https://www.instagram.com/technoprophet',
+      soundcloud: 'https://soundcloud.com/technoprophet',
+    },
   },
 ]
+
+const featuredArtistIds = ['1', '2', '4', '6']
+
+export const featuredArtists: FeaturedArtist[] = artistDirectoryEntries
+  .filter(artist => featuredArtistIds.includes(artist.id))
+  .slice(0, 10)
+  .map(({ id, name, genre, image }) => ({
+    id,
+    name,
+    genre,
+    image,
+  }))

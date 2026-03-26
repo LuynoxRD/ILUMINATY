@@ -4,7 +4,7 @@ import { blogPostPaths, blogPosts, getBlogPostById, getBlogPostBySlug, sortedBlo
 import { eventEntries } from '@/data/events'
 import { followerTestimonials } from '@/data/followers'
 import { imageAssets, uiAssets } from '@/data/assets'
-import { aboutPage, blogPage, contactPage, eventsPage, homePage, siteSettings } from '@/data/pageContent'
+import { aboutPage, artistsPage, blogPage, contactPage, cookiesPage, eventsPage, homePage, privacyPage, siteSettings, termsPage } from '@/data/pageContent'
 import { validateContentSnapshot } from '@/schemas/content'
 import type { ContentAdapter } from '@/types/content'
 
@@ -14,9 +14,13 @@ const localContentSnapshot = validateContentSnapshot({
   siteSettings,
   homePage,
   aboutPage,
+  artistsPage,
   contactPage,
   eventsPage,
   blogPage,
+  termsPage,
+  privacyPage,
+  cookiesPage,
   aboutContent,
   featuredArtists,
   artistDirectoryEntries,

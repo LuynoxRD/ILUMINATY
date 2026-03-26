@@ -1,22 +1,26 @@
 import { sanityConfig } from '@/config/content'
-import { blocksToSections, sectionsToBlocks } from '@/lib/blogContent'
+import { parseLocalDate } from '@/lib/date'
 import { validateContentSnapshot } from '@/schemas/content'
 import { localContentAdapter } from '@/services/content/localAdapter'
 import type {
   AboutContent,
   AboutPageContent,
   ArtistDirectoryEntry,
+  ArtistsPageContent,
+  BlogContentBlock,
   BlogPageContent,
   BlogPost,
   ContactPageContent,
+  ContentCard,
+  ContentSection,
   ContentAdapter,
   EventEntry,
   EventsPageContent,
   FeaturedArtist,
   FollowerCard,
   HomePageContent,
+  LegalPageContent,
   SiteSettings,
-  SocialProfiles,
   UiAssets,
 } from '@/types/content'
 
@@ -34,6 +38,8 @@ interface SanityAboutPage extends Partial<AboutPageContent> {
 interface SanityContactPage extends Partial<ContactPageContent> {}
 interface SanityEventsPage extends Partial<EventsPageContent> {}
 interface SanityBlogPage extends Partial<BlogPageContent> {}
+interface SanityArtistsPage extends Partial<ArtistsPageContent> {}
+interface SanityLegalPage extends Partial<LegalPageContent> {}
 
 interface SanityArtist {
   id?: string
@@ -41,17 +47,21 @@ interface SanityArtist {
   name?: string
   genre?: string
   bio?: string
+  locationLabel?: string
   image?: SanityAssetRef
   homeImage?: SanityAssetRef
   neighborhoods?: string[]
   badge?: string
   featured?: boolean
-}
-
-interface SanityPostSection {
-  title?: string
-  paragraphs?: string[]
-  bullets?: string[]
+  links?: {
+    spotify?: string
+    youtube?: string
+    appleMusic?: string
+    instagram?: string
+    tiktok?: string
+    x?: string
+    soundcloud?: string
+  }
 }
 
 interface SanityPostBlock {
@@ -83,7 +93,6 @@ interface SanityPost {
   readTime?: number
   tags?: string[]
   contentBlocks?: SanityPostBlock[]
-  sections?: SanityPostSection[]
 }
 
 interface SanityEvent {
@@ -134,9 +143,13 @@ interface SanityPayload {
   siteSettings?: SanitySiteSettings
   homePage?: SanityHomePage
   aboutPage?: SanityAboutPage
+  artistsPage?: SanityArtistsPage
   contactPage?: SanityContactPage
   eventsPage?: SanityEventsPage
   blogPage?: SanityBlogPage
+  termsPage?: SanityLegalPage
+  privacyPage?: SanityLegalPage
+  cookiesPage?: SanityLegalPage
   brandLogos?: SanityBrandLogo[]
   artists?: SanityArtist[]
   testimonials?: SanityTestimonial[]
@@ -144,6 +157,8 @@ interface SanityPayload {
   posts?: SanityPost[]
   events?: SanityEvent[]
 }
+
+const SANITY_BATCH_SIZE = 500
 
 const sanityQuery = `
 {
@@ -155,6 +170,10 @@ const sanityQuery = `
     footerCreditPrefix,
     footerCreditName,
     footerCreditHref,
+    footerCreditConnector,
+    footerTechnologyName,
+    footerTechnologyHref,
+    footerRepositoryLink{label, href},
     socialProfiles,
     footerLinkGroups[]{title, links[]{label, href}}
   },
@@ -177,6 +196,17 @@ const sanityQuery = `
     teamSection{subtitle, title, description},
     manifestoSection{title, entries[]{accentLabel, accentClass, body}},
     "missionImage": missionImage.asset->{url}
+  },
+  "artistsPage": *[_type == "artistsPage"][0]{
+    heroTitle,
+    heroDescription,
+    filters{genreLabel, allGenresLabel, neighborhoodLabel, allNeighborhoodsLabel, searchLabel, searchPlaceholder},
+    genreOptions[]{label, value},
+    neighborhoodOptions,
+    resultsSection{subtitle, countSuffix},
+    actions{viewProfileLabel},
+    popup{musicTitle, socialTitle, spotifyMeta, youtubeMeta, appleMusicMeta, soundcloudMeta, instagramMeta, tiktokMeta, xMeta},
+    emptyState{icon, title, description}
   },
   "contactPage": *[_type == "contactPage"][0]{
     heroTitle,
@@ -217,39 +247,87 @@ const sanityQuery = `
     newsletterSection{title, description, inputPlaceholder, buttonLabel, invalidMessage, successMessage, errorMessage},
     post{backLabel, shareLabel, authorLabel, tocLabel, relatedEyebrow, relatedTitle, relatedLinkLabel, newsletterEyebrow, newsletterTitle, newsletterDescription}
   },
-  "brandLogos": *[_type == "brandLogo"] | order(order asc, name asc){_id, name, "image": image.asset->{url}},
-  "artists": *[_type == "artist"] | order(name asc){_id, name, genre, bio, neighborhoods, badge, featured, "image": image.asset->{url}, "homeImage": homeImage.asset->{url}},
-  "testimonials": *[_type == "testimonial"] | order(order asc, date desc){name, handle, date, message, "image": image.asset->{url}},
-  "teamMembers": *[_type == "teamMember"] | order(order asc, name asc){_id, name, role, bio, accentClass, email, secondaryLink, secondaryLabel, "image": image.asset->{url}},
-  "posts": *[_type == "post"] | order(date desc){
-    _id,
-    title,
-    excerpt,
-    metaDescription,
-    category,
-    date,
-    author,
-    authorBio,
-    imageAlt,
-    readTime,
-    tags,
-    "slug": slug.current,
-    "image": coverImage.asset->{url},
-    contentBlocks[]{
-      _type,
-      style,
-      text,
-      items,
-      citation,
-      alt,
-      caption,
-      url,
-      title,
-      "image": image.asset->{url}
-    },
-    sections[]{title, paragraphs, bullets}
+  "termsPage": *[_type == "termsPage"][0]{
+    heroTitle,
+    heroDescription,
+    sections[]{title, paragraphs, bullets, cards[]{title, description, bullets, accentClass}, links[]{label, href}},
+    contactCard{title, description, details[]{label, value}},
+    footerNote,
+    ctaTitle,
+    ctaDescription,
+    ctaLink{label, href}
   },
-  "events": *[_type == "event"] | order(date asc){_id, title, description, date, time, doorsOpen, venue, price, artists, isSoldOut, ticketUrl, "image": image.asset->{url}}
+  "privacyPage": *[_type == "privacyPage"][0]{
+    heroTitle,
+    heroDescription,
+    sections[]{title, paragraphs, bullets, cards[]{title, description, bullets, accentClass}, links[]{label, href}},
+    contactCard{title, description, details[]{label, value}},
+    footerNote,
+    ctaTitle,
+    ctaDescription,
+    ctaLink{label, href}
+  },
+  "cookiesPage": *[_type == "cookiesPage"][0]{
+    heroTitle,
+    heroDescription,
+    sections[]{title, paragraphs, bullets, cards[]{title, description, bullets, accentClass}, links[]{label, href}},
+    contactCard{title, description, details[]{label, value}},
+    footerNote,
+    ctaTitle,
+    ctaDescription,
+    ctaLink{label, href}
+  },
+  "brandLogos": *[_type == "brandLogo"] | order(order asc, name asc){_id, name, "image": image.asset->{url}},
+  "artists": *[_type == "artist"] | order(name asc){_id, name, genre, bio, locationLabel, neighborhoods, badge, featured, links{spotify, youtube, appleMusic, instagram, tiktok, x, soundcloud}, "image": image.asset->{url}, "homeImage": homeImage.asset->{url}},
+  "testimonials": *[_type == "testimonial"] | order(order asc, date desc){name, handle, date, message, "image": image.asset->{url}},
+  "teamMembers": *[_type == "teamMember"] | order(order asc, name asc){_id, name, role, bio, accentClass, email, secondaryLink, secondaryLabel, "image": image.asset->{url}}
+}
+`
+
+const sanityPostsBatchQuery = `
+*[_type == "post" && _id > $lastId] | order(_id asc)[0...$batchSize]{
+  _id,
+  title,
+  excerpt,
+  metaDescription,
+  category,
+  date,
+  author,
+  authorBio,
+  imageAlt,
+  readTime,
+  tags,
+  "slug": slug.current,
+  "image": coverImage.asset->{url},
+  contentBlocks[]{
+    _type,
+    style,
+    text,
+    items,
+    citation,
+    alt,
+    caption,
+    url,
+    title,
+    "image": image.asset->{url}
+  }
+}
+`
+
+const sanityEventsBatchQuery = `
+*[_type == "event" && _id > $lastId] | order(_id asc)[0...$batchSize]{
+  _id,
+  title,
+  description,
+  date,
+  time,
+  doorsOpen,
+  venue,
+  price,
+  artists,
+  isSoldOut,
+  ticketUrl,
+  "image": image.asset->{url}
 }
 `
 
@@ -260,50 +338,126 @@ const pick = (value: unknown, fallback: string) => {
   return normalized || fallback
 }
 
-const mapSanityBlocks = (post: SanityPost) => {
-  const blocks = post.contentBlocks?.flatMap((block) => {
+const mapSanityBlocks = (post: SanityPost): BlogContentBlock[] => {
+  const blocks: BlogContentBlock[] = []
+
+  for (const block of post.contentBlocks || []) {
     switch (block._type) {
       case 'heading':
-        return block.text
-          ? [{ type: 'heading' as const, style: block.style === 'h3' ? 'h3' : 'h2', text: block.text }]
-          : []
+        if (block.text) {
+          blocks.push({
+            type: 'heading',
+            style: block.style === 'h3' ? 'h3' : 'h2',
+            text: block.text,
+          })
+        }
+        break
       case 'paragraph':
-        return block.text ? [{ type: 'paragraph' as const, text: block.text }] : []
+        if (block.text) {
+          blocks.push({
+            type: 'paragraph',
+            text: block.text,
+          })
+        }
+        break
       case 'bulletList':
-        return block.items?.length ? [{ type: 'bullet-list' as const, items: block.items.filter(Boolean) }] : []
+        if (block.items?.length) {
+          blocks.push({
+            type: 'bullet-list',
+            items: block.items.filter(Boolean),
+          })
+        }
+        break
       case 'quote':
-        return block.text ? [{ type: 'quote' as const, text: block.text, citation: textOrEmpty(block.citation) || undefined }] : []
+        if (block.text) {
+          blocks.push({
+            type: 'quote',
+            text: block.text,
+            citation: textOrEmpty(block.citation) || undefined,
+          })
+        }
+        break
       case 'imageBlock': {
         const src = resolveUrl(block.image)
-        return src && textOrEmpty(block.alt)
-          ? [{ type: 'image' as const, src, alt: textOrEmpty(block.alt), caption: textOrEmpty(block.caption) || undefined }]
-          : []
+        const alt = textOrEmpty(block.alt)
+
+        if (src && alt) {
+          blocks.push({
+            type: 'image',
+            src,
+            alt,
+            caption: textOrEmpty(block.caption) || undefined,
+          })
+        }
+        break
       }
       case 'embed':
-        return textOrEmpty(block.url)
-          ? [{ type: 'embed' as const, url: textOrEmpty(block.url), title: textOrEmpty(block.title) || undefined }]
-          : []
+        if (textOrEmpty(block.url)) {
+          blocks.push({
+            type: 'embed',
+            url: textOrEmpty(block.url),
+            title: textOrEmpty(block.title) || undefined,
+          })
+        }
+        break
       default:
-        return []
+        break
     }
-  }) || []
+  }
 
-  if (blocks.length)
-    return blocks
-
-  return sectionsToBlocks(
-    post.sections?.map(section => ({
-      title: textOrEmpty(section.title),
-      paragraphs: section.paragraphs?.filter(Boolean) || [],
-      bullets: section.bullets?.filter(Boolean) || [],
-    })).filter(section => Boolean(section.title || section.paragraphs.length || section.bullets?.length))
-    || [],
-  )
+  return blocks
 }
 
-const createSanityUrl = () => {
+const createSanityUrl = (query: string, params: Record<string, string | number> = {}) => {
   const host = sanityConfig.useCdn ? 'apicdn.sanity.io' : 'api.sanity.io'
-  return `https://${sanityConfig.projectId}.${host}/v${sanityConfig.apiVersion}/data/query/${sanityConfig.dataset}?query=${encodeURIComponent(sanityQuery)}`
+  const searchParams = new URLSearchParams({
+    query,
+  })
+
+  for (const [key, value] of Object.entries(params)) {
+    searchParams.set(`$${key}`, String(value))
+  }
+
+  return `https://${sanityConfig.projectId}.${host}/v${sanityConfig.apiVersion}/data/query/${sanityConfig.dataset}?${searchParams.toString()}`
+}
+
+const fetchSanityResult = async <T>(query: string, params: Record<string, string | number> = {}): Promise<T> => {
+  const response = await fetch(createSanityUrl(query, params))
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Sanity content: ${response.status} ${response.statusText}`)
+  }
+
+  const json = await response.json() as { result?: T }
+
+  if (json.result === undefined) {
+    throw new Error('Sanity response did not include a result payload.')
+  }
+
+  return json.result
+}
+
+const fetchSanityCollectionInBatches = async <T extends { _id?: string }>(query: string): Promise<T[]> => {
+  const collection: T[] = []
+  let lastId = ''
+
+  for (;;) {
+    const batch = await fetchSanityResult<T[]>(query, {
+      lastId,
+      batchSize: SANITY_BATCH_SIZE,
+    })
+
+    if (!batch.length)
+      break
+
+    collection.push(...batch)
+    lastId = batch[batch.length - 1]?._id || ''
+
+    if (!lastId)
+      break
+  }
+
+  return collection
 }
 
 const mapUiAssets = (payload: SanityPayload): UiAssets => ({
@@ -339,11 +493,22 @@ const mapSiteSettings = (payload: SanityPayload): SiteSettings => {
     footerCreditPrefix: pick(payload.siteSettings?.footerCreditPrefix, fallback.footerCreditPrefix),
     footerCreditName: pick(payload.siteSettings?.footerCreditName, fallback.footerCreditName),
     footerCreditHref: payload.siteSettings?.footerCreditHref || fallback.footerCreditHref,
+    footerCreditConnector: pick(payload.siteSettings?.footerCreditConnector, fallback.footerCreditConnector),
+    footerTechnologyName: pick(payload.siteSettings?.footerTechnologyName, fallback.footerTechnologyName),
+    footerTechnologyHref: payload.siteSettings?.footerTechnologyHref || fallback.footerTechnologyHref,
+    footerRepositoryLink:
+      payload.siteSettings?.footerRepositoryLink?.label && payload.siteSettings?.footerRepositoryLink?.href
+        ? {
+            label: payload.siteSettings.footerRepositoryLink.label,
+            href: payload.siteSettings.footerRepositoryLink.href,
+          }
+        : fallback.footerRepositoryLink,
     socialProfiles: {
       instagram: payload.siteSettings?.socialProfiles?.instagram || fallback.socialProfiles.instagram,
-      x: payload.siteSettings?.socialProfiles?.x || fallback.socialProfiles.x,
+      facebook: payload.siteSettings?.socialProfiles?.facebook || fallback.socialProfiles.facebook,
       youtube: payload.siteSettings?.socialProfiles?.youtube || fallback.socialProfiles.youtube,
       tiktok: payload.siteSettings?.socialProfiles?.tiktok || fallback.socialProfiles.tiktok,
+      github: payload.siteSettings?.socialProfiles?.github || fallback.socialProfiles.github,
     },
   }
 }
@@ -380,6 +545,10 @@ const mapHomePage = (payload: SanityPayload): HomePageContent => {
     highlightCard: {
       title: pick(payload.homePage?.highlightCard?.title, fallback.highlightCard.title),
       description: pick(payload.homePage?.highlightCard?.description, fallback.highlightCard.description),
+    },
+    featuredArtistsSection: {
+      title: pick(payload.homePage?.featuredArtistsSection?.title, fallback.featuredArtistsSection.title),
+      description: pick(payload.homePage?.featuredArtistsSection?.description, fallback.featuredArtistsSection.description),
     },
     communitySection: {
       title: pick(payload.homePage?.communitySection?.title, fallback.communitySection.title),
@@ -430,6 +599,53 @@ const mapHomePage = (payload: SanityPayload): HomePageContent => {
         label: pick(payload.homePage?.appCta?.androidButton?.label, fallback.appCta.androidButton.label),
         href: pick(payload.homePage?.appCta?.androidButton?.href, fallback.appCta.androidButton.href),
       },
+    },
+  }
+}
+
+const mapArtistsPage = (payload: SanityPayload): ArtistsPageContent => {
+  const fallback = localContentAdapter.artistsPage
+
+  return {
+    heroTitle: pick(payload.artistsPage?.heroTitle, fallback.heroTitle),
+    heroDescription: pick(payload.artistsPage?.heroDescription, fallback.heroDescription),
+    filters: {
+      genreLabel: pick(payload.artistsPage?.filters?.genreLabel, fallback.filters.genreLabel),
+      allGenresLabel: pick(payload.artistsPage?.filters?.allGenresLabel, fallback.filters.allGenresLabel),
+      neighborhoodLabel: pick(payload.artistsPage?.filters?.neighborhoodLabel, fallback.filters.neighborhoodLabel),
+      allNeighborhoodsLabel: pick(payload.artistsPage?.filters?.allNeighborhoodsLabel, fallback.filters.allNeighborhoodsLabel),
+      searchLabel: pick(payload.artistsPage?.filters?.searchLabel, fallback.filters.searchLabel),
+      searchPlaceholder: pick(payload.artistsPage?.filters?.searchPlaceholder, fallback.filters.searchPlaceholder),
+    },
+    genreOptions:
+      payload.artistsPage?.genreOptions?.map(option => ({
+        label: option.label || '',
+        value: option.value || '',
+      })).filter(option => Boolean(option.label && option.value))
+      || fallback.genreOptions,
+    neighborhoodOptions: payload.artistsPage?.neighborhoodOptions?.filter(Boolean) || fallback.neighborhoodOptions,
+    resultsSection: {
+      subtitle: pick(payload.artistsPage?.resultsSection?.subtitle, fallback.resultsSection.subtitle),
+      countSuffix: pick(payload.artistsPage?.resultsSection?.countSuffix, fallback.resultsSection.countSuffix),
+    },
+    actions: {
+      viewProfileLabel: pick(payload.artistsPage?.actions?.viewProfileLabel, fallback.actions.viewProfileLabel),
+    },
+    popup: {
+      musicTitle: pick(payload.artistsPage?.popup?.musicTitle, fallback.popup.musicTitle),
+      socialTitle: pick(payload.artistsPage?.popup?.socialTitle, fallback.popup.socialTitle),
+      spotifyMeta: pick(payload.artistsPage?.popup?.spotifyMeta, fallback.popup.spotifyMeta),
+      youtubeMeta: pick(payload.artistsPage?.popup?.youtubeMeta, fallback.popup.youtubeMeta),
+      appleMusicMeta: pick(payload.artistsPage?.popup?.appleMusicMeta, fallback.popup.appleMusicMeta),
+      soundcloudMeta: pick(payload.artistsPage?.popup?.soundcloudMeta, fallback.popup.soundcloudMeta),
+      instagramMeta: pick(payload.artistsPage?.popup?.instagramMeta, fallback.popup.instagramMeta),
+      tiktokMeta: pick(payload.artistsPage?.popup?.tiktokMeta, fallback.popup.tiktokMeta),
+      xMeta: pick(payload.artistsPage?.popup?.xMeta, fallback.popup.xMeta),
+    },
+    emptyState: {
+      icon: pick(payload.artistsPage?.emptyState?.icon, fallback.emptyState.icon),
+      title: pick(payload.artistsPage?.emptyState?.title, fallback.emptyState.title),
+      description: pick(payload.artistsPage?.emptyState?.description, fallback.emptyState.description),
     },
   }
 }
@@ -628,6 +844,57 @@ const mapBlogPage = (payload: SanityPayload): BlogPageContent => {
   }
 }
 
+const mapContentCards = (cards: ContentCard[] | undefined, fallback: ContentCard[] = []) =>
+  cards?.map(card => ({
+    title: card.title || '',
+    description: card.description || '',
+    bullets: card.bullets?.filter(Boolean) || undefined,
+    accentClass: card.accentClass || undefined,
+  })).filter(card => Boolean(card.title && card.description))
+  || fallback
+
+const mapContentSections = (sections: ContentSection[] | undefined, fallback: ContentSection[]) =>
+  sections?.map(section => ({
+    title: section.title || '',
+    paragraphs: section.paragraphs?.filter(Boolean) || [],
+    bullets: section.bullets?.filter(Boolean) || undefined,
+    cards: mapContentCards(section.cards),
+    links:
+      section.links?.map(link => ({
+        label: link.label || '',
+        href: link.href || '',
+      })).filter(link => Boolean(link.label && link.href))
+      || undefined,
+  })).filter(section => Boolean(section.title && (section.paragraphs.length || section.bullets?.length || section.cards?.length || section.links?.length)))
+  || fallback
+
+const mapLegalPage = (page: SanityLegalPage | undefined, fallback: LegalPageContent): LegalPageContent => ({
+  heroTitle: pick(page?.heroTitle, fallback.heroTitle),
+  heroDescription: pick(page?.heroDescription, fallback.heroDescription),
+  sections: mapContentSections(page?.sections, fallback.sections),
+  contactCard:
+    page?.contactCard
+      ? {
+          title: pick(page.contactCard.title, fallback.contactCard?.title || ''),
+          description: pick(page.contactCard.description, fallback.contactCard?.description || ''),
+          details:
+            page.contactCard.details?.map(detail => ({
+              label: detail.label || '',
+              value: detail.value || '',
+            })).filter(detail => Boolean(detail.label && detail.value))
+            || fallback.contactCard?.details
+            || [],
+        }
+      : fallback.contactCard,
+  footerNote: pick(page?.footerNote, fallback.footerNote),
+  ctaTitle: pick(page?.ctaTitle, fallback.ctaTitle),
+  ctaDescription: pick(page?.ctaDescription, fallback.ctaDescription),
+  ctaLink: {
+    label: pick(page?.ctaLink?.label, fallback.ctaLink.label),
+    href: pick(page?.ctaLink?.href, fallback.ctaLink.href),
+  },
+})
+
 const mapArtists = (artists: SanityArtist[] | undefined): ArtistDirectoryEntry[] =>
   artists?.map(artist => ({
     id: artist.id || artist._id || artist.name || crypto.randomUUID(),
@@ -635,8 +902,18 @@ const mapArtists = (artists: SanityArtist[] | undefined): ArtistDirectoryEntry[]
     genre: artist.genre || 'Unknown',
     bio: artist.bio || '',
     image: resolveUrl(artist.image),
+    locationLabel: artist.locationLabel || 'New York',
     neighborhoods: artist.neighborhoods || [],
     badge: artist.badge || 'Artist',
+    links: {
+      spotify: artist.links?.spotify || undefined,
+      youtube: artist.links?.youtube || undefined,
+      appleMusic: artist.links?.appleMusic || undefined,
+      instagram: artist.links?.instagram || undefined,
+      tiktok: artist.links?.tiktok || undefined,
+      x: artist.links?.x || undefined,
+      soundcloud: artist.links?.soundcloud || undefined,
+    },
   })).filter(artist => Boolean(artist.image))
   || localContentAdapter.artistDirectoryEntries
 
@@ -646,12 +923,14 @@ const mapFeaturedArtists = (artists: SanityArtist[] | undefined): FeaturedArtist
   if (!featured.length)
     return localContentAdapter.featuredArtists
 
-  return featured.map(artist => ({
-    id: artist.id || artist._id || artist.name || crypto.randomUUID(),
-    name: artist.name || 'Untitled artist',
-    genre: artist.genre || 'Unknown',
-    image: resolveUrl(artist.homeImage || artist.image),
-  }))
+  return featured
+    .slice(0, 10)
+    .map(artist => ({
+      id: artist.id || artist._id || artist.name || crypto.randomUUID(),
+      name: artist.name || 'Untitled artist',
+      genre: artist.genre || 'Unknown',
+      image: resolveUrl(artist.homeImage || artist.image),
+    }))
 }
 
 const mapTestimonials = (testimonials: SanityTestimonial[] | undefined): FollowerCard[] =>
@@ -697,7 +976,6 @@ const mapBlogPosts = (posts: SanityPost[] | undefined): BlogPost[] =>
     readTime: post.readTime || 1,
     tags: post.tags || [],
     blocks: mapSanityBlocks(post),
-    sections: blocksToSections(mapSanityBlocks(post)),
   })).filter(post => Boolean(post.slug && post.image))
   || localContentAdapter.blogPosts
 
@@ -719,27 +997,19 @@ const mapEvents = (events: SanityEvent[] | undefined): EventEntry[] =>
   || localContentAdapter.eventEntries
 
 export const createSanityContentAdapter = async (): Promise<ContentAdapter> => {
-  const headers: HeadersInit = {}
-
-  if (sanityConfig.token)
-    headers.Authorization = `Bearer ${sanityConfig.token}`
-
-  const response = await fetch(createSanityUrl(), { headers })
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch Sanity content: ${response.status} ${response.statusText}`)
-  }
-
-  const json = await response.json() as { result?: SanityPayload }
-  const payload = json.result
-
-  if (!payload)
-    throw new Error('Sanity response did not include a result payload.')
+  const payload = await fetchSanityResult<SanityPayload>(sanityQuery)
+  const [posts, events] = await Promise.all([
+    fetchSanityCollectionInBatches<SanityPost>(sanityPostsBatchQuery),
+    fetchSanityCollectionInBatches<SanityEvent>(sanityEventsBatchQuery),
+  ])
 
   const siteSettings = mapSiteSettings(payload)
-  const blogPosts = mapBlogPosts(payload.posts)
+  const blogPosts = mapBlogPosts(posts)
   const sortedBlogPosts = [...blogPosts].sort(
-    (left, right) => new Date(right.date).getTime() - new Date(left.date).getTime(),
+    (left, right) => parseLocalDate(right.date).getTime() - parseLocalDate(left.date).getTime(),
+  )
+  const eventEntries = mapEvents(events).sort(
+    (left, right) => parseLocalDate(left.date).getTime() - parseLocalDate(right.date).getTime(),
   )
 
   const snapshot = validateContentSnapshot({
@@ -748,9 +1018,13 @@ export const createSanityContentAdapter = async (): Promise<ContentAdapter> => {
     siteSettings,
     homePage: mapHomePage(payload),
     aboutPage: mapAboutPage(payload),
+    artistsPage: mapArtistsPage(payload),
     contactPage: mapContactPage(payload),
     eventsPage: mapEventsPage(payload),
     blogPage: mapBlogPage(payload),
+    termsPage: mapLegalPage(payload.termsPage, localContentAdapter.termsPage),
+    privacyPage: mapLegalPage(payload.privacyPage, localContentAdapter.privacyPage),
+    cookiesPage: mapLegalPage(payload.cookiesPage, localContentAdapter.cookiesPage),
     aboutContent: mapAboutContent(payload),
     featuredArtists: mapFeaturedArtists(payload.artists),
     artistDirectoryEntries: mapArtists(payload.artists),
@@ -759,7 +1033,7 @@ export const createSanityContentAdapter = async (): Promise<ContentAdapter> => {
     blogPosts,
     sortedBlogPosts,
     blogPostPaths: sortedBlogPosts.map(post => `/blog/${post.slug}`),
-    eventEntries: mapEvents(payload.events),
+    eventEntries,
   })
 
   return {

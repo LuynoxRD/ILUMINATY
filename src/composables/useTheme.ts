@@ -1,27 +1,33 @@
 import { computed, watchEffect } from 'vue'
-import { useColorMode } from '@vueuse/core'
+import { usePreferredDark, useStorage } from '@vueuse/core'
 
-type ThemeMode = 'light' | 'dark' | 'auto'
+type ThemeMode = 'light' | 'dark' | 'system'
 
-const colorMode = useColorMode({
-  selector: 'html',
-  attribute: 'data-theme',
-  initialValue: 'auto',
-  storageKey: 'iluminaty-theme',
-})
+const storageKey = 'iluminaty-theme'
+
+const normalizeMode = (value: string | null | undefined): ThemeMode => {
+  if (value === 'light' || value === 'dark' || value === 'system')
+    return value
+
+  // Migrate the previous persisted value used by the old selector.
+  if (value === 'auto')
+    return 'system'
+
+  return 'system'
+}
+
+const storedMode = useStorage<string>(storageKey, 'system')
+const preferredDark = usePreferredDark()
 
 const mode = computed<ThemeMode>({
-  get: () => colorMode.store.value as ThemeMode,
+  get: () => normalizeMode(storedMode.value),
   set: (value) => {
-    colorMode.store.value = value
+    storedMode.value = value
   },
 })
 
-const appliedMode = computed<'light' | 'dark'>(() =>
-  mode.value === 'auto'
-    ? colorMode.system.value
-    : (colorMode.state.value as 'light' | 'dark')
-)
+const systemMode = computed<'light' | 'dark'>(() => (preferredDark.value ? 'dark' : 'light'))
+const appliedMode = computed<'light' | 'dark'>(() => (mode.value === 'system' ? systemMode.value : mode.value))
 
 watchEffect(() => {
   if (typeof document === 'undefined')
@@ -31,13 +37,14 @@ watchEffect(() => {
 
   root.classList.remove('light', 'dark')
   root.classList.add(appliedMode.value)
-  root.setAttribute('data-theme', mode.value)
+  root.setAttribute('data-theme', appliedMode.value)
+  root.setAttribute('data-theme-preference', mode.value)
 })
 
 export function useTheme() {
   return {
     mode,
     appliedMode,
-    systemMode: colorMode.system,
+    systemMode,
   }
 }

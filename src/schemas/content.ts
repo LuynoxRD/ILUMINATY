@@ -43,9 +43,10 @@ const imageAssetsSchema = z.object({
 
 const socialProfilesSchema = z.object({
   instagram: nonEmptyString,
-  x: nonEmptyString,
+  facebook: nonEmptyString,
   youtube: nonEmptyString,
   tiktok: nonEmptyString,
+  github: nonEmptyString,
 })
 
 const siteSettingsSchema = z.object({
@@ -60,6 +61,10 @@ const siteSettingsSchema = z.object({
   footerCreditPrefix: nonEmptyString,
   footerCreditName: nonEmptyString,
   footerCreditHref: z.string().trim().optional(),
+  footerCreditConnector: nonEmptyString,
+  footerTechnologyName: nonEmptyString,
+  footerTechnologyHref: z.string().trim().optional(),
+  footerRepositoryLink: navigationLinkSchema.optional(),
   socialProfiles: socialProfilesSchema,
 })
 
@@ -82,6 +87,10 @@ const homePageSchema = z.object({
     description: nonEmptyString,
   }),
   highlightCard: z.object({
+    title: nonEmptyString,
+    description: nonEmptyString,
+  }),
+  featuredArtistsSection: z.object({
     title: nonEmptyString,
     description: nonEmptyString,
   }),
@@ -201,6 +210,80 @@ const contactPageSchema = z.object({
   faqs: z.array(faqItemSchema).min(1),
 })
 
+const contentCardSchema = z.object({
+  title: nonEmptyString,
+  description: nonEmptyString,
+  bullets: z.array(nonEmptyString).optional(),
+  accentClass: z.string().trim().optional(),
+})
+
+const contentSectionSchema = z.object({
+  title: nonEmptyString,
+  paragraphs: z.array(nonEmptyString),
+  bullets: z.array(nonEmptyString).optional(),
+  cards: z.array(contentCardSchema).optional(),
+  links: z.array(navigationLinkSchema).optional(),
+})
+
+const legalPageSchema = z.object({
+  heroTitle: nonEmptyString,
+  heroDescription: nonEmptyString,
+  sections: z.array(contentSectionSchema).min(1),
+  contactCard: z.object({
+    title: nonEmptyString,
+    description: nonEmptyString,
+    details: z.array(z.object({
+      label: nonEmptyString,
+      value: nonEmptyString,
+    })).min(1),
+  }).optional(),
+  footerNote: nonEmptyString,
+  ctaTitle: nonEmptyString,
+  ctaDescription: nonEmptyString,
+  ctaLink: navigationLinkSchema,
+})
+
+const artistsPageSchema = z.object({
+  heroTitle: nonEmptyString,
+  heroDescription: nonEmptyString,
+  filters: z.object({
+    genreLabel: nonEmptyString,
+    allGenresLabel: nonEmptyString,
+    neighborhoodLabel: nonEmptyString,
+    allNeighborhoodsLabel: nonEmptyString,
+    searchLabel: nonEmptyString,
+    searchPlaceholder: nonEmptyString,
+  }),
+  genreOptions: z.array(z.object({
+    label: nonEmptyString,
+    value: nonEmptyString,
+  })).min(1),
+  neighborhoodOptions: z.array(nonEmptyString).min(1),
+  resultsSection: z.object({
+    subtitle: nonEmptyString,
+    countSuffix: nonEmptyString,
+  }),
+  actions: z.object({
+    viewProfileLabel: nonEmptyString,
+  }),
+  popup: z.object({
+    musicTitle: nonEmptyString,
+    socialTitle: nonEmptyString,
+    spotifyMeta: nonEmptyString,
+    youtubeMeta: nonEmptyString,
+    appleMusicMeta: nonEmptyString,
+    soundcloudMeta: nonEmptyString,
+    instagramMeta: nonEmptyString,
+    tiktokMeta: nonEmptyString,
+    xMeta: nonEmptyString,
+  }),
+  emptyState: z.object({
+    icon: nonEmptyString,
+    title: nonEmptyString,
+    description: nonEmptyString,
+  }),
+})
+
 const eventsPageSchema = z.object({
   heroTitle: nonEmptyString,
   heroDescription: nonEmptyString,
@@ -279,10 +362,22 @@ const featuredArtistSchema = z.object({
   image: nonEmptyString,
 })
 
+const artistLinksSchema = z.object({
+  spotify: z.string().trim().url().optional(),
+  youtube: z.string().trim().url().optional(),
+  appleMusic: z.string().trim().url().optional(),
+  instagram: z.string().trim().url().optional(),
+  tiktok: z.string().trim().url().optional(),
+  x: z.string().trim().url().optional(),
+  soundcloud: z.string().trim().url().optional(),
+})
+
 const artistDirectoryEntrySchema = featuredArtistSchema.extend({
   bio: nonEmptyString,
+  locationLabel: nonEmptyString,
   neighborhoods: z.array(nonEmptyString),
   badge: nonEmptyString,
+  links: artistLinksSchema,
 })
 
 const followerCardSchema = z.object({
@@ -291,12 +386,6 @@ const followerCardSchema = z.object({
   handle: nonEmptyString,
   date: nonEmptyString,
   message: nonEmptyString,
-})
-
-const blogSectionSchema = z.object({
-  title: nonEmptyString,
-  paragraphs: z.array(nonEmptyString).min(1),
-  bullets: z.array(nonEmptyString).optional(),
 })
 
 const blogContentBlockSchema = z.discriminatedUnion('type', [
@@ -346,7 +435,6 @@ const blogPostSchema = z.object({
   readTime: z.number().int().positive(),
   tags: z.array(nonEmptyString).optional(),
   blocks: z.array(blogContentBlockSchema).min(1),
-  sections: z.array(blogSectionSchema).optional(),
 })
 
 const eventEntrySchema = z.object({
@@ -370,9 +458,13 @@ export const contentSnapshotSchema = z.object({
   siteSettings: siteSettingsSchema,
   homePage: homePageSchema,
   aboutPage: aboutPageSchema,
+  artistsPage: artistsPageSchema,
   contactPage: contactPageSchema,
   eventsPage: eventsPageSchema,
   blogPage: blogPageSchema,
+  termsPage: legalPageSchema,
+  privacyPage: legalPageSchema,
+  cookiesPage: legalPageSchema,
   aboutContent: aboutContentSchema,
   featuredArtists: z.array(featuredArtistSchema).min(1),
   artistDirectoryEntries: z.array(artistDirectoryEntrySchema).min(1),

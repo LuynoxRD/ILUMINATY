@@ -1,12 +1,35 @@
 {
-  "name": "iluminaty-artists-platform",
+  "name": "iluminaty-template",
   "version": "1.0.0",
+  "description": "Professional Vue 3 + Vite template for blog, app download landing pages, event promotion, Sanity-ready content and webhook-ready forms.",
+  "author": "LuynoxRD",
+  "license": "MIT",
+  "homepage": "https://github.com/LuynoxRD/ILUMINATY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LuynoxRD/ILUMINATY.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LuynoxRD/ILUMINATY/issues"
+  },
+  "keywords": [
+    "iluminaty",
+    "vue",
+    "vite",
+    "typescript",
+    "tailwindcss",
+    "sanity",
+    "blog-template",
+    "events-template",
+    "landing-page-template"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "node scripts/generate-sitemap.mjs && vite-ssg build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@types/dompurify": "^3.0.5",
@@ -21,12 +44,17 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.30.1",
+    "@typescript-eslint/parser": "^8.30.1",
     "@vitejs/plugin-vue": "^5.2.0",
     "autoprefixer": "^10.4.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.33.0",
     "postcss": "^8.4.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.6.0",
     "vite": "^5.4.0",
+    "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.0"
   }
 }

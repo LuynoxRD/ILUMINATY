@@ -46,18 +46,18 @@ const dropdownRef = ref<HTMLElement | null>(null)
 const options = [
   { value: 'light', label: 'Light', icon: 'light' },
   { value: 'dark', label: 'Dark', icon: 'dark' },
-  { value: 'auto', label: 'System', icon: 'system' },
+  { value: 'system', label: 'System', icon: 'system' },
 ] as const
 
 const currentLabel = computed(() => options.find((option) => option.value === mode.value)?.label ?? 'System')
 const iconMode = computed(() => {
-  if (mode.value === 'auto')
+  if (mode.value === 'system')
     return 'system'
 
   return appliedMode.value
 })
 
-const selectMode = (value: 'light' | 'dark' | 'auto') => {
+const selectMode = (value: 'light' | 'dark' | 'system') => {
   mode.value = value
   isOpen.value = false
 }

@@ -31,10 +31,22 @@ export interface FeaturedArtist {
   image: string
 }
 
+export interface ArtistLinks {
+  spotify?: string
+  youtube?: string
+  appleMusic?: string
+  instagram?: string
+  tiktok?: string
+  x?: string
+  soundcloud?: string
+}
+
 export interface ArtistDirectoryEntry extends FeaturedArtist {
   bio: string
+  locationLabel: string
   neighborhoods: string[]
   badge: string
+  links: ArtistLinks
 }
 
 export interface AboutTeamMember {
@@ -64,9 +76,10 @@ export interface FollowerCard {
 
 export interface SocialProfiles {
   instagram: string
-  x: string
+  facebook: string
   youtube: string
   tiktok: string
+  github: string
 }
 
 export interface NavigationLink {
@@ -88,6 +101,10 @@ export interface SiteSettings {
   footerCreditPrefix: string
   footerCreditName: string
   footerCreditHref?: string
+  footerCreditConnector: string
+  footerTechnologyName: string
+  footerTechnologyHref?: string
+  footerRepositoryLink?: NavigationLink
   socialProfiles: SocialProfiles
 }
 
@@ -127,6 +144,10 @@ export interface HomePageContent {
     description: string
   }
   highlightCard: {
+    title: string
+    description: string
+  }
+  featuredArtistsSection: {
     title: string
     description: string
   }
@@ -251,6 +272,79 @@ export interface ContactPageContent {
   faqs: FaqItem[]
 }
 
+export interface ContentCard {
+  title: string
+  description: string
+  bullets?: string[]
+  accentClass?: string
+}
+
+export interface ContentSection {
+  title: string
+  paragraphs: string[]
+  bullets?: string[]
+  cards?: ContentCard[]
+  links?: NavigationLink[]
+}
+
+export interface LegalContactDetail {
+  label: string
+  value: string
+}
+
+export interface LegalPageContent {
+  heroTitle: string
+  heroDescription: string
+  sections: ContentSection[]
+  contactCard?: {
+    title: string
+    description: string
+    details: LegalContactDetail[]
+  }
+  footerNote: string
+  ctaTitle: string
+  ctaDescription: string
+  ctaLink: NavigationLink
+}
+
+export interface ArtistsPageContent {
+  heroTitle: string
+  heroDescription: string
+  filters: {
+    genreLabel: string
+    allGenresLabel: string
+    neighborhoodLabel: string
+    allNeighborhoodsLabel: string
+    searchLabel: string
+    searchPlaceholder: string
+  }
+  genreOptions: SelectOption[]
+  neighborhoodOptions: string[]
+  resultsSection: {
+    subtitle: string
+    countSuffix: string
+  }
+  actions: {
+    viewProfileLabel: string
+  }
+  popup: {
+    musicTitle: string
+    socialTitle: string
+    spotifyMeta: string
+    youtubeMeta: string
+    appleMusicMeta: string
+    soundcloudMeta: string
+    instagramMeta: string
+    tiktokMeta: string
+    xMeta: string
+  }
+  emptyState: {
+    icon: string
+    title: string
+    description: string
+  }
+}
+
 export interface EventStep {
   icon: string
   title: string
@@ -369,7 +463,6 @@ export interface BlogPost {
   readTime: number
   tags?: string[]
   blocks: BlogContentBlock[]
-  sections?: BlogSection[]
 }
 
 export interface EventEntry {
@@ -393,9 +486,13 @@ export interface ContentSnapshot {
   siteSettings: SiteSettings
   homePage: HomePageContent
   aboutPage: AboutPageContent
+  artistsPage: ArtistsPageContent
   contactPage: ContactPageContent
   eventsPage: EventsPageContent
   blogPage: BlogPageContent
+  termsPage: LegalPageContent
+  privacyPage: LegalPageContent
+  cookiesPage: LegalPageContent
   aboutContent: AboutContent
   featuredArtists: FeaturedArtist[]
   artistDirectoryEntries: ArtistDirectoryEntry[]

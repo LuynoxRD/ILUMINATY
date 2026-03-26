@@ -1,5 +1,6 @@
 import { imageAssets } from '@/data/assets'
 import { sectionsToBlocks } from '@/lib/blogContent'
+import { parseLocalDate } from '@/lib/date'
 
 export type BlogCategory =
   | 'Noticias'
@@ -390,7 +391,7 @@ export const blogPosts: BlogPost[] = rawBlogPosts.map(post => ({
 }))
 
 export const sortedBlogPosts = [...blogPosts].sort(
-  (left, right) => new Date(right.date).getTime() - new Date(left.date).getTime(),
+  (left, right) => parseLocalDate(right.date).getTime() - parseLocalDate(left.date).getTime(),
 )
 
 export const blogPostPaths = sortedBlogPosts.map(post => `/blog/${post.slug}`)
