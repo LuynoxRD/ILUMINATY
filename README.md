@@ -82,7 +82,7 @@ If the final client is not technical, Sanity is the correct path in this reposit
 | Technology | Why it is used |
 | --- | --- |
 | Vue 3 | Component architecture and reactive UI. |
-| Vite | Fast dev server and lean production builds. |
+| Vite 8 | Fast dev server and lean production builds. |
 | Vite SSG | Static generation for marketing pages and blog routes. |
 | TypeScript | Strong contracts across views, adapters, schemas and services. |
 | Tailwind CSS | Fast, consistent utility-first styling. |
@@ -117,6 +117,8 @@ npx vue-tsc --noEmit
 ```
 
 `npm run lint` validates the codebase without mutating files. Use `npm run lint:fix` when you want ESLint to apply safe autofixes.
+
+Linting is configured with the modern flat ESLint setup in `eslint.config.js`.
 
 Unit and component tests are not bundled by default in this template. If your delivery workflow requires tests, add Vitest or your preferred test runner on top of the existing typed content and adapter architecture.
 
@@ -623,6 +625,23 @@ The content layer is adapter-based, so other CMS providers can be added later by
 
 If your client needs a non-technical editing workflow today, keep Sanity. It is the only fully wired CMS integration in this template at the moment.
 
+## Security Maintenance
+
+This repository includes a baseline security maintenance setup for a public frontend project:
+
+- `SECURITY.md` documents the reporting and maintenance posture
+- `.github/dependabot.yml` enables scheduled dependency update pull requests
+- GitHub Dependabot alerts and security updates can be enabled in repository settings
+- the current lint stack uses modern ESLint flat config and the build toolchain has been updated to patched dependency ranges
+
+Recommended recurring checks:
+
+- `npm audit`
+- `npm outdated`
+- `npm run lint`
+- `npx vue-tsc --noEmit`
+- `npm run build`
+
 ## Publishing Checklist for Your Fork
 
 - replace demo branding, copy and media
@@ -637,6 +656,7 @@ If your client needs a non-technical editing workflow today, keep Sanity. It is 
 - run `npm run lint`
 - run `npx vue-tsc --noEmit`
 - run `npm run build`
+- review Dependabot and code scanning alerts before each release
 - add automated tests if your delivery process requires regression coverage
 
 ## Project Structure
