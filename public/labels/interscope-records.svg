@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" fill="none">
+  <rect width="320" height="96" rx="12" fill="transparent"/>
+  <path d="M29 74V22h10v52H29Zm-9-44V22h28v8H20Z" fill="#111111"/>
+  <path d="M57 74V22h11.6l19 28.4V22H99v52H88.2L68.4 44.6V74H57Z" fill="#111111"/>
+  <text x="116" y="41" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#111111">Interscope</text>
+  <text x="116" y="69" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#111111">Records</text>
+</svg>

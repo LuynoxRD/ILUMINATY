@@ -1,46 +1,103 @@
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router' // ✅ createWebHistory, NO Hash
+import { nextTick } from 'vue'
+import { ViteSSG } from 'vite-ssg'
+import type { RouteLocationNormalized } from 'vue-router'
 import App from './App.vue'
 import './style.css'
+import 'lenis/dist/lenis.css'
+import { getContent, loadContent } from './services/content'
 
-// Views
-import Home from './views/Home.vue'
-import Artists from './views/Artists.vue'
-import About from './views/About.vue'
-import Blog from './views/Blog.vue'
-import BlogPost from './views/BlogPost.vue'
-import Events from './views/Events.vue'
-import Contact from './views/Contact.vue'
-import Terms from './views/Terms.vue'
-import Privacy from './views/Privacy.vue'
-import Cookies from './views/Cookies.vue'
-
-const routes = [
-  { path: '/', component: Home, meta: { title: 'Inicio' } },
-  { path: '/artistas', component: Artists, meta: { title: 'Artistas' } },
-  { path: '/sobre-nosotros', component: About, meta: { title: 'Sobre Nosotros' } },
-  { path: '/blog', component: Blog, meta: { title: 'Blog' } },
-  { path: '/blog/:id', component: BlogPost, meta: { title: 'Post' } },
-  { path: '/eventos', component: Events, meta: { title: 'Eventos' } },
-  { path: '/contacto', component: Contact, meta: { title: 'Contacto' } },
-  { path: '/terminos', component: Terms, meta: { title: 'Términos y Condiciones' } },
-  { path: '/privacidad', component: Privacy, meta: { title: 'Política de Privacidad' } },
-  { path: '/cookies', component: Cookies, meta: { title: 'Política de Cookies' } },
+const staticRoutes = [
+  { path: '/', component: () => import('./views/Home.vue'), meta: { title: 'Inicio' } },
+  { path: '/artistas', component: () => import('./views/Artists.vue'), meta: { title: 'Artistas' } },
+  { path: '/sobre-nosotros', component: () => import('./views/About.vue'), meta: { title: 'Sobre Nosotros' } },
+  { path: '/blog', component: () => import('./views/Blog.vue'), meta: { title: 'Blog' } },
+  {
+    path: '/blog/:slug',
+    component: () => import('./views/BlogPost.vue'),
+    props: (route: RouteLocationNormalized) => ({ initialSlug: String(route.params.slug || '') }),
+    meta: { title: 'Blog' },
+  },
+  { path: '/eventos', component: () => import('./views/Events.vue'), meta: { title: 'Eventos' } },
+  { path: '/contacto', component: () => import('./views/Contact.vue'), meta: { title: 'Contacto' } },
+  { path: '/terminos', component: () => import('./views/Terms.vue'), meta: { title: 'Terminos y Condiciones' } },
+  { path: '/privacidad', component: () => import('./views/Privacy.vue'), meta: { title: 'Politica de Privacidad' } },
+  { path: '/cookies', component: () => import('./views/Cookies.vue'), meta: { title: 'Politica de Cookies' } },
 ]
 
-const router = createRouter({
-  history: createWebHistory('/ILUMINATY/'), // ✅ DEBE COINCIDIR CON base EN vite.config
-  routes,
-  scrollBehavior() {
-    return { top: 0, behavior: 'smooth' }
-  }
-})
+export const includedRoutes = async (paths: string[]) => {
+  const content = await loadContent()
+  return Array.from(new Set([...paths.filter(path => !path.includes(':') && !path.includes('*')), ...content.blogPostPaths]))
+}
 
-router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title || 'Página'} | Iluminaty`
-  next()
-})
+export const createApp = ViteSSG(
+  App,
+  {
+    base: import.meta.env.BASE_URL,
+    routes: staticRoutes,
+    scrollBehavior() {
+      return false
+    },
+  },
+  async ({ router, isClient }) => {
+    await loadContent()
 
-const app = createApp(App)
-app.use(router)
-app.mount('#app')
+    router.beforeEach((to, _from, next) => {
+      if (isClient && to.meta.title) {
+        const blogPost = to.path.startsWith('/blog/') ? getContent().getBlogPostBySlug(String(to.params.slug || '')) : undefined
+        document.title = `${blogPost?.title || to.meta.title} | ILUMINATY`
+      }
+      next()
+    })
+
+    if (!isClient)
+      return
+
+    const [{ default: gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger'),
+      import('lenis'),
+    ])
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    const lenis = new Lenis({
+      lerp: 0.085,
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1,
+      anchors: {
+        offset: 80,
+      },
+      stopInertiaOnNavigate: true,
+    })
+
+    lenis.on('scroll', ScrollTrigger.update)
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+    })
+
+    gsap.ticker.lagSmoothing(0)
+
+    router.afterEach(async (to) => {
+      await nextTick()
+
+      if (to.hash) {
+        lenis.scrollTo(to.hash, {
+          offset: 80,
+          duration: 1.1,
+          force: true,
+        })
+        return
+      }
+
+      lenis.scrollTo(0, {
+        immediate: true,
+        force: true,
+      })
+    })
+  },
+  {
+    useHead: true,
+  },
+)
