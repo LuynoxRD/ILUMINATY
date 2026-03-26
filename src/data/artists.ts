@@ -1,17 +1,5 @@
 import { imageAssets } from '@/data/assets'
-
-export interface FeaturedArtist {
-  id: string
-  name: string
-  genre: string
-  image: string
-}
-
-export interface ArtistDirectoryEntry extends FeaturedArtist {
-  bio: string
-  neighborhoods: string[]
-  badge: string
-}
+import type { ArtistDirectoryEntry, FeaturedArtist } from '@/types/content'
 
 export const featuredArtists: FeaturedArtist[] = [
   {

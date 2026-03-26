@@ -1,6 +1,7 @@
 import { imageAssets } from '@/data/assets'
+import type { AboutContent } from '@/types/content'
 
-export const aboutContent = {
+export const aboutContent: AboutContent = {
   missionImage: imageAssets.about.community,
   team: [
     {

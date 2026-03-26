@@ -13,7 +13,7 @@
           <span class="text-xl font-display font-bold neon-text">ILUMINATY</span>
         </RouterLink>
 
-        <div class="hidden items-center gap-8 md:flex">
+        <div class="hidden items-center gap-8 lg:flex">
           <RouterLink
             v-for="link in navLinks"
             :key="link.path"
@@ -27,7 +27,7 @@
 
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="rounded-lg p-2 transition-colors hover:bg-white/10 md:hidden"
+          class="rounded-lg p-2 transition-colors hover:bg-white/10 lg:hidden"
           aria-label="Toggle menu"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
       </div>
 
       <transition name="slide">
-        <div v-show="mobileMenuOpen" class="border-t border-gray-300 bg-white md:hidden">
+        <div v-show="mobileMenuOpen" class="border-t border-gray-300 bg-white lg:hidden">
           <div class="flex flex-col items-start space-y-4 px-4 py-4">
             <ThemeSelector />
             <RouterLink

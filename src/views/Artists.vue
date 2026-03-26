@@ -84,7 +84,9 @@
 import { computed, ref } from 'vue'
 import ArtistCard from '@/components/ArtistCard.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
-import { artistDirectoryEntries } from '@/data/artists'
+import { useContent } from '@/composables/useContent'
+
+const { artistDirectoryEntries } = useContent()
 
 const selectedGenre = ref('')
 const selectedNeighborhood = ref('')

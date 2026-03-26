@@ -1,67 +1,63 @@
 import { nextTick } from 'vue'
 import { ViteSSG } from 'vite-ssg'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Lenis from 'lenis'
 import App from './App.vue'
 import './style.css'
 import 'lenis/dist/lenis.css'
-
-import Home from './views/Home.vue'
-import Artists from './views/Artists.vue'
-import About from './views/About.vue'
-import Blog from './views/Blog.vue'
-import BlogPost from './views/BlogPost.vue'
-import Events from './views/Events.vue'
-import Contact from './views/Contact.vue'
-import Terms from './views/Terms.vue'
-import Privacy from './views/Privacy.vue'
-import Cookies from './views/Cookies.vue'
-import { sortedBlogPosts } from './data/blogPosts'
-
-gsap.registerPlugin(ScrollTrigger)
+import { getContent, loadContent } from './services/content'
 
 const staticRoutes = [
-  { path: '/', component: Home, meta: { title: 'Inicio' } },
-  { path: '/artistas', component: Artists, meta: { title: 'Artistas' } },
-  { path: '/sobre-nosotros', component: About, meta: { title: 'Sobre Nosotros' } },
-  { path: '/blog', component: Blog, meta: { title: 'Blog' } },
-  { path: '/eventos', component: Events, meta: { title: 'Eventos' } },
-  { path: '/contacto', component: Contact, meta: { title: 'Contacto' } },
-  { path: '/terminos', component: Terms, meta: { title: 'Términos y Condiciones' } },
-  { path: '/privacidad', component: Privacy, meta: { title: 'Política de Privacidad' } },
-  { path: '/cookies', component: Cookies, meta: { title: 'Política de Cookies' } },
+  { path: '/', component: () => import('./views/Home.vue'), meta: { title: 'Inicio' } },
+  { path: '/artistas', component: () => import('./views/Artists.vue'), meta: { title: 'Artistas' } },
+  { path: '/sobre-nosotros', component: () => import('./views/About.vue'), meta: { title: 'Sobre Nosotros' } },
+  { path: '/blog', component: () => import('./views/Blog.vue'), meta: { title: 'Blog' } },
+  {
+    path: '/blog/:slug',
+    component: () => import('./views/BlogPost.vue'),
+    props: route => ({ initialSlug: String(route.params.slug || '') }),
+    meta: { title: 'Blog' },
+  },
+  { path: '/eventos', component: () => import('./views/Events.vue'), meta: { title: 'Eventos' } },
+  { path: '/contacto', component: () => import('./views/Contact.vue'), meta: { title: 'Contacto' } },
+  { path: '/terminos', component: () => import('./views/Terms.vue'), meta: { title: 'Terminos y Condiciones' } },
+  { path: '/privacidad', component: () => import('./views/Privacy.vue'), meta: { title: 'Politica de Privacidad' } },
+  { path: '/cookies', component: () => import('./views/Cookies.vue'), meta: { title: 'Politica de Cookies' } },
 ]
 
-const blogRoutes = sortedBlogPosts.map(post => ({
-  path: `/blog/${post.slug}`,
-  component: BlogPost,
-  props: { initialSlug: post.slug },
-  meta: {
-    title: post.title,
-    description: post.metaDescription,
-  },
-}))
+export const includedRoutes = async (paths: string[]) => {
+  const content = await loadContent()
+  return Array.from(new Set([...paths.filter(path => !path.includes(':') && !path.includes('*')), ...content.blogPostPaths]))
+}
 
 export const createApp = ViteSSG(
   App,
   {
     base: import.meta.env.BASE_URL,
-    routes: [...staticRoutes, ...blogRoutes],
+    routes: staticRoutes,
     scrollBehavior() {
       return false
     },
   },
-  ({ router, isClient }) => {
+  async ({ router, isClient }) => {
+    await loadContent()
+
     router.beforeEach((to, _from, next) => {
       if (isClient && to.meta.title) {
-        document.title = `${to.meta.title} | ILUMINATY`
+        const blogPost = to.path.startsWith('/blog/') ? getContent().getBlogPostBySlug(String(to.params.slug || '')) : undefined
+        document.title = `${blogPost?.title || to.meta.title} | ILUMINATY`
       }
       next()
     })
 
     if (!isClient)
       return
+
+    const [{ default: gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger'),
+      import('lenis'),
+    ])
+
+    gsap.registerPlugin(ScrollTrigger)
 
     const lenis = new Lenis({
       lerp: 0.085,

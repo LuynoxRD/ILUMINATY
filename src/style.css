@@ -14,6 +14,11 @@ html {
   --bg-elevated: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.82);
   --bg-footer: rgba(255, 255, 255, 0.92);
+  --hero-fade-base: #f9fafb;
+  --hero-fade-mid: rgba(249, 250, 251, 0.98);
+  --hero-fade-clear: rgba(249, 250, 251, 0);
+  --hero-phone-overlay-strong: rgba(249, 250, 251, 1);
+  --hero-phone-overlay-soft: rgba(249, 250, 251, 0.4);
   --text-primary: #111827;
   --text-secondary: #4b5563;
   --text-muted: #6b7280;
@@ -29,6 +34,11 @@ html.dark {
   --bg-elevated: #1e293b;
   --bg-glass: rgba(15, 23, 42, 0.84);
   --bg-footer: rgba(15, 23, 42, 0.92);
+  --hero-fade-base: #0f172a;
+  --hero-fade-mid: rgba(15, 23, 42, 0.985);
+  --hero-fade-clear: rgba(15, 23, 42, 0);
+  --hero-phone-overlay-strong: rgba(15, 23, 42, 1);
+  --hero-phone-overlay-soft: rgba(15, 23, 42, 0.4);
   --text-primary: #f3f4f6;
   --text-secondary: #d1d5db;
   --text-muted: #94a3b8;
@@ -83,8 +93,11 @@ a {
 }
 
 /* Forms */
-input, textarea, select {
+input:not([type='checkbox']):not([type='radio']),
+textarea,
+select {
   @apply bg-gray-50 border border-gray-200 rounded-md px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-200;
+  width: 100%;
 }
 
 input:disabled, textarea:disabled, select:disabled {
@@ -272,7 +285,17 @@ footer {
 .theme-store-button {
   background-color: #ffffff;
   color: #111827;
-  border-color: var(--border-default);
+  border-color: #111827;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.theme-store-button:hover {
+  transform: translateY(-1px);
+}
+
+.theme-store-copy,
+.theme-store-icon {
+  color: #111827 !important;
 }
 
 .theme-link-accent {
@@ -287,6 +310,20 @@ footer {
   background-color: var(--bg-surface);
   color: var(--text-primary);
   border-color: var(--border-default);
+}
+
+.theme-hero-scene-fade {
+  background: linear-gradient(to top, var(--hero-fade-base) 0%, var(--hero-fade-base) 38%, var(--hero-fade-mid) 56%, var(--hero-fade-clear) 92%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 100% at center bottom, white 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 100% at center bottom, white 58%, transparent 100%);
+}
+
+.theme-hero-phone-screen {
+  background-color: var(--hero-fade-base);
+}
+
+.theme-hero-phone-overlay {
+  background: linear-gradient(to top, var(--hero-phone-overlay-strong) 0%, var(--hero-phone-overlay-soft) 40%, transparent 100%);
 }
 
 .social-icon-brand {
@@ -371,7 +408,12 @@ html.dark .theme-highlight-button {
 html.dark .theme-store-button {
   background-color: #ffffff;
   color: #111827;
-  border-color: #ffffff;
+  border-color: #111827;
+}
+
+html.dark .theme-store-copy,
+html.dark .theme-store-icon {
+  color: #111827 !important;
 }
 
 html.dark .social-icon-neutral {
@@ -380,7 +422,7 @@ html.dark .social-icon-neutral {
   color: #111827;
 }
 
-html.dark input,
+html.dark input:not([type='checkbox']):not([type='radio']),
 html.dark textarea,
 html.dark select {
   background-color: var(--bg-surface);

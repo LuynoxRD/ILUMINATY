@@ -5,10 +5,8 @@
         <div class="absolute right-0 top-0 h-96 w-96 rounded-full bg-neon-cyan/20 blur-3xl"></div>
       </div>
       <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <h1 class="mb-4">Contacto &amp; Booking</h1>
-        <p class="mx-auto max-w-2xl text-lg text-gray-600">
-          ¿Preguntas? ¿Booking? ¿Colaboraciones? Estamos aquí para escucharte.
-        </p>
+        <h1 class="mb-4">{{ contactPage.heroTitle }}</h1>
+        <p class="mx-auto max-w-2xl text-lg text-gray-600">{{ contactPage.heroDescription }}</p>
       </div>
     </section>
 
@@ -16,54 +14,38 @@
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div class="lg:col-span-1">
-            <h3 class="mb-8">Información de Contacto</h3>
+            <h3 class="mb-8">{{ contactPage.infoTitle }}</h3>
 
-            <div class="mb-8">
-              <h4 class="mb-2 font-semibold text-neon-lime">📧 Email</h4>
-              <a href="mailto:info@iluminaty.nyc" class="text-gray-600 transition-colors hover:text-neon-lime">
-                info@iluminaty.nyc
+            <div v-for="method in contactPage.methods" :key="method.title" class="mb-8">
+              <h4 class="mb-2 font-semibold" :class="method.accentClass">{{ method.icon }} {{ method.title }}</h4>
+              <a :href="method.href" class="text-gray-600 transition-colors hover:text-neon-lime">
+                {{ method.value }}
               </a>
-              <p class="mt-2 text-sm text-gray-500">Respuesta en 24 horas hábiles</p>
-            </div>
-
-            <div class="mb-8">
-              <h4 class="mb-2 font-semibold text-neon-violet">🎤 Booking &amp; Partnership</h4>
-              <a href="mailto:booking@iluminaty.nyc" class="text-gray-600 transition-colors hover:text-neon-violet">
-                booking@iluminaty.nyc
-              </a>
-              <p class="mt-2 text-sm text-gray-500">Colaboraciones, eventos y features</p>
-            </div>
-
-            <div class="mb-8">
-              <h4 class="mb-2 font-semibold text-neon-cyan">🆘 Soporte Técnico</h4>
-              <a href="mailto:support@iluminaty.nyc" class="text-gray-600 transition-colors hover:text-neon-cyan">
-                support@iluminaty.nyc
-              </a>
-              <p class="mt-2 text-sm text-gray-500">Problemas con la plataforma</p>
+              <p class="mt-2 text-sm text-gray-500">{{ method.description }}</p>
             </div>
 
             <div>
-              <h4 class="mb-2 font-semibold text-neon-lime">📍 Oficina</h4>
+              <h4 class="mb-2 font-semibold text-neon-lime">{{ contactPage.office.title }}</h4>
               <p class="text-gray-600">
-                325 Lafayette Street<br>
-                New York, NY 10012<br>
-                USA
+                <template v-for="line in contactPage.office.lines" :key="line">
+                  {{ line }}<br>
+                </template>
               </p>
-              <p class="mt-2 text-sm text-gray-500">Abierto: Lunes - Viernes, 10am-6pm EST</p>
+              <p class="mt-2 text-sm text-gray-500">{{ contactPage.office.hours }}</p>
             </div>
 
             <div class="mt-12 border-t border-gray-300 pt-8">
-              <h4 class="mb-4 font-semibold">Síguenos en Redes</h4>
+              <h4 class="mb-4 font-semibold">{{ contactPage.socialTitle }}</h4>
               <SocialLinks size="lg" />
             </div>
           </div>
 
           <div class="lg:col-span-2">
             <form class="glass rounded-2xl p-8 md:p-12" @submit.prevent="submitForm">
-              <h3 class="mb-8">Envía un Mensaje</h3>
+              <h3 class="mb-8">{{ contactPage.formTitle }}</h3>
 
               <div class="mb-6">
-                <label for="name" class="mb-2 block text-sm font-semibold">Nombre Completo *</label>
+                <label for="name" class="mb-2 block text-sm font-semibold">{{ contactPage.form.nameLabel }}</label>
                 <input
                   id="name"
                   v-model="form.name"
@@ -76,7 +58,7 @@
               </div>
 
               <div class="mb-6">
-                <label for="email" class="mb-2 block text-sm font-semibold">Email *</label>
+                <label for="email" class="mb-2 block text-sm font-semibold">{{ contactPage.form.emailLabel }}</label>
                 <input
                   id="email"
                   v-model="form.email"
@@ -89,20 +71,17 @@
               </div>
 
               <div class="mb-6">
-                <label for="subject" class="mb-2 block text-sm font-semibold">Asunto</label>
+                <label for="subject" class="mb-2 block text-sm font-semibold">{{ contactPage.form.subjectLabel }}</label>
                 <select id="subject" v-model="form.subject" class="w-full">
-                  <option value="">Selecciona un tema...</option>
-                  <option value="booking">Booking / Partnership</option>
-                  <option value="artist">Registro como Artista</option>
-                  <option value="technical">Soporte Técnico</option>
-                  <option value="feedback">Feedback y Sugerencias</option>
-                  <option value="press">Prensa / Media</option>
-                  <option value="other">Otro</option>
+                  <option value="">{{ contactPage.form.subjectPlaceholder }}</option>
+                  <option v-for="option in contactPage.form.subjectOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
                 </select>
               </div>
 
               <div class="mb-6">
-                <label for="phone" class="mb-2 block text-sm font-semibold">Teléfono (Opcional)</label>
+                <label for="phone" class="mb-2 block text-sm font-semibold">{{ contactPage.form.phoneLabel }}</label>
                 <input
                   id="phone"
                   v-model="form.phone"
@@ -114,74 +93,60 @@
               </div>
 
               <div v-if="form.subject === 'artist'" class="mb-6">
-                <label for="artistName" class="mb-2 block text-sm font-semibold">Nombre Artístico</label>
-                <input
-                  id="artistName"
-                  v-model="form.artistName"
-                  type="text"
-                  placeholder="Tu nombre artístico..."
-                >
+                <label for="artistName" class="mb-2 block text-sm font-semibold">{{ contactPage.form.artistNameLabel }}</label>
+                <input id="artistName" v-model="form.artistName" type="text" :placeholder="contactPage.form.artistNamePlaceholder">
               </div>
 
               <div v-if="form.subject === 'artist'" class="mb-6">
-                <label for="genre" class="mb-2 block text-sm font-semibold">Género/Disciplina</label>
+                <label for="genre" class="mb-2 block text-sm font-semibold">{{ contactPage.form.genreLabel }}</label>
                 <select id="genre" v-model="form.genre" class="w-full">
-                  <option value="">Selecciona un género...</option>
-                  <option value="hip-hop">Hip-Hop / Rap</option>
-                  <option value="electronic">Electrónico</option>
-                  <option value="r-b">R&amp;B / Soul</option>
-                  <option value="reggaeton">Reggaeton</option>
-                  <option value="visual">Arte Visual / Graffiti</option>
-                  <option value="production">Producción Musical</option>
-                  <option value="other">Otro</option>
+                  <option value="">{{ contactPage.form.genrePlaceholder }}</option>
+                  <option v-for="option in contactPage.form.genreOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
                 </select>
               </div>
 
               <div class="mb-6">
-                <label for="message" class="mb-2 block text-sm font-semibold">Mensaje *</label>
+                <label for="message" class="mb-2 block text-sm font-semibold">{{ contactPage.form.messageLabel }}</label>
                 <textarea
                   id="message"
                   v-model="form.message"
                   required
                   rows="6"
-                  placeholder="Cuéntanos más sobre ti o tu propuesta..."
+                  :placeholder="contactPage.form.messagePlaceholder"
                   :class="{ 'border-red-500': errors.message }"
                   @input="validateField('message')"
                 ></textarea>
                 <p v-if="errors.message" class="mt-1 text-xs text-red-400">{{ errors.message }}</p>
-                <p class="mt-2 text-xs text-gray-500">{{ form.message.length }}/1000 caracteres</p>
+                <p class="mt-2 text-xs text-gray-500">{{ form.message.length }}/{{ contactPage.form.messageLimit }} caracteres</p>
               </div>
 
               <div class="mb-6">
                 <label class="flex cursor-pointer items-start gap-3">
-                  <input
-                    v-model="form.privacy"
-                    type="checkbox"
-                    required
-                    class="mt-1 h-4 w-4"
-                  >
+                  <input v-model="form.privacy" type="checkbox" required class="mt-1 h-4 w-4">
                   <span class="text-sm text-gray-600">
-                    He leído y acepto los <RouterLink to="/terminos" class="text-neon-lime hover:underline">Términos y Condiciones</RouterLink> y la <RouterLink to="/privacidad" class="text-neon-lime hover:underline">Política de Privacidad</RouterLink>. Deseo recibir comunicaciones de ILUMINATY *
+                    {{ contactPage.form.privacyPrefix }}
+                    <RouterLink to="/terminos" class="text-neon-lime hover:underline">{{ contactPage.form.termsLabel }}</RouterLink>
+                    y la
+                    <RouterLink to="/privacidad" class="text-neon-lime hover:underline">{{ contactPage.form.privacyLabel }}</RouterLink>.
+                    {{ contactPage.form.privacySuffix }}
                   </span>
                 </label>
               </div>
 
               <div v-if="submitStatus === 'loading'" class="mb-6 rounded-lg border border-neon-lime/30 bg-neon-lime/10 p-4 text-neon-lime">
-                ⏳ Enviando tu mensaje...
+                {{ readPlainText(contactPage.form.loadingMessage, 'Enviando tu mensaje...') }}
               </div>
               <div v-if="submitStatus === 'success'" class="mb-6 rounded-lg border border-neon-lime/30 bg-neon-lime/10 p-4 text-neon-lime">
-                ✅ ¡Mensaje enviado correctamente! Te contactaremos pronto.
+                {{ feedbackMessage }}
               </div>
               <div v-if="submitStatus === 'error'" class="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-red-400">
-                ❌ Error al enviar. Intenta de nuevo o escribe directamente a info@iluminaty.nyc
+                {{ feedbackMessage }}
               </div>
 
-              <button
-                type="submit"
-                :disabled="submitStatus === 'loading'"
-                class="btn-primary w-full py-3 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {{ submitStatus === 'loading' ? 'Enviando...' : 'Enviar Mensaje' }}
+              <button type="submit" :disabled="submitStatus === 'loading'" class="btn-primary w-full py-3 disabled:cursor-not-allowed disabled:opacity-50">
+                {{ submitStatus === 'loading' ? contactPage.form.submitLoadingLabel : contactPage.form.submitLabel }}
               </button>
             </form>
           </div>
@@ -191,21 +156,14 @@
 
     <section class="border-y border-gray-300 bg-dark-secondary/50 py-20">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <h2 class="mb-12 text-center">Preguntas Frecuentes</h2>
+        <h2 class="mb-12 text-center">{{ contactPage.faqTitle }}</h2>
 
         <div class="space-y-4">
-          <div
-            v-for="(faq, index) in faqs"
-            :key="index"
-            class="glass overflow-hidden rounded-xl"
-          >
-            <button
-              class="w-full p-6 text-left transition-colors hover:bg-white/5"
-              @click="toggleFaq(index)"
-            >
+          <div v-for="(faq, index) in contactPage.faqs" :key="faq.question" class="glass overflow-hidden rounded-xl">
+            <button class="w-full p-6 text-left transition-colors hover:bg-white/5" @click="toggleFaq(index)">
               <div class="flex items-center justify-between">
                 <h4 class="font-semibold">{{ faq.question }}</h4>
-                <span :class="{ 'rotate-180': expandedFaq === index }" class="transition-transform">▼</span>
+                <span class="transition-transform" :class="{ 'rotate-180': expandedFaq === index }">▼</span>
               </div>
             </button>
             <transition name="faq">
@@ -221,12 +179,15 @@
 </template>
 
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import DOMPurify from 'dompurify'
 import SocialLinks from '@/components/SocialLinks.vue'
+import { useContent } from '@/composables/useContent'
+import { readPlainText, resolveSubmissionMessage } from '@/lib/formFeedback'
+import { submitContactForm } from '@/services/forms'
 
-interface ContactForm {
+interface ContactFormState {
   name: string
   email: string
   subject: string
@@ -244,7 +205,9 @@ interface ValidationErrors {
   message?: string
 }
 
-const form = ref<ContactForm>({
+const { contactPage } = useContent()
+
+const createInitialForm = (): ContactFormState => ({
   name: '',
   email: '',
   subject: '',
@@ -255,55 +218,30 @@ const form = ref<ContactForm>({
   privacy: false,
 })
 
+const form = ref<ContactFormState>(createInitialForm())
 const errors = ref<ValidationErrors>({})
 const submitStatus = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
+const feedbackMessage = ref('')
 const expandedFaq = ref<number | null>(null)
 
-const faqs = [
-  {
-    question: '¿Cómo me registro como artista?',
-    answer: 'Rellena el formulario de contacto seleccionando "Registro como Artista" como asunto. Nos pondremos en contacto en 24-48 horas. Necesitamos información sobre tu género musical, barrio y portfolio de trabajo.',
-  },
-  {
-    question: '¿Cuál es el proceso de booking?',
-    answer: 'Contáctanos en booking@iluminaty.nyc con detalles de tu propuesta (fechas, lugar, presupuesto). Nuestro equipo de eventos evaluará y responderá en 3-5 días hábiles.',
-  },
-  {
-    question: '¿Es gratis unirse a ILUMINATY?',
-    answer: 'Sí, el registro es completamente gratuito. Los artistas no pagan comisión por ventas de tickets de eventos que promovemos. Ganas el 100% de tus ingresos.',
-  },
-  {
-    question: '¿Qué barrios de NYC cubren?',
-    answer: 'Cubrimos los 5 condados: Manhattan, Brooklyn, Queens, Bronx y Staten Island. Tenemos especial enfoque en comunidades de East Side, Harlem, Williamsburg y Jamaica Queens.',
-  },
-  {
-    question: '¿Cómo protegen mis derechos de autor?',
-    answer: 'Toda la música y contenido visual sube bajo licencia del artista. ILUMINATY no reclama derechos sobre tu trabajo. Te ofrecemos herramientas para registrar copyright.',
-  },
-  {
-    question: '¿Hay membership premium?',
-    answer: 'Actualmente ofrecemos cuenta gratuita para todos. Estamos desarrollando tiers premium con estadísticas, marketing avanzado y herramientas de colaboración.',
-  },
-]
+const validateField = (field: keyof ContactFormState) => {
+  delete errors.value[field as keyof ValidationErrors]
 
-const validateField = (field: keyof ContactForm) => {
-  errors.value = {}
-
-  if (field === 'name' && form.value.name.length < 2) {
+  if (field === 'name' && form.value.name.trim().length < 2) {
     errors.value.name = 'El nombre debe tener al menos 2 caracteres'
   }
 
   if (field === 'email') {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(form.value.email)) {
-      errors.value.email = 'Por favor ingresa un email válido'
+      errors.value.email = 'Por favor ingresa un email valido'
     }
   }
 
   if (field === 'phone' && form.value.phone) {
     const phoneRegex = /^[\d\s\-+()]+$/
     if (!phoneRegex.test(form.value.phone) || form.value.phone.length < 10) {
-      errors.value.phone = 'Por favor ingresa un teléfono válido'
+      errors.value.phone = 'Por favor ingresa un telefono valido'
     }
   }
 
@@ -311,13 +249,14 @@ const validateField = (field: keyof ContactForm) => {
     if (form.value.message.length < 10) {
       errors.value.message = 'El mensaje debe tener al menos 10 caracteres'
     }
-    if (form.value.message.length > 1000) {
-      form.value.message = form.value.message.substring(0, 1000)
+    if (form.value.message.length > contactPage.form.messageLimit) {
+      form.value.message = form.value.message.substring(0, contactPage.form.messageLimit)
     }
   }
 }
 
 const submitForm = async () => {
+  errors.value = {}
   validateField('name')
   validateField('email')
   validateField('phone')
@@ -328,40 +267,38 @@ const submitForm = async () => {
   }
 
   submitStatus.value = 'loading'
+  feedbackMessage.value = ''
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
-    const sanitizedForm = {
-      ...form.value,
-      name: DOMPurify.sanitize(form.value.name),
-      email: DOMPurify.sanitize(form.value.email),
-      message: DOMPurify.sanitize(form.value.message),
-      artistName: DOMPurify.sanitize(form.value.artistName),
-      phone: DOMPurify.sanitize(form.value.phone),
-    }
-
-    console.log('Formulario sanitizado enviado:', sanitizedForm)
+    const result = await submitContactForm({
+      name: DOMPurify.sanitize(form.value.name.trim()),
+      email: DOMPurify.sanitize(form.value.email.trim()),
+      subject: DOMPurify.sanitize(form.value.subject.trim()),
+      phone: DOMPurify.sanitize(form.value.phone.trim()),
+      artistName: DOMPurify.sanitize(form.value.artistName.trim()),
+      genre: DOMPurify.sanitize(form.value.genre.trim()),
+      message: DOMPurify.sanitize(form.value.message.trim()),
+      privacy: form.value.privacy,
+    })
 
     submitStatus.value = 'success'
-    form.value = {
-      name: '',
-      email: '',
-      subject: '',
-      phone: '',
-      artistName: '',
-      genre: '',
-      message: '',
-      privacy: false,
-    }
+    feedbackMessage.value = resolveSubmissionMessage(
+      result,
+      readPlainText(contactPage.form.successMessage, 'Mensaje enviado correctamente.'),
+    )
+    form.value = createInitialForm()
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       submitStatus.value = 'idle'
+      feedbackMessage.value = ''
     }, 5000)
   }
-  catch (error) {
+  catch {
     submitStatus.value = 'error'
-    console.error('Error:', error)
+    feedbackMessage.value = readPlainText(
+      contactPage.form.errorMessage,
+      'No pudimos enviar tu mensaje. Intenta de nuevo.',
+    )
   }
 }
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { followerTestimonials } from '@/data/followers'
-import { socialProfiles } from '@/data/socialLinks'
+import { useContent } from '@/composables/useContent'
+
+const { followerTestimonials, socialProfiles } = useContent()
 
 const rowOne = [...followerTestimonials, ...followerTestimonials]
 const rowTwo = [...followerTestimonials.slice().reverse(), ...followerTestimonials.slice().reverse()]
