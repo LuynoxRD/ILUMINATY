@@ -4,6 +4,7 @@
     class="theme-dropdown"
   >
     <button
+      ref="triggerRef"
       type="button"
       class="theme-trigger"
       @click.stop="isOpen = !isOpen"
@@ -17,7 +18,13 @@
       </svg>
     </button>
 
-    <div v-show="isOpen" class="theme-menu" role="menu">
+    <div
+      ref="menuRef"
+      v-show="isOpen"
+      class="theme-menu"
+      :style="menuStyle"
+      role="menu"
+    >
       <button
         v-for="option in options"
         :key="option.value"
@@ -36,12 +43,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useTheme } from '@/composables/useTheme'
 
 const { mode, appliedMode } = useTheme()
 const isOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
+const triggerRef = ref<HTMLButtonElement | null>(null)
+const menuRef = ref<HTMLElement | null>(null)
+const menuShift = ref(0)
 
 const options = [
   { value: 'light', label: 'Light', icon: 'light' },
@@ -56,6 +66,9 @@ const iconMode = computed(() => {
 
   return appliedMode.value
 })
+const menuStyle = computed(() => ({
+  '--theme-menu-shift': `${menuShift.value}px`,
+}))
 
 const selectMode = (value: 'light' | 'dark' | 'system') => {
   mode.value = value
@@ -67,11 +80,44 @@ const handlePointerDown = (event: MouseEvent) => {
     isOpen.value = false
 }
 
+const updateMenuPosition = () => {
+  if (!isOpen.value || !triggerRef.value || !menuRef.value)
+    return
+
+  const triggerRect = triggerRef.value.getBoundingClientRect()
+  const menuRect = menuRef.value.getBoundingClientRect()
+  const viewportWidth = window.innerWidth
+  const gutter = viewportWidth < 640 ? 12 : 16
+  const centeredLeft = triggerRect.left + (triggerRect.width / 2) - (menuRect.width / 2)
+  const maxLeft = Math.max(gutter, viewportWidth - gutter - menuRect.width)
+  const clampedLeft = Math.min(Math.max(centeredLeft, gutter), maxLeft)
+
+  menuShift.value = clampedLeft - centeredLeft
+}
+
+const handleViewportChange = () => {
+  updateMenuPosition()
+}
+
+watch(isOpen, async (open) => {
+  if (!open) {
+    menuShift.value = 0
+    return
+  }
+
+  await nextTick()
+  updateMenuPosition()
+})
+
 onMounted(() => {
   window.addEventListener('mousedown', handlePointerDown)
+  window.addEventListener('resize', handleViewportChange)
+  window.visualViewport?.addEventListener('resize', handleViewportChange)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('mousedown', handlePointerDown)
+  window.removeEventListener('resize', handleViewportChange)
+  window.visualViewport?.removeEventListener('resize', handleViewportChange)
 })
 </script>
