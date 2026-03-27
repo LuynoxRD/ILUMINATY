@@ -3,10 +3,10 @@
     <Transition name="artist-popup">
       <div
         v-if="show && artist"
-        class="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 px-4 py-8 backdrop-blur-sm"
+        class="fixed inset-0 z-[70] flex items-center justify-center overflow-hidden bg-black/70 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-6 md:px-6 lg:py-8"
         @click.self="emit('close')"
       >
-        <div class="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-2xl dark:border-white/10 dark:bg-zinc-950">
+        <div class="relative flex w-full max-w-md flex-col overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-2xl max-h-[calc(100dvh-2rem)] dark:border-white/10 dark:bg-zinc-950 sm:max-h-[calc(100dvh-3rem)]">
           <button
             type="button"
             class="absolute right-4 top-4 z-10 rounded-full border border-white/70 bg-white/90 p-2 text-gray-500 shadow-sm ring-1 ring-black/5 transition-colors hover:text-gray-900 dark:border-white/20 dark:bg-zinc-950/90 dark:text-zinc-400 dark:ring-white/10 dark:hover:text-white"
@@ -18,15 +18,16 @@
             </svg>
           </button>
 
-          <div class="relative h-36 overflow-hidden bg-gray-200">
+          <div class="artist-popup-hero relative h-36 shrink-0 overflow-hidden bg-gray-200">
             <img :src="artist.image" :alt="artist.name" class="h-full w-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></div>
           </div>
 
-          <div class="relative px-6 pb-6">
-            <div class="-mt-14 mb-4 flex justify-center">
-              <img :src="artist.image" :alt="artist.name" class="h-28 w-28 rounded-full border-4 border-white object-cover shadow-xl dark:border-zinc-950">
-            </div>
+          <div class="artist-popup-avatar pointer-events-none absolute left-1/2 top-36 z-[1] -translate-x-1/2 -translate-y-1/2">
+            <img :src="artist.image" :alt="artist.name" class="h-28 w-28 rounded-full border-4 border-white object-cover shadow-xl dark:border-zinc-950">
+          </div>
+
+          <div class="artist-popup-scroll relative flex-1 min-h-0 overflow-y-auto px-6 pb-6 pt-16">
 
             <div class="text-center">
               <p class="text-sm font-semibold uppercase tracking-[0.18em] text-neon-lime">{{ artist.genre }}</p>
@@ -105,6 +106,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{ close: [] }>()
 const { artistsPage } = useContent()
+let lockedScrollY = 0
 
 interface PopupLink {
   label: string
@@ -208,13 +210,43 @@ const handleKeydown = (event: KeyboardEvent) => {
     emit('close')
 }
 
+const lockBodyScroll = () => {
+  if (typeof document === 'undefined' || typeof window === 'undefined')
+    return
+
+  lockedScrollY = window.scrollY
+  document.documentElement.style.overflow = 'hidden'
+  document.body.style.overflow = 'hidden'
+  document.body.style.position = 'fixed'
+  document.body.style.top = `-${lockedScrollY}px`
+  document.body.style.left = '0'
+  document.body.style.right = '0'
+  document.body.style.width = '100%'
+}
+
+const unlockBodyScroll = () => {
+  if (typeof document === 'undefined' || typeof window === 'undefined')
+    return
+
+  const offsetTop = Number.parseInt(document.body.style.top || '0', 10)
+
+  document.documentElement.style.overflow = ''
+  document.body.style.overflow = ''
+  document.body.style.position = ''
+  document.body.style.top = ''
+  document.body.style.left = ''
+  document.body.style.right = ''
+  document.body.style.width = ''
+  window.scrollTo({ top: Math.abs(offsetTop), left: 0, behavior: 'auto' })
+}
+
 watch(
   () => props.show,
   (visible) => {
-    if (typeof document === 'undefined')
-      return
-
-    document.body.style.overflow = visible ? 'hidden' : ''
+    if (visible)
+      lockBodyScroll()
+    else
+      unlockBodyScroll()
   },
   { immediate: true },
 )
@@ -225,8 +257,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  if (typeof document !== 'undefined')
-    document.body.style.overflow = ''
+  unlockBodyScroll()
 
   if (typeof window !== 'undefined')
     window.removeEventListener('keydown', handleKeydown)
@@ -242,6 +273,32 @@ onBeforeUnmount(() => {
 .artist-popup-enter-from,
 .artist-popup-leave-to {
   opacity: 0;
+}
+
+.artist-popup-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
+@media (max-height: 760px) {
+  .artist-popup-hero {
+    height: 7.5rem;
+  }
+
+  .artist-popup-avatar {
+    top: 7.5rem;
+  }
+
+  .artist-popup-avatar img {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .artist-popup-scroll {
+    padding-top: 4.75rem;
+    padding-bottom: 1.25rem;
+  }
 }
 
 .artist-link-icon :deep(svg) {

@@ -18,15 +18,79 @@ const { artistsPage } = useContent()
 const stopScroll = ref(false)
 const repeatedItems = computed(() => [...props.items, ...props.items])
 const duration = computed(() => `${Math.max(props.items.length, 1) * 4200}ms`)
+const touchStartX = ref(0)
+const touchStartY = ref(0)
+const touchHolding = ref(false)
+const touchMoveThreshold = 12
+
+const pauseScroll = () => {
+  stopScroll.value = true
+}
+
+const resumeScroll = () => {
+  stopScroll.value = false
+}
+
+const isCoarsePointer = () => {
+  if (typeof window === 'undefined')
+    return false
+
+  return window.matchMedia('(hover: none), (pointer: coarse)').matches
+}
+
+const handleTouchStart = (event: TouchEvent) => {
+  if (!isCoarsePointer())
+    return
+
+  const touch = event.touches[0]
+
+  if (!touch)
+    return
+
+  touchStartX.value = touch.clientX
+  touchStartY.value = touch.clientY
+  touchHolding.value = true
+  pauseScroll()
+}
+
+const handleTouchMove = (event: TouchEvent) => {
+  if (!touchHolding.value)
+    return
+
+  const touch = event.touches[0]
+
+  if (!touch)
+    return
+
+  const deltaX = Math.abs(touch.clientX - touchStartX.value)
+  const deltaY = Math.abs(touch.clientY - touchStartY.value)
+
+  if (deltaX > touchMoveThreshold || deltaY > touchMoveThreshold) {
+    touchHolding.value = false
+    resumeScroll()
+  }
+}
+
+const handleTouchEnd = () => {
+  touchHolding.value = false
+  resumeScroll()
+}
 </script>
 
 <template>
   <div
     class="overflow-hidden w-full relative max-w-6xl mx-auto"
-    @mouseenter="stopScroll = true"
-    @mouseleave="stopScroll = false"
+    @mouseenter="pauseScroll"
+    @mouseleave="resumeScroll"
+    @mouseover="pauseScroll"
+    @focusin="pauseScroll"
+    @focusout="resumeScroll"
+    @touchstart.passive="handleTouchStart"
+    @touchmove.passive="handleTouchMove"
+    @touchend="handleTouchEnd"
+    @touchcancel="handleTouchEnd"
   >
-    <div class="theme-fade-left-soft absolute left-0 top-0 h-full w-20 z-10 pointer-events-none" />
+    <div class="theme-fade-left-soft absolute left-0 top-0 h-full w-8 sm:w-10 md:w-12 lg:w-14 xl:w-20 z-10 pointer-events-none" />
     <div
       class="marquee-inner flex w-fit"
       :style="{ animationPlayState: stopScroll ? 'paused' : 'running', animationDuration: duration }"
@@ -50,7 +114,7 @@ const duration = computed(() => `${Math.max(props.items.length, 1) * 4200}ms`)
         </button>
       </div>
     </div>
-    <div class="theme-fade-right-soft absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none" />
+    <div class="theme-fade-right-soft absolute right-0 top-0 h-full w-8 sm:w-10 md:w-12 lg:w-14 xl:w-40 z-10 pointer-events-none" />
   </div>
 </template>
 
