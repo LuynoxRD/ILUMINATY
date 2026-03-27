@@ -181,7 +181,7 @@ input:disabled, textarea:disabled, select:disabled {
 }
 
 .theme-dropdown {
-  @apply relative;
+  @apply relative inline-flex;
 }
 
 .theme-trigger {
@@ -196,13 +196,16 @@ input:disabled, textarea:disabled, select:disabled {
 }
 
 .theme-menu {
-  @apply absolute right-0 top-full z-50 mt-2 min-w-[11rem] rounded-2xl border p-2 shadow-lg;
+  @apply absolute left-1/2 top-full z-50 mt-2 min-w-[9.5rem] rounded-2xl border p-1.5 shadow-lg;
   background-color: var(--bg-surface);
   border-color: var(--border-default);
+  max-width: min(calc(100vw - 1.5rem), 12rem);
+  transform: translateX(calc(-50% + var(--theme-menu-shift, 0px)));
+  width: max-content;
 }
 
 .theme-menu-item {
-  @apply flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors duration-200;
+  @apply flex w-full items-center gap-3 whitespace-nowrap rounded-xl px-2.5 py-2 text-sm transition-colors duration-200;
   color: var(--text-secondary);
 }
 
@@ -340,6 +343,7 @@ footer {
 
 .social-icon-brand {
   @apply inline-flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-200;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.05);
 }
 
 .social-icon-large {
@@ -438,6 +442,10 @@ html.dark .social-icon-neutral {
   background-color: #ffffff;
   border: 1px solid #111827;
   color: #111827;
+}
+
+html.dark .social-icon-brand {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
 html.dark input:not([type='checkbox']):not([type='radio']),
