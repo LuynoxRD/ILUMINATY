@@ -631,6 +631,8 @@ This repository includes a baseline security maintenance setup for a public fron
 
 - `SECURITY.md` documents the reporting and maintenance posture
 - `.github/dependabot.yml` enables scheduled dependency update pull requests
+- `.github/workflows/gitleaks.yml` runs secret scanning on pull requests, pushes to `main` and a weekly schedule
+- `gitleaks.toml` extends the default Gitleaks ruleset used locally and in CI
 - GitHub Dependabot alerts and security updates can be enabled in repository settings
 - the current lint stack uses modern ESLint flat config and the build toolchain has been updated to patched dependency ranges
 
@@ -641,6 +643,8 @@ Recommended recurring checks:
 - `npm run lint`
 - `npx vue-tsc --noEmit`
 - `npm run build`
+- `gitleaks dir .`
+- `gitleaks git .`
 
 ## Publishing Checklist for Your Fork
 
@@ -656,6 +660,7 @@ Recommended recurring checks:
 - run `npm run lint`
 - run `npx vue-tsc --noEmit`
 - run `npm run build`
+- run `gitleaks dir .` and `gitleaks git .` if you have Gitleaks installed locally
 - review Dependabot and code scanning alerts before each release
 - add automated tests if your delivery process requires regression coverage
 

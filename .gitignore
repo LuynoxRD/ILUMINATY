@@ -4,3 +4,4 @@ agentes/
 dist/
 AGENTS.md
 vite-dev.log
+.gitleaks-*.json
