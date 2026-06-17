@@ -12,11 +12,11 @@ import LegalLayout from '@/components/LegalLayout.vue'
 const { privacyPage } = useContent()
 
 useHead({
-  title: `Politica de Privacidad | ${siteConfig.name}`,
+  title: `Política de Privacidad | ${siteConfig.name}`,
   link: [{ rel: 'canonical', href: resolveSiteUrl('privacidad') }],
   meta: [
     { name: 'description', content: privacyPage.heroDescription },
-    { property: 'og:title', content: `Politica de Privacidad | ${siteConfig.name}` },
+    { property: 'og:title', content: `Política de Privacidad | ${siteConfig.name}` },
     { property: 'og:description', content: privacyPage.heroDescription },
     { property: 'og:url', content: resolveSiteUrl('privacidad') },
     { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },

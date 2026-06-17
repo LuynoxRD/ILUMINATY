@@ -95,7 +95,7 @@ const subtitleElement = ref<HTMLElement>()
 const buttonsElement = ref<HTMLElement>()
 const statsElement = ref<HTMLElement>()
 
-const statValues = ref([0, 0, 0])
+const statValues = ref(homePage.hero.stats.map(s => s.value))
 const counterTweens: gsap.core.Tween[] = []
 
 const formatStat = (value: number, format = 'plain', suffix = '') => {
