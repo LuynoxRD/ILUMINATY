@@ -9,7 +9,6 @@ const normalizeMode = (value: string | null | undefined): ThemeMode => {
   if (value === 'light' || value === 'dark' || value === 'system')
     return value
 
-  // Migrate the previous persisted value used by the old selector.
   if (value === 'auto')
     return 'system'
 
@@ -30,6 +29,14 @@ const systemMode = computed<'light' | 'dark'>(() => (preferredDark.value ? 'dark
 const appliedMode = computed<'light' | 'dark'>(() => (mode.value === 'system' ? systemMode.value : mode.value))
 
 export function useTheme() {
+  return {
+    mode,
+    appliedMode,
+    systemMode,
+  }
+}
+
+export function useSyncTheme() {
   watchEffect(() => {
     if (typeof document === 'undefined')
       return
@@ -41,10 +48,4 @@ export function useTheme() {
     root.setAttribute('data-theme', appliedMode.value)
     root.setAttribute('data-theme-preference', mode.value)
   })
-
-  return {
-    mode,
-    appliedMode,
-    systemMode,
-  }
 }
