@@ -129,6 +129,9 @@ const handleTouchEnd = () => {
           </div>
         </div>
       </div>
+    </div>
+    <div class="theme-fade-right-soft absolute right-0 top-0 h-full w-8 sm:w-10 md:w-12 lg:w-14 xl:w-40 z-10 pointer-events-none" />
+  </div>
 </template>
 
 <style scoped>
