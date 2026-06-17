@@ -3,6 +3,11 @@
     <Transition name="artist-popup">
       <div
         v-if="show && artist"
+        ref="overlayRef"
+        role="dialog"
+        aria-modal="true"
+        aria-describedby="artist-popup-bio"
+        :aria-label="`Perfil de ${artist.name}`"
         class="fixed inset-0 z-[70] flex items-center justify-center overflow-hidden bg-black/70 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-6 md:px-6 lg:py-8"
         @click.self="emit('close')"
       >
@@ -35,7 +40,7 @@
               <p class="mt-2 text-sm text-gray-500 dark:text-zinc-400">{{ artist.locationLabel }}</p>
             </div>
 
-            <p class="mt-6 text-center text-sm leading-7 text-gray-700 dark:text-zinc-300">
+            <p id="artist-popup-bio" class="mt-6 text-center text-sm leading-7 text-gray-700 dark:text-zinc-300">
               {{ artist.bio }}
             </p>
 
@@ -94,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useContent } from '@/composables/useContent'
 import { toSafeHref } from '@/lib/safeUrl'
 import type { ArtistDirectoryEntry } from '@/types/content'
@@ -106,7 +111,37 @@ const props = defineProps<{
 
 const emit = defineEmits<{ close: [] }>()
 const { artistsPage } = useContent()
+const overlayRef = ref<HTMLElement | null>(null)
 let lockedScrollY = 0
+let previousFocusedElement: HTMLElement | null = null
+
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])'
+
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
+}
+
+function trapFocus(event: KeyboardEvent): void {
+  if (event.key !== 'Tab' || !overlayRef.value || !props.show) return
+
+  const focusable = getFocusableElements(overlayRef.value)
+  if (focusable.length === 0) return
+
+  const first = focusable[0]
+  const last = focusable[focusable.length - 1]
+
+  if (event.shiftKey) {
+    if (document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    }
+  } else {
+    if (document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
+}
 
 interface PopupLink {
   label: string
@@ -221,8 +256,11 @@ const linkSections = computed(() =>
 )
 
 const handleKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Escape' && props.show)
+  if (event.key === 'Escape' && props.show) {
     emit('close')
+    return
+  }
+  trapFocus(event)
 }
 
 const lockBodyScroll = () => {
@@ -257,11 +295,28 @@ const unlockBodyScroll = () => {
 
 watch(
   () => props.show,
-  (visible) => {
-    if (visible)
+  async (visible) => {
+    if (visible) {
+      if (typeof document !== 'undefined')
+        previousFocusedElement = document.activeElement as HTMLElement | null
+
       lockBodyScroll()
-    else
+
+      await nextTick()
+
+      if (overlayRef.value) {
+        const focusable = getFocusableElements(overlayRef.value)
+        if (focusable.length > 0)
+          focusable[0].focus()
+      }
+    } else {
       unlockBodyScroll()
+
+      if (previousFocusedElement && typeof previousFocusedElement.focus === 'function')
+        previousFocusedElement.focus()
+
+      previousFocusedElement = null
+    }
   },
   { immediate: true },
 )
