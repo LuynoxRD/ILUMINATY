@@ -58,12 +58,11 @@ Practical guidance:
 - the exact ceiling is not guaranteed and depends on content size, route count, build machine RAM and Node.js heap settings
 - beyond that range, migrate to a server-rendered or hybrid model that can render pages on demand instead of materializing the full site during build
 
-Current delivery caveats:
+Delivery caveats:
 
-- not validated end to end against a live Sanity project in this audit environment
-- no automated behavior test suite is bundled by default
-- form security and delivery guarantees still depend on the real backend or webhook implementation you connect
-- transitive dependency risk still depends on the state of upstream packages in your install graph
+- validate the Sanity integration against a real Sanity project and real content before launch
+- form security and delivery guarantees depend on the real backend or webhook implementation you connect
+- transitive dependency risk depends on the state of upstream packages in your install graph
 
 ## Why Sanity
 
@@ -119,7 +118,13 @@ npx vue-tsc --noEmit
 
 Linting is configured with the modern flat ESLint setup in `eslint.config.js`.
 
-Unit and component tests are not bundled by default in this template. If your delivery workflow requires tests, add Vitest or your preferred test runner on top of the existing typed content and adapter architecture.
+This template ships with Vitest. Run the test suite with:
+
+```bash
+npm run test        # watch mode
+npm run test:run    # single pass
+npm run test:coverage
+```
 
 ### Production build
 
@@ -131,6 +136,39 @@ The build runs two steps:
 
 1. `scripts/generate-sitemap.mjs` generates `public/sitemap.xml` and `public/robots.txt`
 2. `vite-ssg build` renders the static application and blog routes
+
+## Deploy
+
+The output of `npm run build` is a static directory at `dist/`. Any static host works.
+
+### GitHub Pages
+
+The repository ships with a ready-to-use workflow at `.github/workflows/deploy.yml`. Set `VITE_SITE_URL` as a repository secret or variable, push to `main`, and the site deploys automatically. The demo at [luynoxrd.github.io/ILUMINATY](https://luynoxrd.github.io/ILUMINATY/) is deployed this way.
+
+If the site lives under a subpath (for example `https://username.github.io/repo-name/`), set `VITE_SITE_URL` to the full URL including the subpath. The build derives the Vite `base` automatically from that value.
+
+### Netlify
+
+```toml
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+```
+
+Set `VITE_SITE_URL` and any other variables in the Netlify dashboard under Site settings → Environment variables.
+
+### Vercel
+
+```json
+// vercel.json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
+}
+```
+
+Set `VITE_SITE_URL` and other variables in the Vercel dashboard under Project settings → Environment variables.
 
 ## Environment Variables
 
@@ -170,7 +208,7 @@ Behavior:
 - first visit defaults to `system`
 - `system` follows the operating system preference
 - if the user manually selects `light` or `dark`, that preference persists across sessions until the user selects `system` again
-- an anti-flash script in `index.html` applies the right theme before Vue mounts
+- `public/theme-init.js` is loaded by `index.html` before Vue mounts and applies the right theme immediately, preventing any flash of the wrong theme
 
 ## Demo Mode vs CMS Mode
 
