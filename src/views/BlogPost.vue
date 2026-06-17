@@ -55,7 +55,7 @@
       <div class="mx-auto grid max-w-6xl gap-16 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:px-8">
         <article class="min-w-0">
           <div class="overflow-hidden rounded-[2rem] shadow-lg">
-            <img :src="post.image" :alt="post.imageAlt" class="h-[28rem] w-full object-cover">
+            <img :src="post.image" :alt="post.imageAlt" loading="lazy" class="h-[28rem] w-full object-cover">
           </div>
 
           <div class="mt-14 space-y-6">
@@ -81,7 +81,7 @@
               </ul>
 
               <figure v-else-if="block.type === 'image'" class="overflow-hidden rounded-[2rem] border border-gray-200 bg-gray-50">
-                <img :src="block.src" :alt="block.alt" class="h-auto w-full object-cover">
+                <img :src="block.src" :alt="block.alt" loading="lazy" class="h-auto w-full object-cover">
                 <figcaption v-if="block.caption" class="px-6 py-4 text-sm text-gray-500">{{ block.caption }}</figcaption>
               </figure>
 
@@ -176,7 +176,7 @@
           >
             <article class="theme-surface-card flex h-full flex-col overflow-hidden rounded-2xl border shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
               <div class="relative h-56 overflow-hidden bg-gray-200">
-                <img :src="relatedPost.image" :alt="relatedPost.imageAlt" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
+                <img :src="relatedPost.image" :alt="relatedPost.imageAlt" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-transparent to-transparent"></div>
               </div>
               <div class="flex flex-1 flex-col p-6">

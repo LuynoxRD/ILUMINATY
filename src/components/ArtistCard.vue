@@ -8,6 +8,7 @@
       <img 
         :src="image" 
         :alt="name"
+        loading="lazy"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent"></div>

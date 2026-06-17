@@ -94,7 +94,7 @@ const handleTouchEnd = () => {
       <div class="marquee-inner flex w-max transform-gpu pt-10 pb-5" :style="{ animationDuration: marqueeDuration, animationPlayState: stopScroll ? 'paused' : 'running' }">
         <div v-for="(card, index) in rowOne" :key="`${card.handle}-${card.date}-${index}`" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
           <div class="flex gap-2">
-            <img class="size-11 rounded-full object-cover" :src="card.image" :alt="card.name">
+            <img class="size-11 rounded-full object-cover" :src="card.image" :alt="card.name" loading="lazy">
             <div class="flex flex-col">
               <div class="flex items-center gap-1">
                 <p class="font-medium text-gray-900">{{ card.name }}</p>
@@ -117,7 +117,7 @@ const handleTouchEnd = () => {
         </div>
         <div v-for="(card, index) in rowOne" :key="`${card.handle}-${card.date}-clone-${index}`" aria-hidden="true" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
           <div class="flex gap-2">
-            <img class="size-11 rounded-full object-cover" :src="card.image" alt="">
+            <img class="size-11 rounded-full object-cover" :src="card.image" alt="" loading="lazy">
             <div class="flex flex-col">
               <div class="flex items-center gap-1">
                 <p class="font-medium text-gray-900">{{ card.name }}</p>
@@ -156,7 +156,7 @@ const handleTouchEnd = () => {
       <div class="marquee-inner marquee-reverse flex w-max transform-gpu pt-5 pb-10" :style="{ animationDuration: marqueeDuration, animationPlayState: stopScroll ? 'paused' : 'running' }">
         <div v-for="(card, index) in rowTwo" :key="`${card.handle}-${card.date}-reverse-${index}`" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
           <div class="flex gap-2">
-            <img class="size-11 rounded-full object-cover" :src="card.image" :alt="card.name">
+            <img class="size-11 rounded-full object-cover" :src="card.image" :alt="card.name" loading="lazy">
             <div class="flex flex-col">
               <div class="flex items-center gap-1">
                 <p class="font-medium text-gray-900">{{ card.name }}</p>
@@ -179,7 +179,7 @@ const handleTouchEnd = () => {
         </div>
         <div v-for="(card, index) in rowTwo" :key="`${card.handle}-${card.date}-reverse-clone-${index}`" aria-hidden="true" class="theme-surface-card p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0 border">
           <div class="flex gap-2">
-            <img class="size-11 rounded-full object-cover" :src="card.image" alt="">
+            <img class="size-11 rounded-full object-cover" :src="card.image" alt="" loading="lazy">
             <div class="flex flex-col">
               <div class="flex items-center gap-1">
                 <p class="font-medium text-gray-900">{{ card.name }}</p>

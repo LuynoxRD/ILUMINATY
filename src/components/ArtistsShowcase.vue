@@ -102,7 +102,7 @@ const handleTouchEnd = () => {
           class="group relative mx-4 h-[20rem] w-56 overflow-hidden bg-transparent p-0 text-left transition-all duration-300 hover:scale-90"
           @click="emit('view', artist.id)"
         >
-          <img :src="artist.image" :alt="artist.name" class="w-full h-full object-cover" />
+          <img :src="artist.image" :alt="artist.name" loading="lazy" class="w-full h-full object-cover" />
           <div class="flex items-center justify-center px-4 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute bottom-0 backdrop-blur-md left-0 w-full h-full bg-black/30">
             <div class="text-center">
               <p class="text-white text-lg font-semibold">{{ artist.name }}</p>
@@ -119,7 +119,7 @@ const handleTouchEnd = () => {
           :key="`dup-${artist.id}`"
           class="group relative mx-4 h-[20rem] w-56 overflow-hidden bg-transparent p-0 text-left transition-all duration-300 hover:scale-90"
         >
-          <img :src="artist.image" alt="" class="w-full h-full object-cover" />
+          <img :src="artist.image" alt="" loading="lazy" class="w-full h-full object-cover" />
           <div class="flex items-center justify-center px-4 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute bottom-0 backdrop-blur-md left-0 w-full h-full bg-black/30">
             <div class="text-center">
               <p class="text-white text-lg font-semibold">{{ artist.name }}</p>
