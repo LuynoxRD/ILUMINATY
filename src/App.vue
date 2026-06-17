@@ -21,10 +21,15 @@ import { useSyncTheme } from './composables/useTheme'
 
 useSyncTheme()
 
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.sanity.io; connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+
 useHead({
   htmlAttrs: {
     lang: 'es',
   },
+  meta: [
+    { 'http-equiv': 'Content-Security-Policy', content: CSP },
+  ],
 })
 </script>
 
