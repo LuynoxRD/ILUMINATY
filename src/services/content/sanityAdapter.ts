@@ -441,8 +441,16 @@ const fetchSanityResult = async <T>(query: string, params: Record<string, string
 const fetchSanityCollectionInBatches = async <T extends { _id?: string }>(query: string): Promise<T[]> => {
   const collection: T[] = []
   let lastId = ''
+  let iterations = 0
+  const MAX_ITERATIONS = 100
 
   for (;;) {
+    iterations++
+    if (iterations > MAX_ITERATIONS) {
+      console.warn(`[sanityAdapter] fetchSanityCollectionInBatches reached max iterations (${MAX_ITERATIONS}) for query`)
+      break
+    }
+
     const batch = await fetchSanityResult<T[]>(query, {
       lastId,
       batchSize: SANITY_BATCH_SIZE,
