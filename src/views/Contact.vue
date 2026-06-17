@@ -53,9 +53,11 @@
                   type="text"
                   required
                   :class="{ 'border-red-500': errors.name }"
+                  :aria-invalid="errors.name ? true : undefined"
+                  :aria-describedby="errors.name ? 'name-error' : undefined"
                   @input="validateField('name')"
                 >
-                <p v-if="errors.name" class="mt-1 text-xs text-red-400">{{ errors.name }}</p>
+                <p v-if="errors.name" id="name-error" class="mt-1 text-xs text-red-400">{{ errors.name }}</p>
               </div>
 
               <div class="mb-6">
@@ -66,9 +68,11 @@
                   type="email"
                   required
                   :class="{ 'border-red-500': errors.email }"
+                  :aria-invalid="errors.email ? true : undefined"
+                  :aria-describedby="errors.email ? 'email-error' : undefined"
                   @input="validateField('email')"
                 >
-                <p v-if="errors.email" class="mt-1 text-xs text-red-400">{{ errors.email }}</p>
+                <p v-if="errors.email" id="email-error" class="mt-1 text-xs text-red-400">{{ errors.email }}</p>
               </div>
 
               <div class="mb-6">
@@ -78,6 +82,8 @@
                   v-model="form.subject"
                   class="w-full"
                   :class="{ 'border-red-500': errors.subject }"
+                  :aria-invalid="errors.subject ? true : undefined"
+                  :aria-describedby="errors.subject ? 'subject-error' : undefined"
                   @change="validateField('subject')"
                 >
                   <option value="">{{ contactPage.form.subjectPlaceholder }}</option>
@@ -85,7 +91,7 @@
                     {{ option.label }}
                   </option>
                 </select>
-                <p v-if="errors.subject" class="mt-1 text-xs text-red-400">{{ errors.subject }}</p>
+                <p v-if="errors.subject" id="subject-error" class="mt-1 text-xs text-red-400">{{ errors.subject }}</p>
               </div>
 
               <div class="mb-6">
@@ -95,9 +101,11 @@
                   v-model="form.phone"
                   type="tel"
                   :class="{ 'border-red-500': errors.phone }"
+                  :aria-invalid="errors.phone ? true : undefined"
+                  :aria-describedby="errors.phone ? 'phone-error' : undefined"
                   @input="validateField('phone')"
                 >
-                <p v-if="errors.phone" class="mt-1 text-xs text-red-400">{{ errors.phone }}</p>
+                <p v-if="errors.phone" id="phone-error" class="mt-1 text-xs text-red-400">{{ errors.phone }}</p>
               </div>
 
               <div v-if="form.subject === 'artist'" class="mb-6">
@@ -124,9 +132,11 @@
                   rows="6"
                   :placeholder="contactPage.form.messagePlaceholder"
                   :class="{ 'border-red-500': errors.message }"
+                  :aria-invalid="errors.message ? true : undefined"
+                  :aria-describedby="errors.message ? 'message-error' : undefined"
                   @input="validateField('message')"
                 ></textarea>
-                <p v-if="errors.message" class="mt-1 text-xs text-red-400">{{ errors.message }}</p>
+                <p v-if="errors.message" id="message-error" class="mt-1 text-xs text-red-400">{{ errors.message }}</p>
                 <p class="mt-2 text-xs text-gray-500">{{ form.message.length }}/{{ contactPage.form.messageLimit }} caracteres</p>
               </div>
 
