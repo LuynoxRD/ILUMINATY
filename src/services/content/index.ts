@@ -47,7 +47,9 @@ export const loadContent = async (): Promise<ContentAdapter> => {
     return contentAdapter
   })().catch((err) => {
     contentLoadPromise = null
-    throw err
+    throw new Error(
+      `[loadContent] Failed to load content from source "${contentSource}": ${err instanceof Error ? err.message : String(err)}`,
+    )
   })
 
   return contentLoadPromise

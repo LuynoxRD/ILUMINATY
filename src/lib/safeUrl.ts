@@ -5,6 +5,15 @@ const SAFE_ABSOLUTE_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:'])
 // (e.g. tab/LF/CR embedded inside the scheme name).
 const DANGEROUS_SCHEME_RE = /^(?:javascript|data|vbscript):/i
 
+const tryDecodeURI = (value: string): string => {
+  try {
+    return decodeURIComponent(value)
+  }
+  catch {
+    return value
+  }
+}
+
 // Requires a true relative path (single leading /) or a fragment (#).
 // Explicitly excludes protocol-relative URLs (//host) which are an open-redirect vector.
 const hasSafeRelativePrefix = (value: string) =>
@@ -17,7 +26,11 @@ export const toSafeHref = (value: string | null | undefined): string | undefined
   if (!normalized)
     return undefined
 
-  if (DANGEROUS_SCHEME_RE.test(normalized))
+  // Decode URL-encoded characters (e.g. javascript%3A → javascript:)
+  // before the regex check so encoded dangerous schemes are caught early.
+  const decoded = tryDecodeURI(normalized)
+
+  if (DANGEROUS_SCHEME_RE.test(decoded))
     return undefined
 
   if (hasSafeRelativePrefix(normalized))

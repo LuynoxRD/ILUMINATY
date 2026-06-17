@@ -1,4 +1,4 @@
-import { reactive, ref } from 'vue'
+import { onUnmounted, reactive, ref } from 'vue'
 import { normalizeNewsletterBlock, resolveSubmissionMessage } from '@/lib/formFeedback'
 import { subscribeToNewsletter } from '@/services/forms'
 import type { NewsletterBlock } from '@/types/content'
@@ -11,6 +11,8 @@ export const useNewsletterForm = (source: string) => {
   const feedbackMessage = ref('')
 
   let feedbackTimer: ReturnType<typeof setTimeout> | undefined
+
+  onUnmounted(() => clearTimeout(feedbackTimer))
 
   const clearFeedback = (delay = 4000) => {
     clearTimeout(feedbackTimer)
