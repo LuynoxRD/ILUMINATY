@@ -125,7 +125,7 @@ describe('useNewsletterForm', () => {
   describe('protección contra doble submit', () => {
     it('ignora llamadas a submit mientras status es loading', async () => {
       let resolveSubscribe!: () => void
-      subscribeMock.mockImplementation(() => new Promise(r => (resolveSubscribe = r)))
+      subscribeMock.mockImplementation(() => new Promise(r => { resolveSubscribe = r as unknown as () => void }))
 
       const [form, app] = withSetup(() => useNewsletterForm('test'))
       form.email = 'usuario@ejemplo.com'
