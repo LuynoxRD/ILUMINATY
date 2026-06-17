@@ -84,11 +84,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
   title: string
@@ -124,6 +121,7 @@ const isAvailable = computed(() => Boolean(props.ticketUrl) && !isSoldOut.value)
 const isComingSoon = computed(() => !props.ticketUrl && !isSoldOut.value)
 
 const cardElement = ref<HTMLElement>()
+let cardTween: gsap.core.Tween | null = null
 
 const statusLabel = computed(() => {
   if (isSoldOut.value)
@@ -161,7 +159,7 @@ onMounted(() => {
     return
   }
 
-  gsap.fromTo(
+  cardTween = gsap.fromTo(
     cardElement.value,
     { opacity: 0, y: 50 },
     {
@@ -176,5 +174,13 @@ onMounted(() => {
       },
     },
   )
+})
+
+onUnmounted(() => {
+  if (cardTween) {
+    cardTween.scrollTrigger?.kill()
+    cardTween.kill()
+    cardTween = null
+  }
 })
 </script>

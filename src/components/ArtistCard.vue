@@ -48,12 +48,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useContent } from '@/composables/useContent'
-
-gsap.registerPlugin(ScrollTrigger)
 const { artistsPage } = useContent()
 
 interface Props {
@@ -69,6 +66,7 @@ defineProps<Props>()
 defineEmits<{ view: [] }>()
 
 const cardElement = ref<HTMLElement>()
+let cardTween: gsap.core.Tween | null = null
 
 onMounted(() => {
   if (!cardElement.value) return
@@ -78,7 +76,7 @@ onMounted(() => {
     return
   }
 
-  gsap.fromTo(
+  cardTween = gsap.fromTo(
     cardElement.value,
     { opacity: 0, y: 50 },
     {
@@ -93,5 +91,13 @@ onMounted(() => {
       },
     },
   )
+})
+
+onUnmounted(() => {
+  if (cardTween) {
+    cardTween.scrollTrigger?.kill()
+    cardTween.kill()
+    cardTween = null
+  }
 })
 </script>

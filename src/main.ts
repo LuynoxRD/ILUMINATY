@@ -72,13 +72,26 @@ export const createApp = ViteSSG(
       stopInertiaOnNavigate: true,
     })
 
-    lenis.on('scroll', ScrollTrigger.update)
+    const onScrollUpdate = () => ScrollTrigger.update()
+    lenis.on('scroll', onScrollUpdate)
 
-    gsap.ticker.add((time) => {
+    const onTicker = (time: number) => {
       lenis.raf(time * 1000)
-    })
+    }
+    gsap.ticker.add(onTicker)
 
     gsap.ticker.lagSmoothing(0)
+
+    const cleanup = () => {
+      lenis.off('scroll', onScrollUpdate)
+      gsap.ticker.remove(onTicker)
+      lenis.destroy()
+      ScrollTrigger.getAll().forEach(st => st.kill())
+      ScrollTrigger.clearScrollMemory()
+    }
+
+    if (typeof window !== 'undefined')
+      window.addEventListener('beforeunload', cleanup)
 
     router.afterEach(async (to) => {
       await nextTick()
