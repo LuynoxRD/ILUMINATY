@@ -1,0 +1,25 @@
+minimum_pre_commit_version: '4.4.0'
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: check-illegal-windows-names
+
+  - repo: local
+    hooks:
+      - id: commitlint
+        name: commitlint
+        entry: npm exec commitlint -- --edit
+        language: unsupported
+        stages: [commit-msg]
+      - id: eslint
+        name: eslint
+        entry: npm exec eslint --
+        language: unsupported
+        files: \.(vue|[cm]?[jt]sx?)$
