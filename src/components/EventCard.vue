@@ -154,22 +154,27 @@ const formatDate = (dateStr: string) =>
   }).format(new Date(dateStr))
 
 onMounted(() => {
-  if (cardElement.value) {
-    gsap.fromTo(
-      cardElement.value,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        scrollTrigger: {
-          trigger: cardElement.value,
-          start: 'top bottom-=100px',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      },
-    )
+  if (!cardElement.value) return
+
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.set(cardElement.value, { opacity: 1, y: 0 })
+    return
   }
+
+  gsap.fromTo(
+    cardElement.value,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      scrollTrigger: {
+        trigger: cardElement.value,
+        start: 'top bottom-=100px',
+        toggleActions: 'play none none none',
+        once: true,
+      },
+    },
+  )
 })
 </script>
