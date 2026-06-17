@@ -28,7 +28,9 @@
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
           class="rounded-lg p-2 transition-colors hover:bg-white/10 lg:hidden"
-          aria-label="Toggle menu"
+          aria-controls="mobile-menu"
+          :aria-expanded="mobileMenuOpen"
+          :aria-label="mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
@@ -37,7 +39,13 @@
       </div>
 
       <transition name="slide">
-        <div v-show="mobileMenuOpen" class="border-t border-gray-300 bg-white lg:hidden">
+        <div
+          id="mobile-menu"
+          v-show="mobileMenuOpen"
+          :inert="!mobileMenuOpen"
+          :aria-hidden="!mobileMenuOpen"
+          class="border-t border-gray-300 bg-white lg:hidden"
+        >
           <div class="flex flex-col items-start space-y-4 px-4 py-4">
             <ThemeSelector />
             <RouterLink
