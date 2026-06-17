@@ -20,6 +20,9 @@ const hasSafeRelativePrefix = (value: string) =>
   (value.startsWith('/') && !value.startsWith('//'))
   || value.startsWith('#')
 
+export const safeRoute = (value: string | null | undefined): string =>
+  toSafeHref(value) ?? '/'
+
 export const toSafeHref = (value: string | null | undefined): string | undefined => {
   const normalized = value?.trim()
 

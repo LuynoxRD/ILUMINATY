@@ -1,11 +1,15 @@
 import { z } from 'zod'
 import type { ContentSnapshot } from '@/types/content'
+import { toSafeHref } from '@/lib/safeUrl'
 
 const nonEmptyString = z.string().trim().min(1)
 
 const navigationLinkSchema = z.object({
   label: nonEmptyString,
-  href: nonEmptyString,
+  href: nonEmptyString.refine(
+    val => toSafeHref(val) !== undefined,
+    { message: 'href contiene un protocolo peligroso o no es una URL válida' },
+  ),
 })
 
 const newsletterBlockSchema = z.object({

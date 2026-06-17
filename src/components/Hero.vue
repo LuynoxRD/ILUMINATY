@@ -13,10 +13,10 @@
           </p>
 
           <div ref="buttonsElement" class="mb-12 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-            <RouterLink :to="homePage.hero.primaryCta.href" class="btn-primary">
+            <RouterLink :to="safeRoute(homePage.hero.primaryCta.href)" class="btn-primary">
               {{ homePage.hero.primaryCta.label }}
             </RouterLink>
-            <RouterLink :to="homePage.hero.secondaryCta.href" class="btn-secondary">
+            <RouterLink :to="safeRoute(homePage.hero.secondaryCta.href)" class="btn-secondary">
               {{ homePage.hero.secondaryCta.label }}
             </RouterLink>
           </div>
@@ -86,6 +86,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import gsap from 'gsap'
 import { useContent } from '@/composables/useContent'
+import { safeRoute } from '@/lib/safeUrl'
 
 const { homePage, uiAssets } = useContent()
 
