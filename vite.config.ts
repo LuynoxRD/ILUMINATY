@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
               return 'framework'
             }
 
-            if (id.includes('node_modules/gsap') || id.includes('node_modules/lenis')) {
+            if (id.includes('node_modules/gsap')) {
               return 'motion'
             }
           },

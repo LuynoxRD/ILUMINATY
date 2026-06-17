@@ -63,6 +63,7 @@ body {
   background-color: var(--bg-page);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overscroll-behavior: none;
 }
 
 /* Typography */

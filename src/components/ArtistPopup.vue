@@ -112,7 +112,6 @@ const props = defineProps<{
 const emit = defineEmits<{ close: [] }>()
 const { artistsPage } = useContent()
 const overlayRef = ref<HTMLElement | null>(null)
-let lockedScrollY = 0
 let previousFocusedElement: HTMLElement | null = null
 
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])'
@@ -196,20 +195,7 @@ const xSvg = `
   </svg>
 `
 
-let _purify: ((d: string) => string) | null = null
-
-if (typeof window !== 'undefined') {
-  import('dompurify').then(m => {
-    _purify = html => m.default(html)
-  }).catch(() => {
-    /* DOMPurify no disponible — sanitización omitida. Las SVGs son estáticas. */
-  })
-}
-
-const sanitizeHtml = (html: string): string => {
-  if (!_purify) return html
-  return _purify(html)
-}
+const sanitizeHtml = (html: string): string => html
 
 const createLink = (
   label: string,
@@ -268,30 +254,18 @@ const lockBodyScroll = () => {
   if (typeof document === 'undefined' || typeof window === 'undefined')
     return
 
-  lockedScrollY = window.scrollY
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+  if (scrollbarWidth > 0)
+    document.body.style.paddingRight = `${scrollbarWidth}px`
   document.documentElement.style.overflow = 'hidden'
-  document.body.style.overflow = 'hidden'
-  document.body.style.position = 'fixed'
-  document.body.style.top = `-${lockedScrollY}px`
-  document.body.style.left = '0'
-  document.body.style.right = '0'
-  document.body.style.width = '100%'
 }
 
 const unlockBodyScroll = () => {
   if (typeof document === 'undefined' || typeof window === 'undefined')
     return
 
-  const offsetTop = Number.parseInt(document.body.style.top || '0', 10)
-
   document.documentElement.style.overflow = ''
-  document.body.style.overflow = ''
-  document.body.style.position = ''
-  document.body.style.top = ''
-  document.body.style.left = ''
-  document.body.style.right = ''
-  document.body.style.width = ''
-  window.scrollTo({ top: Math.abs(offsetTop), left: 0, behavior: 'auto' })
+  document.body.style.paddingRight = ''
 }
 
 watch(

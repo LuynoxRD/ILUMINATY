@@ -3,7 +3,6 @@ import { ViteSSG } from 'vite-ssg'
 import type { RouteLocationNormalized } from 'vue-router'
 import App from './App.vue'
 import './style.css'
-import 'lenis/dist/lenis.css'
 import { getContent, loadContent } from './services/content'
 
 const staticRoutes = [
@@ -53,39 +52,14 @@ export const createApp = ViteSSG(
     if (!isClient)
       return
 
-    const [{ default: gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([
+    const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
       import('gsap'),
       import('gsap/ScrollTrigger'),
-      import('lenis'),
     ])
 
     gsap.registerPlugin(ScrollTrigger)
 
-    const lenis = new Lenis({
-      lerp: 0.085,
-      smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1,
-      anchors: {
-        offset: 80,
-      },
-      stopInertiaOnNavigate: true,
-    })
-
-    const onScrollUpdate = () => ScrollTrigger.update()
-    lenis.on('scroll', onScrollUpdate)
-
-    const onTicker = (time: number) => {
-      lenis.raf(time * 1000)
-    }
-    gsap.ticker.add(onTicker)
-
-    gsap.ticker.lagSmoothing(0)
-
     const cleanup = () => {
-      lenis.off('scroll', onScrollUpdate)
-      gsap.ticker.remove(onTicker)
-      lenis.destroy()
       ScrollTrigger.getAll().forEach(st => st.kill())
       ScrollTrigger.clearScrollMemory()
     }
@@ -93,22 +67,27 @@ export const createApp = ViteSSG(
     if (typeof window !== 'undefined')
       window.addEventListener('beforeunload', cleanup)
 
-    router.afterEach(async (to) => {
+    router.afterEach(async (to, from) => {
       await nextTick()
 
       if (to.hash) {
-        lenis.scrollTo(to.hash, {
-          offset: 80,
-          duration: 1.1,
-          force: true,
-        })
-        return
+        let el: Element | null = null
+        try {
+          el = document.querySelector(to.hash)
+        }
+        catch {
+          // selector inválido (ej. #123-titulo) — ignorar y dejar que el bloque de abajo maneje
+        }
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 80
+          window.scrollTo({ top, behavior: 'smooth' })
+          return
+        }
       }
 
-      lenis.scrollTo(0, {
-        immediate: true,
-        force: true,
-      })
+      if (to.path !== from.path) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      }
     })
   },
   {
