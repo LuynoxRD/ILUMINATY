@@ -1,0 +1,37 @@
+[config]
+model = "claude-sonnet-4-5"
+
+[pr_reviewer]
+require_score_label = false
+require_tests_review = true
+require_security_review = true
+require_estimate_effort_to_review = true
+extra_instructions = """
+This is a Vue 3 + Vite + TypeScript + vite-ssg (SSG) project. When reviewing:
+- Flag any use of window/document/localStorage without SSR guards (typeof window !== 'undefined' or onMounted)
+- Flag v-html without DOMPurify sanitization
+- Flag defineProps without TypeScript generics (must use defineProps<{}>(), not options object)
+- Flag missing aria-label, aria-hidden, or role attributes on interactive elements
+- Flag hardcoded hex colors instead of Tailwind config tokens
+- Flag images without loading='lazy' and width/height attributes
+- Flag GSAP animations without prefers-reduced-motion guard
+"""
+
+[pr_description]
+publish_labels = true
+use_bullet_points = true
+extra_instructions = """
+Generate the description in Spanish. Use Conventional Commits format for the title.
+"""
+
+[pr_code_suggestions]
+num_code_suggestions = 4
+extra_instructions = """
+Focus on: SSR safety, accessibility (a11y), TypeScript strict mode compliance,
+Vue 3 Composition API best practices, and Tailwind dark mode patterns.
+"""
+
+[github_action_config]
+auto_review = true
+auto_describe = true
+auto_improve = false
