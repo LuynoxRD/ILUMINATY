@@ -29,7 +29,7 @@ export const validateContactFormPayload = (payload: ContactFormPayload): Contact
     throw new Error(`Invalid contact form payload: ${formatIssues(result.error.issues)}`)
   }
 
-  return result.data as ContactFormPayload
+  return result.data
 }
 
 export const validateNewsletterPayload = (payload: NewsletterPayload): NewsletterPayload => {
