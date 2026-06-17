@@ -122,6 +122,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
 }
 
 function trapFocus(event: KeyboardEvent): void {
+  if (typeof document === 'undefined') return
   if (event.key !== 'Tab' || !overlayRef.value || !props.show) return
 
   const focusable = getFocusableElements(overlayRef.value)
