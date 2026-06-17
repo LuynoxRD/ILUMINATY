@@ -1,4 +1,4 @@
-minimum_pre_commit_version: '4.4.0'
+minimum_pre_commit_version: '4.0.0'
 fail_fast: false
 
 repos:
@@ -15,11 +15,11 @@ repos:
     hooks:
       - id: commitlint
         name: commitlint
-        entry: npm exec commitlint -- --edit
-        language: unsupported
+        entry: commitlint --edit
+        language: node
         stages: [commit-msg]
       - id: eslint
         name: eslint
-        entry: npm exec eslint --
-        language: unsupported
+        entry: eslint --
+        language: node
         files: \.(vue|[cm]?[jt]sx?)$
