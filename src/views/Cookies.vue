@@ -12,11 +12,11 @@ import LegalLayout from '@/components/LegalLayout.vue'
 const { cookiesPage } = useContent()
 
 useHead({
-  title: `Politica de Cookies | ${siteConfig.name}`,
+  title: `Política de Cookies | ${siteConfig.name}`,
   link: [{ rel: 'canonical', href: resolveSiteUrl('cookies') }],
   meta: [
     { name: 'description', content: cookiesPage.heroDescription },
-    { property: 'og:title', content: `Politica de Cookies | ${siteConfig.name}` },
+    { property: 'og:title', content: `Política de Cookies | ${siteConfig.name}` },
     { property: 'og:description', content: cookiesPage.heroDescription },
     { property: 'og:url', content: resolveSiteUrl('cookies') },
     { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },

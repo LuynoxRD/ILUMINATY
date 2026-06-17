@@ -18,9 +18,9 @@ const staticRoutes = [
   },
   { path: '/eventos', component: () => import('./views/Events.vue'), meta: { title: 'Eventos' } },
   { path: '/contacto', component: () => import('./views/Contact.vue'), meta: { title: 'Contacto' } },
-  { path: '/terminos', component: () => import('./views/Terms.vue'), meta: { title: 'Terminos y Condiciones' } },
-  { path: '/privacidad', component: () => import('./views/Privacy.vue'), meta: { title: 'Politica de Privacidad' } },
-  { path: '/cookies', component: () => import('./views/Cookies.vue'), meta: { title: 'Politica de Cookies' } },
+  { path: '/terminos', component: () => import('./views/Terms.vue'), meta: { title: 'Términos y Condiciones' } },
+  { path: '/privacidad', component: () => import('./views/Privacy.vue'), meta: { title: 'Política de Privacidad' } },
+  { path: '/cookies', component: () => import('./views/Cookies.vue'), meta: { title: 'Política de Cookies' } },
 ]
 
 export const includedRoutes = async (paths: string[]) => {
