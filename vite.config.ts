@@ -23,6 +23,11 @@ export default defineConfig(({ mode }) => {
     plugins: [vue()],
     build: {
       rollupOptions: {
+        onwarn(warning, warn) {
+          if (warning.code === 'INVALID_ANNOTATION')
+            return
+          warn(warning)
+        },
         output: {
           manualChunks(id) {
             if (id.includes('node_modules/vue') || id.includes('node_modules/@vue') || id.includes('node_modules/vue-router')) {
