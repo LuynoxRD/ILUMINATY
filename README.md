@@ -170,6 +170,17 @@ Set `VITE_SITE_URL` and any other variables in the Netlify dashboard under Site 
 
 Set `VITE_SITE_URL` and other variables in the Vercel dashboard under Project settings → Environment variables.
 
+### Cloudflare Pages
+
+Connect the repository in the Cloudflare dashboard and set:
+
+| Setting | Value |
+| --- | --- |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+
+Set `VITE_SITE_URL` and other variables under Settings → Environment variables.
+
 ## Environment Variables
 
 Copy `.env.example` into `.env` and set the values you need.
