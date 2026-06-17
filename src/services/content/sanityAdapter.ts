@@ -181,6 +181,7 @@ const sanityQuery = `
     hero{highlightedWord, titleRemainder, description, primaryCta{label, href}, secondaryCta{label, href}, stats[]{label, value, format, suffix}},
     labelsSection{title, description},
     highlightCard{title, description},
+    featuredArtistsSection{title, description},
     communitySection{title, description, benefits, cta{label, href}},
     faqSection{title, description, contactLink{label, href}, items[]{question, answer}},
     featuredBlogSection{eyebrow, title, description, ctaLabel},
