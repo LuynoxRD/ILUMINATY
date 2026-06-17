@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useHead } from '@unhead/vue'
 import { RouterLink } from 'vue-router'
 import AppDownloadCta from '@/components/AppDownloadCta.vue'
 import ArtistPopup from '@/components/ArtistPopup.vue'
@@ -9,6 +10,8 @@ import Hero from '@/components/Hero.vue'
 import { useContent } from '@/composables/useContent'
 import { useNewsletterForm } from '@/composables/useNewsletterForm'
 import { getBlogCategoryColor } from '@/lib/blog'
+import { siteConfig } from '@/config/site'
+import { resolveSiteUrl } from '@/lib/seo'
 import { parseLocalDate } from '@/lib/date'
 import { normalizeNewsletterBlock } from '@/lib/formFeedback'
 import type { ArtistDirectoryEntry } from '@/types/content'
@@ -18,6 +21,19 @@ const featuredPosts = computed(() => sortedBlogPosts.slice(0, 3))
 const newsletterForm = useNewsletterForm('home-newsletter')
 const newsletterCopy = computed(() => normalizeNewsletterBlock(homePage.newsletterSection))
 const selectedFeaturedArtist = ref<ArtistDirectoryEntry | null>(null)
+
+useHead({
+  title: `Inicio | ${siteConfig.name}`,
+  link: [{ rel: 'canonical', href: resolveSiteUrl() }],
+  meta: [
+    { name: 'description', content: siteConfig.description },
+    { property: 'og:title', content: `Inicio | ${siteConfig.name}` },
+    { property: 'og:description', content: siteConfig.description },
+    { property: 'og:url', content: resolveSiteUrl() },
+    { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ],
+})
 
 const formatDate = (date: string) =>
   parseLocalDate(date).toLocaleDateString('es-ES', {

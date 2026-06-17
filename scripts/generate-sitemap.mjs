@@ -31,8 +31,13 @@ const buildSanityQueryUrl = (query, params = {}) => {
 
 const readLocalPosts = () => {
   const source = readFileSync(new URL('../src/data/blogPosts.ts', import.meta.url), 'utf8')
-  const slugMatches = [...source.matchAll(/slug:\s*'([^']+)'/g)].map(match => match[1])
-  const dateMatches = [...source.matchAll(/date:\s*'([^']+)'/g)].map(match => match[1])
+  const slugMatches = [...source.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map(match => match[1])
+  const dateMatches = [...source.matchAll(/date:\s*['"]([^'"]+)['"]/g)].map(match => match[1])
+
+  if (!slugMatches.length) {
+    console.warn('[sitemap] No se encontraron posts locales — revisa src/data/blogPosts.ts')
+    return []
+  }
 
   return slugMatches.map((slug, index) => ({
     slug,

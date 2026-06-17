@@ -45,7 +45,10 @@ export const loadContent = async (): Promise<ContentAdapter> => {
     }
     contentAdapter = await resolveRemoteContentAdapter()
     return contentAdapter
-  })()
+  })().catch((err) => {
+    contentLoadPromise = null
+    throw err
+  })
 
   return contentLoadPromise
 }

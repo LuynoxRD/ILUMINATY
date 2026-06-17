@@ -127,14 +127,30 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useHead } from '@unhead/vue'
 import EventCard from '@/components/EventCard.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import { useContent } from '@/composables/useContent'
+import { siteConfig } from '@/config/site'
+import { resolveSiteUrl } from '@/lib/seo'
 import { parseLocalDate } from '@/lib/date'
 import { useNewsletterForm } from '@/composables/useNewsletterForm'
 import { normalizeNewsletterBlock } from '@/lib/formFeedback'
 
 const { eventEntries, eventsPage } = useContent()
+
+useHead({
+  title: `Eventos | ${siteConfig.name}`,
+  link: [{ rel: 'canonical', href: resolveSiteUrl('eventos') }],
+  meta: [
+    { name: 'description', content: eventsPage.heroDescription },
+    { property: 'og:title', content: `Eventos | ${siteConfig.name}` },
+    { property: 'og:description', content: eventsPage.heroDescription },
+    { property: 'og:url', content: resolveSiteUrl('eventos') },
+    { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ],
+})
 const newsletterForm = useNewsletterForm('events-alerts')
 const notificationCopy = computed(() => normalizeNewsletterBlock(eventsPage.notificationSection))
 

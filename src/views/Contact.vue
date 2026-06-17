@@ -187,14 +187,31 @@
 </template>
 
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
 import { computed, ref } from 'vue'
+import { useHead } from '@unhead/vue'
 import { RouterLink } from 'vue-router'
 import SocialLinks from '@/components/SocialLinks.vue'
 import { useContent } from '@/composables/useContent'
 import { readPlainText, resolveSubmissionMessage } from '@/lib/formFeedback'
+import { siteConfig } from '@/config/site'
+import { resolveSiteUrl } from '@/lib/seo'
 import { toSafeHref } from '@/lib/safeUrl'
 import { submitContactForm } from '@/services/forms'
+
+const { contactPage } = useContent()
+
+useHead({
+  title: `Contacto | ${siteConfig.name}`,
+  link: [{ rel: 'canonical', href: resolveSiteUrl('contacto') }],
+  meta: [
+    { name: 'description', content: contactPage.heroDescription },
+    { property: 'og:title', content: `Contacto | ${siteConfig.name}` },
+    { property: 'og:description', content: contactPage.heroDescription },
+    { property: 'og:url', content: resolveSiteUrl('contacto') },
+    { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ],
+})
 
 interface ContactFormState {
   name: string
@@ -214,8 +231,6 @@ interface ValidationErrors {
   phone?: string
   message?: string
 }
-
-const { contactPage } = useContent()
 
 const createInitialForm = (): ContactFormState => ({
   name: '',
@@ -294,14 +309,15 @@ const submitForm = async () => {
   feedbackMessage.value = ''
 
   try {
+    const purify = (await import('dompurify')).default
     const result = await submitContactForm({
-      name: DOMPurify.sanitize(form.value.name.trim()),
-      email: DOMPurify.sanitize(form.value.email.trim()),
-      subject: DOMPurify.sanitize(form.value.subject.trim()),
-      phone: DOMPurify.sanitize(form.value.phone.trim()),
-      artistName: DOMPurify.sanitize(form.value.artistName.trim()),
-      genre: DOMPurify.sanitize(form.value.genre.trim()),
-      message: DOMPurify.sanitize(form.value.message.trim()),
+      name: purify.sanitize(form.value.name.trim()),
+      email: purify.sanitize(form.value.email.trim()),
+      subject: purify.sanitize(form.value.subject.trim()),
+      phone: purify.sanitize(form.value.phone.trim()),
+      artistName: purify.sanitize(form.value.artistName.trim()),
+      genre: purify.sanitize(form.value.genre.trim()),
+      message: purify.sanitize(form.value.message.trim()),
       privacy: form.value.privacy,
     })
 
