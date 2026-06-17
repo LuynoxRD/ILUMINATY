@@ -50,7 +50,7 @@
               <RouterLink
                 v-for="link in section.links"
                 :key="link.href"
-                :to="link.href"
+                :to="safeRoute(link.href)"
                 class="inline-flex rounded-full border border-neon-lime/30 bg-neon-lime/10 px-4 py-2 text-sm font-semibold text-neon-lime transition-colors hover:border-neon-lime hover:bg-neon-lime/15"
               >
                 {{ link.label }}
@@ -81,7 +81,7 @@
         <p class="mb-6 text-sm text-gray-400 md:mb-8 md:text-base">
           {{ page.ctaDescription }}
         </p>
-        <RouterLink :to="page.ctaLink.href" class="btn-primary inline-block text-sm md:text-base">
+        <RouterLink :to="safeRoute(page.ctaLink.href)" class="btn-primary inline-block text-sm md:text-base">
           {{ page.ctaLink.label }}
         </RouterLink>
       </div>
@@ -92,6 +92,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import type { LegalPageContent } from '@/types/content'
+import { safeRoute } from '@/lib/safeUrl'
 
 defineProps<{
   page: LegalPageContent

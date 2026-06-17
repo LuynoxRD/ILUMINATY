@@ -15,7 +15,7 @@
             <h4 class="mb-4 text-lg font-semibold">{{ group.title }}</h4>
             <ul class="space-y-3 text-base text-gray-600">
               <li v-for="link in group.links" :key="link.href">
-                <RouterLink :to="link.href" class="transition-colors hover:text-neon-lime">{{ link.label }}</RouterLink>
+                <RouterLink :to="safeRoute(link.href)" class="transition-colors hover:text-neon-lime">{{ link.label }}</RouterLink>
               </li>
             </ul>
           </div>
@@ -31,7 +31,7 @@
             <h4 class="mb-4 text-lg font-semibold">{{ group.title }}</h4>
             <ul class="space-y-3 text-base text-gray-600">
               <li v-for="link in group.links" :key="link.href">
-                <RouterLink :to="link.href" class="transition-colors hover:text-neon-lime">{{ link.label }}</RouterLink>
+                <RouterLink :to="safeRoute(link.href)" class="transition-colors hover:text-neon-lime">{{ link.label }}</RouterLink>
               </li>
             </ul>
           </div>
@@ -84,7 +84,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useContent } from '@/composables/useContent'
-import { toSafeHref } from '@/lib/safeUrl'
+import { safeRoute, toSafeHref } from '@/lib/safeUrl'
 import LogoMark from './LogoMark.vue'
 import SocialLinks from './SocialLinks.vue'
 

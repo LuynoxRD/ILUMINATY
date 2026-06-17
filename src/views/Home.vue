@@ -9,6 +9,7 @@ import FollowersMarquee from '@/components/FollowersMarquee.vue'
 import Hero from '@/components/Hero.vue'
 import { useContent } from '@/composables/useContent'
 import { useNewsletterForm } from '@/composables/useNewsletterForm'
+import { safeRoute } from '@/lib/safeUrl'
 import { getBlogCategoryColor } from '@/lib/blog'
 import { siteConfig } from '@/config/site'
 import { resolveSiteUrl } from '@/lib/seo'
@@ -136,7 +137,7 @@ const closeFeaturedArtist = () => {
                 <span class="text-gray-700">{{ benefit }}</span>
               </li>
             </ul>
-            <RouterLink :to="homePage.communitySection.cta.href" class="theme-highlight-button mt-8 inline-block self-center rounded-lg px-8 py-3 font-semibold transition-colors lg:self-start">
+            <RouterLink :to="safeRoute(homePage.communitySection.cta.href)" class="theme-highlight-button mt-8 inline-block self-center rounded-lg px-8 py-3 font-semibold transition-colors lg:self-start">
               {{ homePage.communitySection.cta.label }}
             </RouterLink>
           </div>
@@ -156,7 +157,7 @@ const closeFeaturedArtist = () => {
           <h2 id="faqs-title" class="text-3xl font-medium tracking-tight text-gray-900">{{ homePage.faqSection.title }}</h2>
           <p class="mt-2 text-lg text-gray-600">
             {{ homePage.faqSection.description }}
-            <RouterLink :to="homePage.faqSection.contactLink.href" class="theme-link-accent hover:underline">{{ homePage.faqSection.contactLink.label }}</RouterLink>.
+            <RouterLink :to="safeRoute(homePage.faqSection.contactLink.href)" class="theme-link-accent hover:underline">{{ homePage.faqSection.contactLink.label }}</RouterLink>.
           </p>
         </div>
         <ul role="list" class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3">
