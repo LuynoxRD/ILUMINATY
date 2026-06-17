@@ -1,7 +1,7 @@
 <template>
   <div ref="cardElement" class="group glass card-hover flex flex-col overflow-hidden rounded-xl md:flex-row">
     <div class="relative h-48 overflow-hidden md:h-auto md:w-1/3">
-      <img :src="image" :alt="title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <img :src="image" :alt="title" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
       <div class="absolute inset-0 bg-gradient-to-r from-dark-bg to-dark-bg/30 md:from-transparent"></div>
     </div>
 

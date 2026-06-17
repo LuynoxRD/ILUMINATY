@@ -68,6 +68,7 @@
             <img
               :src="uiAssets.appPreview"
               alt="Mobile phone mockup"
+              loading="lazy"
               class="relative z-10 h-full w-full object-contain transition-transform duration-500 hover:scale-105"
             >
           </div>

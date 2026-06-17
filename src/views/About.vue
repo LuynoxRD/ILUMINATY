@@ -32,7 +32,7 @@
           </ul>
         </div>
         <div class="glass overflow-hidden rounded-xl">
-          <img :src="aboutContent.missionImage" alt="Comunidad ILUMINATY reunida en Nueva York" class="h-full w-full object-cover">
+          <img :src="aboutContent.missionImage" alt="Comunidad ILUMINATY reunida en Nueva York" loading="lazy" class="h-full w-full object-cover">
         </div>
       </div>
     </SectionTitle>
@@ -62,7 +62,7 @@
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div v-for="member in aboutContent.team" :key="member.id" class="glass card-hover overflow-hidden rounded-xl text-center">
           <div class="h-48 overflow-hidden bg-gradient-dark">
-            <img :src="member.image" :alt="member.name" class="h-full w-full object-cover">
+            <img :src="member.image" :alt="member.name" loading="lazy" class="h-full w-full object-cover">
           </div>
           <div class="p-6">
             <h3 class="mb-1 text-xl font-bold text-gray-900">{{ member.name }}</h3>

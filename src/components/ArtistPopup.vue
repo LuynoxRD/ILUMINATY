@@ -24,12 +24,12 @@
           </button>
 
           <div class="artist-popup-hero relative h-36 shrink-0 overflow-hidden bg-gray-200">
-            <img :src="artist.image" :alt="artist.name" class="h-full w-full object-cover">
+            <img :src="artist.image" :alt="artist.name" loading="lazy" class="h-full w-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></div>
           </div>
 
           <div class="artist-popup-avatar pointer-events-none absolute left-1/2 top-36 z-[1] -translate-x-1/2 -translate-y-1/2">
-            <img :src="artist.image" :alt="artist.name" class="h-28 w-28 rounded-full border-4 border-white object-cover shadow-xl dark:border-zinc-950">
+            <img :src="artist.image" :alt="artist.name" loading="lazy" class="h-28 w-28 rounded-full border-4 border-white object-cover shadow-xl dark:border-zinc-950">
           </div>
 
           <div class="artist-popup-scroll relative flex-1 min-h-0 overflow-y-auto px-6 pb-6 pt-16">

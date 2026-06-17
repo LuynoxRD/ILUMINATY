@@ -17,7 +17,7 @@
           <RouterLink v-for="post in posts" :key="post.slug" :to="`/blog/${post.slug}`" class="block">
             <article class="theme-surface-card flex h-full flex-col overflow-hidden rounded-2xl border shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
               <div class="relative h-52 overflow-hidden bg-gray-200">
-                <img :src="post.image" :alt="post.imageAlt" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                <img :src="post.image" :alt="post.imageAlt" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent"></div>
               </div>
 
