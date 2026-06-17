@@ -8,6 +8,7 @@
       <img 
         :src="image" 
         :alt="name"
+        loading="lazy"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent"></div>
@@ -68,23 +69,28 @@ const cardElement = ref<HTMLElement>()
 let cardTween: gsap.core.Tween | null = null
 
 onMounted(() => {
-  if (cardElement.value) {
-    cardTween = gsap.fromTo(
-      cardElement.value,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        scrollTrigger: {
-          trigger: cardElement.value,
-          start: 'top bottom-=100px',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      }
-    )
+  if (!cardElement.value) return
+
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.set(cardElement.value, { opacity: 1, y: 0 })
+    return
   }
+
+  cardTween = gsap.fromTo(
+    cardElement.value,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      scrollTrigger: {
+        trigger: cardElement.value,
+        start: 'top bottom-=100px',
+        toggleActions: 'play none none none',
+        once: true,
+      },
+    },
+  )
 })
 
 onUnmounted(() => {

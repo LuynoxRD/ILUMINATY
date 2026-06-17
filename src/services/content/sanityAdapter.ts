@@ -441,8 +441,16 @@ const fetchSanityResult = async <T>(query: string, params: Record<string, string
 const fetchSanityCollectionInBatches = async <T extends { _id?: string }>(query: string): Promise<T[]> => {
   const collection: T[] = []
   let lastId = ''
+  let iterations = 0
+  const MAX_ITERATIONS = 100
 
   for (;;) {
+    iterations++
+    if (iterations > MAX_ITERATIONS) {
+      console.warn(`[sanityAdapter] fetchSanityCollectionInBatches reached max iterations (${MAX_ITERATIONS}) for query`)
+      break
+    }
+
     const batch = await fetchSanityResult<T[]>(query, {
       lastId,
       batchSize: SANITY_BATCH_SIZE,
@@ -464,8 +472,8 @@ const fetchSanityCollectionInBatches = async <T extends { _id?: string }>(query:
 const mapUiAssets = (payload: SanityPayload): UiAssets => ({
   appPreview: resolveUrl(payload.homePage?.appPreview, localContentAdapter.uiAssets.appPreview),
   labelLogos:
-    payload.brandLogos?.map(logo => ({
-      id: logo.id || logo._id || logo.name || crypto.randomUUID(),
+    payload.brandLogos?.map((logo, index) => ({
+      id: logo.id || logo._id || logo.name || `fallback-${index}`,
       name: logo.name || 'Brand logo',
       src: resolveUrl(logo.image),
     })).filter(logo => Boolean(logo.src))
@@ -897,8 +905,8 @@ const mapLegalPage = (page: SanityLegalPage | undefined, fallback: LegalPageCont
 })
 
 const mapArtists = (artists: SanityArtist[] | undefined): ArtistDirectoryEntry[] =>
-  artists?.map(artist => ({
-    id: artist.id || artist._id || artist.name || crypto.randomUUID(),
+  artists?.map((artist, index) => ({
+    id: artist.id || artist._id || artist.name || `fallback-${index}`,
     name: artist.name || 'Untitled artist',
     genre: artist.genre || 'Unknown',
     bio: artist.bio || '',
@@ -926,8 +934,8 @@ const mapFeaturedArtists = (artists: SanityArtist[] | undefined): FeaturedArtist
 
   return featured
     .slice(0, 10)
-    .map(artist => ({
-      id: artist.id || artist._id || artist.name || crypto.randomUUID(),
+    .map((artist, index) => ({
+      id: artist.id || artist._id || artist.name || `fallback-${index}`,
       name: artist.name || 'Untitled artist',
       genre: artist.genre || 'Unknown',
       image: resolveUrl(artist.homeImage || artist.image),
@@ -947,8 +955,8 @@ const mapTestimonials = (testimonials: SanityTestimonial[] | undefined): Followe
 const mapAboutContent = (payload: SanityPayload): AboutContent => ({
   missionImage: resolveUrl(payload.aboutPage?.missionImage, localContentAdapter.aboutContent.missionImage),
   team:
-    payload.teamMembers?.map(member => ({
-      id: member.id || member._id || member.name || crypto.randomUUID(),
+    payload.teamMembers?.map((member, index) => ({
+      id: member.id || member._id || member.name || `fallback-${index}`,
       name: member.name || 'Team member',
       role: member.role || '',
       bio: member.bio || '',
@@ -962,8 +970,8 @@ const mapAboutContent = (payload: SanityPayload): AboutContent => ({
 })
 
 const mapBlogPosts = (posts: SanityPost[] | undefined): BlogPost[] =>
-  posts?.map(post => ({
-    id: post.id || post._id || post.slug || crypto.randomUUID(),
+  posts?.map((post, index) => ({
+    id: post.id || post._id || post.slug || `fallback-${index}`,
     slug: post.slug || '',
     title: post.title || 'Untitled post',
     excerpt: post.excerpt || '',
@@ -981,8 +989,8 @@ const mapBlogPosts = (posts: SanityPost[] | undefined): BlogPost[] =>
   || localContentAdapter.blogPosts
 
 const mapEvents = (events: SanityEvent[] | undefined): EventEntry[] =>
-  events?.map(event => ({
-    id: event.id || event._id || event.title || crypto.randomUUID(),
+  events?.map((event, index) => ({
+    id: event.id || event._id || event.title || `fallback-${index}`,
     title: event.title || 'Untitled event',
     description: event.description || '',
     date: event.date || '',

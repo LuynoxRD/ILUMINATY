@@ -1,7 +1,7 @@
 <template>
   <div ref="cardElement" class="group glass card-hover flex flex-col overflow-hidden rounded-xl md:flex-row">
     <div class="relative h-48 overflow-hidden md:h-auto md:w-1/3">
-      <img :src="image" :alt="title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <img :src="image" :alt="title" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
       <div class="absolute inset-0 bg-gradient-to-r from-dark-bg to-dark-bg/30 md:from-transparent"></div>
     </div>
 
@@ -152,23 +152,28 @@ const formatDate = (dateStr: string) =>
   }).format(new Date(dateStr))
 
 onMounted(() => {
-  if (cardElement.value) {
-    cardTween = gsap.fromTo(
-      cardElement.value,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        scrollTrigger: {
-          trigger: cardElement.value,
-          start: 'top bottom-=100px',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      },
-    )
+  if (!cardElement.value) return
+
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.set(cardElement.value, { opacity: 1, y: 0 })
+    return
   }
+
+  cardTween = gsap.fromTo(
+    cardElement.value,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      scrollTrigger: {
+        trigger: cardElement.value,
+        start: 'top bottom-=100px',
+        toggleActions: 'play none none none',
+        once: true,
+      },
+    },
+  )
 })
 
 onUnmounted(() => {

@@ -72,7 +72,7 @@ const closeFeaturedArtist = () => {
 
           <div class="no-scrollbar flex items-center justify-start gap-6 overflow-x-auto pb-4 md:justify-center md:gap-10 md:pb-0 lg:gap-16" style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
             <div v-for="label in uiAssets.labelLogos" :key="label.id" class="theme-logo-wrapper flex-shrink-0">
-              <img :src="label.src" :alt="label.name" class="theme-logo h-10 max-w-[120px] w-auto object-contain sm:h-12 sm:max-w-[150px] md:h-16 lg:h-20" />
+              <img :src="label.src" :alt="label.name" loading="lazy" class="theme-logo h-10 max-w-[120px] w-auto object-contain sm:h-12 sm:max-w-[150px] md:h-16 lg:h-20" />
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@ const closeFeaturedArtist = () => {
           <RouterLink v-for="post in featuredPosts" :key="post.id" :to="`/blog/${post.slug}`" class="group block">
             <article class="theme-surface-card flex h-full flex-col overflow-hidden rounded-2xl border text-gray-900 shadow-sm transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
               <div class="relative h-56 overflow-hidden bg-gray-200">
-                <img :src="post.image" :alt="post.title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <img :src="post.image" :alt="post.title" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent"></div>
               </div>
               <div class="flex flex-1 flex-col p-6">

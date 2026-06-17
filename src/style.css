@@ -376,6 +376,12 @@ footer {
   color: #111111;
 }
 
+/*
+ * Dark mode !important overrides for Tailwind utility classes.
+ * Required because Tailwind utility classes have higher specificity
+ * than CSS custom properties. The !important flag ensures dark mode
+ * colors apply correctly when html.dark is present.
+ */
 html.dark .bg-white {
   background-color: var(--bg-surface) !important;
 }
@@ -469,9 +475,3 @@ html.dark .theme-filter-control {
 html.dark ::-webkit-scrollbar-track {
   background: var(--bg-soft);
 }
-
-
-
-
-
-

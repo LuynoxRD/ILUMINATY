@@ -123,6 +123,15 @@ const animateCounters = () => {
 }
 
 onMounted(() => {
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.set(titleElement.value, { opacity: 1, y: 0 })
+    gsap.set(subtitleElement.value, { opacity: 1, y: 0 })
+    gsap.set(buttonsElement.value, { opacity: 1, y: 0 })
+    gsap.set(statsElement.value, { opacity: 1, y: 0 })
+    animateCounters()
+    return
+  }
+
   const tl = gsap.timeline()
 
   if (titleElement.value) {

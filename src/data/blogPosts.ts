@@ -1,40 +1,13 @@
 import { imageAssets } from '@/data/assets'
 import { sectionsToBlocks } from '@/lib/blogContent'
 import { parseLocalDate } from '@/lib/date'
+import type { BlogCategory, BlogPost, BlogSection } from '@/types/content'
 
-export type BlogCategory =
-  | 'Noticias'
-  | 'Análisis'
-  | 'Tutoriales'
-  | 'Entrevistas'
-  | 'Tendencias'
-  | 'Colaboraciones'
-
-export interface BlogSection {
-  title: string
-  paragraphs: string[]
-  bullets?: string[]
-}
-
-export interface BlogPost {
-  id: string
-  slug: string
-  title: string
-  excerpt: string
-  metaDescription: string
-  category: BlogCategory
-  date: string
-  author: string
-  authorBio: string
-  image: string
-  imageAlt: string
-  readTime: number
-  tags?: string[]
-  blocks: import('@/types/content').BlogContentBlock[]
+interface RawBlogPost extends Omit<BlogPost, 'blocks'> {
   sections?: BlogSection[]
 }
 
-const rawBlogPosts: Omit<BlogPost, 'blocks'>[] = [
+const rawBlogPosts: RawBlogPost[] = [
   {
     id: '1',
     slug: 'king-cipher-anuncia-concreto-puro',
