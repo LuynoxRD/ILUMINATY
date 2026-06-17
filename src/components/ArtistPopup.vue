@@ -71,7 +71,7 @@
                     <span
                       class="artist-link-icon flex h-11 w-11 items-center justify-center rounded-full border border-white/90 shadow-sm ring-1 ring-black/5 dark:ring-white/10"
                       :style="{ backgroundColor: link.brandColor, color: '#ffffff' }"
-                      v-html="link.iconSvg"
+                      v-html="sanitizeHtml(link.iconSvg)"
                     />
 
                     <span class="text-left">
@@ -159,6 +159,21 @@ const xSvg = `
     <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
   </svg>
 `
+
+let _purify: ((d: string) => string) | null = null
+
+if (typeof window !== 'undefined') {
+  import('dompurify').then(m => {
+    _purify = html => m.default(html)
+  }).catch(() => {
+    /* DOMPurify no disponible — sanitización omitida. Las SVGs son estáticas. */
+  })
+}
+
+const sanitizeHtml = (html: string): string => {
+  if (!_purify) return html
+  return _purify(html)
+}
 
 const createLink = (
   label: string,
