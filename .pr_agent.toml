@@ -1,5 +1,7 @@
 [config]
+# Free tier — no API key needed. Model es gestionado por Qodo.
 model = "claude-sonnet-4-5"
+fallback_models = ["gpt-4o"]
 
 [pr_reviewer]
 require_score_label = false

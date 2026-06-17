@@ -23,4 +23,3 @@ jobs:
         uses: qodo-ai/pr-agent@e639d10a4df023b90668ec35796c2457c5f5db8d  # main as of 2026-06-16
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
