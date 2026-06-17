@@ -29,19 +29,19 @@ const mode = computed<ThemeMode>({
 const systemMode = computed<'light' | 'dark'>(() => (preferredDark.value ? 'dark' : 'light'))
 const appliedMode = computed<'light' | 'dark'>(() => (mode.value === 'system' ? systemMode.value : mode.value))
 
-watchEffect(() => {
-  if (typeof document === 'undefined')
-    return
-
-  const root = document.documentElement
-
-  root.classList.remove('light', 'dark')
-  root.classList.add(appliedMode.value)
-  root.setAttribute('data-theme', appliedMode.value)
-  root.setAttribute('data-theme-preference', mode.value)
-})
-
 export function useTheme() {
+  watchEffect(() => {
+    if (typeof document === 'undefined')
+      return
+
+    const root = document.documentElement
+
+    root.classList.remove('light', 'dark')
+    root.classList.add(appliedMode.value)
+    root.setAttribute('data-theme', appliedMode.value)
+    root.setAttribute('data-theme-preference', mode.value)
+  })
+
   return {
     mode,
     appliedMode,
