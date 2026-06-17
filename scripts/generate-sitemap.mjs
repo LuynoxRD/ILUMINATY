@@ -2,7 +2,13 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { loadEnv } from 'vite'
 
 const env = loadEnv('production', process.cwd(), '')
-const siteUrl = env.VITE_SITE_URL || 'https://example.com'
+const siteUrl = env.VITE_SITE_URL
+if (!siteUrl) {
+  throw new Error(
+    'VITE_SITE_URL no está definida. El sitemap y robots.txt se generarían con un dominio ' +
+    'incorrecto. Agrégala en el archivo .env de producción.',
+  )
+}
 const contentSource = env.VITE_CONTENT_SOURCE || 'local'
 const sanityConfig = {
   projectId: env.VITE_SANITY_PROJECT_ID || '',
