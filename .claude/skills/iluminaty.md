@@ -29,7 +29,6 @@ Usa `mcp__claude_ai_Context7__resolve-library-id` + `mcp__claude_ai_Context7__qu
 | `typescript` | ^5.6.0 | Tipado estático |
 | `@vueuse/core` | ^14.2.1 | Composables utilitarios |
 | `gsap` | ^3.12.0 | Animaciones |
-| `lenis` | ^1.3.20 | Smooth scrolling |
 | `zod` | ^4.3.6 | Validación de schemas en runtime |
 | `@unhead/vue` | ^2.1.13 | Meta tags SEO (SSG-compatible) |
 | `dompurify` | ^3.4.1 | Sanitización de HTML |
@@ -137,7 +136,7 @@ export function useTheme() {
 - **Base URL dinámica:** se calcula desde `VITE_SITE_URL` en el env. Importante para GitHub Pages (el repo está en una subruta).
 - **Code splitting manual:**
   - `framework` chunk → Vue core + Vue Router
-  - `motion` chunk → GSAP + Lenis
+  - `motion` chunk → GSAP
 - **Puerto dev:** 5173 (fijo).
 - Variables de entorno deben empezar con `VITE_` para ser accesibles en el cliente.
 

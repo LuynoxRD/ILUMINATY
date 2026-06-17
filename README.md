@@ -90,7 +90,6 @@ If the final client is not technical, Sanity is the correct path in this reposit
 | Vue Router | Marketing routes plus dynamic blog routes. |
 | Unhead | SEO meta tags and page head management. |
 | GSAP | Motion for hero sections and visual transitions. |
-| Lenis | Smooth scrolling. |
 | Zod | Runtime validation for content snapshots and form payloads. |
 | DOMPurify | Sanitization before form payloads leave the browser. |
 | Sanity | Headless CMS adapter already wired. |
