@@ -1,7 +1,11 @@
 node_modules/
 agentes/
 .env
+.env.local
 dist/
+coverage/
+.vite/
+.DS_Store
 AGENTS.md
 vite-dev.log
 .gitleaks-*.json
