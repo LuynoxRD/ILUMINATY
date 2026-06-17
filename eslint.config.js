@@ -11,6 +11,7 @@ export default [
       'agentes/**',
       '.env',
       'dist/**',
+      'coverage/**',
       'AGENTS.md',
       'vite-dev.log',
     ],
