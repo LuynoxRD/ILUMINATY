@@ -328,10 +328,12 @@ const submitForm = async () => {
     )
     form.value = createInitialForm()
 
-    window.setTimeout(() => {
-      submitStatus.value = 'idle'
-      feedbackMessage.value = ''
-    }, 5000)
+    if (typeof window !== 'undefined') {
+      window.setTimeout(() => {
+        submitStatus.value = 'idle'
+        feedbackMessage.value = ''
+      }, 5000)
+    }
   }
   catch {
     submitStatus.value = 'error'

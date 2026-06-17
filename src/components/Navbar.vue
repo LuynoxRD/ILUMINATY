@@ -76,6 +76,8 @@ const navLinks = [
 ]
 
 const handleScroll = () => {
+  if (typeof window === 'undefined') return
+
   const currentScroll = window.scrollY
 
   if (currentScroll <= 0)
