@@ -269,6 +269,15 @@ useHead(() => {
   if (!post.value) {
     return {
       title: `Blog | ${siteConfig.name}`,
+      link: [{ rel: 'canonical', href: resolveSiteUrl('blog') }],
+      meta: [
+        { name: 'description', content: siteConfig.description },
+        { property: 'og:title', content: `Blog | ${siteConfig.name}` },
+        { property: 'og:description', content: siteConfig.description },
+        { property: 'og:url', content: resolveSiteUrl('blog') },
+        { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+        { name: 'twitter:card', content: 'summary_large_image' },
+      ],
     }
   }
 
@@ -306,7 +315,7 @@ useHead(() => {
       { name: 'description', content: post.value.metaDescription },
       { property: 'og:type', content: 'article' },
       { property: 'og:site_name', content: siteConfig.name },
-      { property: 'og:title', content: post.value.title },
+      { property: 'og:title', content: `${post.value.title} | ${siteConfig.name}` },
       { property: 'og:description', content: post.value.metaDescription },
       { property: 'og:url', content: canonicalUrl },
       { property: 'og:image', content: imageUrl },

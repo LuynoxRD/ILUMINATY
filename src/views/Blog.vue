@@ -92,30 +92,12 @@ useHead({
   title: `Blog | ${siteConfig.name}`,
   link: [{ rel: 'canonical', href: resolveSiteUrl('blog') }],
   meta: [
-    {
-      name: 'description',
-      content: 'Historias, tendencias y analisis del arte urbano de Nueva York publicadas en el blog editorial de ILUMINATY.',
-    },
-    {
-      property: 'og:title',
-      content: `Blog | ${siteConfig.name}`,
-    },
-    {
-      property: 'og:description',
-      content: 'Historias, tendencias y analisis del arte urbano de Nueva York publicadas en el blog editorial de ILUMINATY.',
-    },
-    {
-      property: 'og:url',
-      content: resolveSiteUrl('blog'),
-    },
-    {
-      property: 'og:image',
-      content: resolveSiteUrl(siteConfig.defaultOgImage),
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
+    { name: 'description', content: blogPage.heroDescription },
+    { property: 'og:title', content: `Blog | ${siteConfig.name}` },
+    { property: 'og:description', content: blogPage.heroDescription },
+    { property: 'og:url', content: resolveSiteUrl('blog') },
+    { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+    { name: 'twitter:card', content: 'summary_large_image' },
   ],
 })
 
