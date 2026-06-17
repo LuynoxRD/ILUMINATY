@@ -57,19 +57,19 @@ export const siteSettings: SiteSettings = {
 export const homePage: HomePageContent = {
   hero: {
     highlightedWord: 'Descubre',
-    titleRemainder: 'el talento mas revolucionario de NYC',
+    titleRemainder: 'el talento más revolucionario de NYC',
     description:
-      'La plataforma definitiva para conectar con artistas urbanos, raperos, productores y creadores visuales de Nueva York. Exploracion sin limites.',
+      'La plataforma definitiva para conectar con artistas urbanos, raperos, productores y creadores visuales de Nueva York. Exploración sin límites.',
     primaryCta: { label: 'Explorar Artistas', href: '/artistas' },
     secondaryCta: { label: 'Ver Eventos', href: '/eventos' },
     stats: [
       { label: 'Artistas', value: 500, suffix: '+', format: 'plain' },
       { label: 'Seguidores', value: 1200000, format: 'millions' },
-      { label: 'Eventos/Ano', value: 85, suffix: '+', format: 'plain' },
+      { label: 'Eventos/Año', value: 85, suffix: '+', format: 'plain' },
     ],
   },
   labelsSection: {
-    title: 'El futuro del arte urbano esta aqui',
+    title: 'El futuro del arte urbano está aquí',
     description: 'Trabajamos con los mejores sellos discograficos',
   },
   highlightCard: {
@@ -83,7 +83,7 @@ export const homePage: HomePageContent = {
   communitySection: {
     title: 'Una Comunidad que Crece',
     description:
-      'ILUMINATY es mas que una plataforma. Es un movimiento de artistas urbanos, productores y creadores que comparten una vision: democratizar el arte sin limites.',
+      'ILUMINATY es más que una plataforma. Es un movimiento de artistas urbanos, productores y creadores que comparten una vision: democratizar el arte sin limites.',
     benefits: [
       'Acceso a oportunidades de booking y colaboraciones',
       'Herramientas para gestionar tu carrera artistica',
@@ -160,22 +160,22 @@ export const homePage: HomePageContent = {
   appCta: {
     title: 'Descarga la app y sigue el pulso de la escena urbana',
     description: 'Descubre artistas, revisa eventos y conecta con la comunidad ILUMINATY desde tu telefono.',
-    iosButton: { label: 'Download for iOS', href: '#' },
-    androidButton: { label: 'Download for Android', href: '#' },
+    iosButton: { label: 'Descargar para iOS', href: '#' },
+    androidButton: { label: 'Descargar para Android', href: '#' },
   },
 }
 
 export const aboutPage: AboutPageContent = {
   heroTitle: 'Sobre ILUMINATY',
   heroDescription:
-    'Somos mas que una plataforma. Somos un movimiento que amplifica las voces de artistas urbanos de Nueva York.',
+    'Somos más que una plataforma. Somos un movimiento que amplifica las voces de artistas urbanos de Nueva York.',
   missionSection: {
     subtitle: 'Proposito',
     title: 'Nuestra Mision',
     description: 'Crear un ecosistema donde el talento urbano prospera sin limites',
     heading: 'Democratizar la Visibilidad',
     body:
-      'En ILUMINATY creemos que cada artista merece ser descubierto. No importa si estas comenzando en un sotano de Brooklyn o si ya eres una leyenda del Bronx. Nuestra plataforma reduce barreras y abre un espacio mas claro para mostrar trabajo, conectar comunidad y activar oportunidades reales.',
+      'En ILUMINATY creemos que cada artista merece ser descubierto. No importa si estas comenzando en un sotano de Brooklyn o si ya eres una leyenda del Bronx. Nuestra plataforma reduce barreras y abre un espacio más claro para mostrar trabajo, conectar comunidad y activar oportunidades reales.',
     bullets: [
       'Conexion directa entre artistas y audiencia',
       'Promocion igualitaria sin sesgos corporativos',
@@ -219,7 +219,7 @@ export const aboutPage: AboutPageContent = {
       {
         accentLabel: 'Creemos',
         accentClass: 'text-neon-lime',
-        body: 'que el arte urbano es la voz mas honesta de Nueva York. Cada beat, cada letra y cada trazo registra una realidad que merece archivo y visibilidad.',
+        body: 'que el arte urbano es la voz más honesta de Nueva York. Cada beat, cada letra y cada trazo registra una realidad que merece archivo y visibilidad.',
       },
       {
         accentLabel: 'Rechazamos',
@@ -239,7 +239,7 @@ export const aboutPage: AboutPageContent = {
       {
         accentLabel: 'Sonamos',
         accentClass: 'text-neon-violet',
-        body: 'con una industria donde el talento y la constancia pesen mas que la friccion de acceso.',
+        body: 'con una industria donde el talento y la constancia pesen más que la friccion de acceso.',
       },
     ],
   },
@@ -310,7 +310,7 @@ export const contactPage: ContactPageContent = {
       { value: 'other', label: 'Otro' },
     ],
     messageLabel: 'Mensaje *',
-    messagePlaceholder: 'Cuentanos mas sobre ti o tu propuesta...',
+    messagePlaceholder: 'Cuentanos más sobre ti o tu propuesta...',
     messageLimit: 1000,
     privacyPrefix: 'He leido y acepto los',
     termsLabel: 'Terminos y Condiciones',
@@ -392,7 +392,7 @@ export const artistsPage: ArtistsPageContent = {
   emptyState: {
     icon: '🔍',
     title: 'No se encontraron artistas',
-    description: 'Intenta cambiar los filtros para ver mas resultados.',
+    description: 'Intenta cambiar los filtros para ver más resultados.',
   },
 }
 
@@ -469,7 +469,7 @@ export const termsPage: LegalPageContent = {
     {
       title: '10. Cambios a los Terminos',
       paragraphs: [
-        'Podemos actualizar estos terminos periodicamente. Publicaremos la version mas reciente en esta pagina. El uso continuado del servicio despues de dichos cambios constituye tu aceptacion de los nuevos terminos.',
+        'Podemos actualizar estos terminos periodicamente. Publicaremos la version más reciente en esta pagina. El uso continuado del servicio despues de dichos cambios constituye tu aceptacion de los nuevos terminos.',
       ],
     },
   ],
@@ -483,7 +483,7 @@ export const termsPage: LegalPageContent = {
   },
   footerNote: 'Ultima actualizacion: Febrero 2026',
   ctaTitle: '¿Tienes Preguntas?',
-  ctaDescription: 'Nuestro equipo esta aqui para ayudarte. Contactanos si necesitas aclaraciones sobre nuestros terminos.',
+  ctaDescription: 'Nuestro equipo está aquí para ayudarte. Contáctanos si necesitas aclaraciones sobre nuestros términos.',
   ctaLink: { label: 'Contactar Soporte', href: '/contacto' },
 }
 
@@ -558,7 +558,7 @@ export const privacyPage: LegalPageContent = {
     {
       title: '6. Cookies y Tecnologias Similares',
       paragraphs: [
-        'Utilizamos cookies para mejorar tu experiencia. Para mas informacion, consulta nuestra politica de cookies.',
+        'Utilizamos cookies para mejorar tu experiencia. Para más informacion, consulta nuestra politica de cookies.',
       ],
       links: [{ label: 'Politica de Cookies', href: '/cookies' }],
     },
@@ -586,7 +586,7 @@ export const privacyPage: LegalPageContent = {
   },
   footerNote: 'Ultima actualizacion: Febrero 2026',
   ctaTitle: '¿Tienes Preguntas sobre Privacidad?',
-  ctaDescription: 'Nuestro equipo de privacidad esta aqui para ayudarte. No dudes en contactarnos.',
+  ctaDescription: 'Nuestro equipo de privacidad está aquí para ayudarte. No dudes en contactarnos.',
   ctaLink: { label: 'Contactar Equipo de Privacidad', href: '/contacto' },
 }
 
@@ -619,14 +619,14 @@ export const cookiesPage: LegalPageContent = {
           description: 'Permiten medir y mejorar el rendimiento de nuestro sitio.',
           bullets: [
             'Analisis de trafico web.',
-            'Identificacion de paginas mas populares.',
+            'Identificacion de paginas más populares.',
             'Deteccion de errores tecnicos.',
           ],
           accentClass: 'border-neon-violet/20 bg-neon-violet/10',
         },
         {
           title: 'Cookies Funcionales',
-          description: 'Permiten recordar tus preferencias para ofrecer funcionalidades mejoradas y mas personales.',
+          description: 'Permiten recordar tus preferencias para ofrecer funcionalidades mejoradas y más personales.',
           bullets: [
             'Preferencias de idioma.',
             'Configuracion de tema oscuro o claro.',
@@ -636,7 +636,7 @@ export const cookiesPage: LegalPageContent = {
         },
         {
           title: 'Cookies de Publicidad',
-          description: 'Se utilizan para mostrar anuncios mas relevantes y medir la efectividad de campañas publicitarias.',
+          description: 'Se utilizan para mostrar anuncios más relevantes y medir la efectividad de campañas publicitarias.',
           bullets: [
             'Personalizacion de anuncios.',
             'Medicion de campañas.',
@@ -666,7 +666,7 @@ export const cookiesPage: LegalPageContent = {
       cards: [
         {
           title: 'Configuracion del Navegador',
-          description: 'La mayoria de los navegadores te permiten ver, gestionar, eliminar y bloquear cookies. Consulta la configuracion de privacidad de tu navegador para mas informacion.',
+          description: 'La mayoria de los navegadores te permiten ver, gestionar, eliminar y bloquear cookies. Consulta la configuracion de privacidad de tu navegador para más informacion.',
           accentClass: 'border-neon-lime/20 bg-neon-lime/10',
         },
         {
@@ -707,7 +707,7 @@ export const cookiesPage: LegalPageContent = {
     {
       title: '8. Mas Informacion',
       paragraphs: [
-        'Para mas informacion sobre como protegemos tu privacidad, consulta nuestra politica relacionada.',
+        'Para más informacion sobre como protegemos tu privacidad, consulta nuestra politica relacionada.',
       ],
       links: [{ label: 'Politica de Privacidad', href: '/privacidad' }],
     },
@@ -728,7 +728,7 @@ export const cookiesPage: LegalPageContent = {
 
 export const eventsPage: EventsPageContent = {
   heroTitle: 'Calendario de Eventos',
-  heroDescription: 'Descubre los shows, festivales y experiencias urbanas mas esperadas de Nueva York.',
+  heroDescription: 'Descubre los shows, festivales y experiencias urbanas más esperadas de Nueva York.',
   statsLabels: {
     total: 'Eventos Totales',
     upcoming: 'Proximos',

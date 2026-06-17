@@ -1,7 +1,7 @@
 import { imageAssets } from '@/data/assets'
 import { sectionsToBlocks } from '@/lib/blogContent'
 import { parseLocalDate } from '@/lib/date'
-import type { BlogCategory, BlogPost, BlogSection } from '@/types/content'
+import type { BlogPost, BlogSection } from '@/types/content'
 
 interface RawBlogPost extends Omit<BlogPost, 'blocks'> {
   sections?: BlogSection[]

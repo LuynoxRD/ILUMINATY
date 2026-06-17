@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.sanity.io; connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ebPQzVruAfmq6kvM8gZsJzZzht5Zh9TodyaBGCH3YAk='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.sanity.io; connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Iluminaty - Plataforma de artistas urbanos de Nueva York" />
@@ -26,7 +26,11 @@
           document.documentElement.setAttribute('data-theme', theme)
           document.documentElement.setAttribute('data-theme-preference', preference)
         }
-        catch (e) {}
+        catch (e) {
+          if (e instanceof DOMException && e.name === 'SecurityError') {
+            console.warn('ILUMINATY: localStorage bloqueado por el navegador. Usando tema claro por defecto.')
+          }
+        }
       })()
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
