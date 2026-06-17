@@ -112,15 +112,12 @@ const handleTouchEnd = () => {
           </div>
         </button>
       </div>
-      <!-- Copia visual pura para el loop infinito — oculta a AT -->
-      <div class="flex" aria-hidden="true">
-        <button
+      <!-- Copia visual pura para el loop infinito — oculta a AT, no interactiva -->
+      <div class="flex pointer-events-none" aria-hidden="true">
+        <div
           v-for="artist in items"
           :key="`dup-${artist.id}`"
-          type="button"
-          tabindex="-1"
           class="group relative mx-4 h-[20rem] w-56 overflow-hidden bg-transparent p-0 text-left transition-all duration-300 hover:scale-90"
-          @click="emit('view', artist.id)"
         >
           <img :src="artist.image" alt="" class="w-full h-full object-cover" />
           <div class="flex items-center justify-center px-4 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute bottom-0 backdrop-blur-md left-0 w-full h-full bg-black/30">
@@ -130,11 +127,8 @@ const handleTouchEnd = () => {
               <p class="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-neon-lime">{{ artistsPage.actions.viewProfileLabel }}</p>
             </div>
           </div>
-        </button>
+        </div>
       </div>
-    </div>
-    <div class="theme-fade-right-soft absolute right-0 top-0 h-full w-8 sm:w-10 md:w-12 lg:w-14 xl:w-40 z-10 pointer-events-none" />
-  </div>
 </template>
 
 <style scoped>
