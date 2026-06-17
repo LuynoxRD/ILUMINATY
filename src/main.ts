@@ -39,7 +39,8 @@ export const createApp = ViteSSG(
     },
   },
   async ({ router, isClient }) => {
-    await loadContent()
+    if (isClient)
+      await loadContent()
 
     router.beforeEach((to, _from, next) => {
       if (isClient && to.meta.title) {
