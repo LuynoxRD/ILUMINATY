@@ -14,12 +14,12 @@
   </article>
 </template>
 
-<script setup>
-defineProps({
-  title: String,
-  excerpt: String,
-  author: String,
-  date: String,
-  cover: String,
-})
+<script setup lang="ts">
+defineProps<{
+  title?: string
+  excerpt?: string
+  author?: string
+  date?: string
+  cover?: string
+}>()
 </script>
