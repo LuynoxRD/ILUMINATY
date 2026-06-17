@@ -8,7 +8,7 @@ export interface ContactFormPayload {
   artistName?: string
   genre?: string
   message: string
-  privacy: true
+  privacy: boolean
 }
 
 export interface NewsletterPayload {

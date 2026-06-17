@@ -44,7 +44,6 @@ describe('validateContactFormPayload', () => {
   })
 
   it('lanza error si privacy es false', () => {
-    // @ts-expect-error — probando que TypeScript Y Zod rechazan privacy: false
     const payload = { ...validContact, privacy: false }
     expect(() => validateContactFormPayload(payload)).toThrow()
   })
