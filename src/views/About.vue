@@ -121,9 +121,25 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import { useContent } from '@/composables/useContent'
+import { siteConfig } from '@/config/site'
+import { resolveSiteUrl } from '@/lib/seo'
 import { toSafeHref } from '@/lib/safeUrl'
 
 const { aboutContent, aboutPage } = useContent()
+
+useHead({
+  title: `Sobre Nosotros | ${siteConfig.name}`,
+  link: [{ rel: 'canonical', href: resolveSiteUrl('sobre-nosotros') }],
+  meta: [
+    { name: 'description', content: aboutPage.heroDescription },
+    { property: 'og:title', content: `Sobre Nosotros | ${siteConfig.name}` },
+    { property: 'og:description', content: aboutPage.heroDescription },
+    { property: 'og:url', content: resolveSiteUrl('sobre-nosotros') },
+    { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ],
+})
 </script>

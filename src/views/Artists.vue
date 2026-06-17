@@ -79,13 +79,29 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useHead } from '@unhead/vue'
 import { useRoute, useRouter } from 'vue-router'
 import ArtistCard from '@/components/ArtistCard.vue'
 import ArtistPopup from '@/components/ArtistPopup.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import { useContent } from '@/composables/useContent'
+import { siteConfig } from '@/config/site'
+import { resolveSiteUrl } from '@/lib/seo'
 
 const { artistDirectoryEntries, artistsPage } = useContent()
+
+useHead({
+  title: `Artistas | ${siteConfig.name}`,
+  link: [{ rel: 'canonical', href: resolveSiteUrl('artistas') }],
+  meta: [
+    { name: 'description', content: artistsPage.heroDescription },
+    { property: 'og:title', content: `Artistas | ${siteConfig.name}` },
+    { property: 'og:description', content: artistsPage.heroDescription },
+    { property: 'og:url', content: resolveSiteUrl('artistas') },
+    { property: 'og:image', content: resolveSiteUrl(siteConfig.defaultOgImage) },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ],
+})
 const route = useRoute()
 const router = useRouter()
 

@@ -10,6 +10,7 @@ const notImplemented = (source: string): never => {
 }
 
 let contentAdapter: ContentAdapter = localContentAdapter
+let contentLoadPromise: Promise<ContentAdapter> | null = null
 
 const resolveRemoteContentAdapter = async (): Promise<ContentAdapter> => {
   switch (contentSource) {
@@ -33,12 +34,21 @@ const resolveRemoteContentAdapter = async (): Promise<ContentAdapter> => {
 
 export const getContent = () => contentAdapter
 
-export const loadContent = async () => {
-  if (contentSource === 'local') {
-    contentAdapter = localContentAdapter
-    return contentAdapter
-  }
+export const loadContent = async (): Promise<ContentAdapter> => {
+  if (contentLoadPromise)
+    return contentLoadPromise
 
-  contentAdapter = await resolveRemoteContentAdapter()
-  return contentAdapter
+  contentLoadPromise = (async () => {
+    if (contentSource === 'local') {
+      contentAdapter = localContentAdapter
+      return contentAdapter
+    }
+    contentAdapter = await resolveRemoteContentAdapter()
+    return contentAdapter
+  })().catch((err) => {
+    contentLoadPromise = null
+    throw err
+  })
+
+  return contentLoadPromise
 }

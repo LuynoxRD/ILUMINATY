@@ -10,8 +10,11 @@ export const useNewsletterForm = (source: string) => {
   const submitStatus = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
   const feedbackMessage = ref('')
 
+  let feedbackTimer: ReturnType<typeof setTimeout> | undefined
+
   const clearFeedback = (delay = 4000) => {
-    window.setTimeout(() => {
+    clearTimeout(feedbackTimer)
+    feedbackTimer = setTimeout(() => {
       feedbackMessage.value = ''
       if (submitStatus.value !== 'loading') {
         submitStatus.value = 'idle'
