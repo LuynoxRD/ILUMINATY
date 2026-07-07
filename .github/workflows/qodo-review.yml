@@ -20,7 +20,7 @@ jobs:
       contents: read
     steps:
       - name: Qodo Review
-        uses: qodo-ai/pr-agent@e639d10a4df023b90668ec35796c2457c5f5db8d  # main as of 2026-06-16
+        uses: qodo-ai/pr-agent@bd09b6cf89c6d6f3d16b159fa7603fa0e7768cf2  # main as of 2026-06-16
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
