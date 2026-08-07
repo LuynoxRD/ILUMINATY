@@ -8,47 +8,45 @@
 
 ## Estado Dependabot / PRs — 2026-08-07
 
-### Alertas Dependabot abiertas (10)
+### ✅ Resuelto (ejecutado el 2026-08-07)
 
-| # | Severidad | Paquete | Instalado | Vulnerable | Corregido | Origen (transitiva de) | Runtime? |
-|---|---|---|---|---|---|---|---|
-| 36 | HIGH | fast-uri | 3.1.3 | <3.1.5 | 3.1.5 | ajv (commitlint) | No (dev) |
-| 26 | HIGH | fast-uri | 3.1.3 | <=3.1.3 | 3.1.4 | ajv (commitlint) | No (dev) |
-| 32 | HIGH | undici | 7.28.0 | <7.29.0 | 7.29.0 | jsdom (tests) | No (dev) |
-| 35 | MED | undici | 7.28.0 | <7.29.0 | 7.29.0 | jsdom (tests) | No (dev) |
-| 34 | MED | undici | 7.28.0 | <7.29.0 | 7.29.0 | jsdom (tests) | No (dev) |
-| 33 | MED | undici | 7.28.0 | <7.29.0 | 7.29.0 | jsdom (tests) | No (dev) |
-| 31 | MED | undici | 7.28.0 | <7.29.0 | 7.29.0 | jsdom (tests) | No (dev) |
-| 28 | HIGH | postcss | 8.5.15 | <=8.5.17 | 8.5.18 | @vue/compiler-sfc, tailwind, vite | No (build) |
-| 24 | HIGH | brace-expansion | 5.0.6 | <5.0.7 | 5.0.7 | minimatch (glob/editorconfig) | No (dev) |
-| 25 | LOW | dompurify | 3.4.11 | <=3.4.11 | 3.4.12 | dependencia directa | **Sí** |
+Todas las acciones completadas y verificadas:
 
-**Análisis de impacto:** 9 de 10 alertas son de dependencias transitivas **dev/build** (commitlint, jsdom para tests, tooling de build). Ninguna llega al bundle de producción. La única alerta con impacto en runtime es **dompurify (LOW)**, ya cubierta por el PR #117.
+| Acción | Resultado |
+|---|---|
+| Merge PR #117 (dompurify → 3.4.12) | MERGED |
+| Merge PRs #118, #119, #120, #121, #123, #124 | MERGED |
+| Cierre PR #122 (tailwindcss 3→4, major) | CLOSED + ignore |
+| PR #126 (overrides + bumps) | MERGED, CI verde |
+| `npm audit` | **0 vulnerabilidades** |
+| Lint / Tests / Build | ✅ 93 tests, build SSG OK |
+| Alertas Dependabot abiertas | **0** |
+
+**Cambios aplicados (PR #126):** dompurify 3.4.13, postcss 8.5.26, overrides: fast-uri ^3.1.5, undici ^7.29.0, brace-expansion ^5.0.7, js-yaml ^5.2.3 (CVE-2026-59870).
+
+### Historial de alertas (10, todas cerradas)
+
+| # | Severidad | Paquete | Instalado | Corregido | Origen (transitiva de) | Runtime? |
+|---|---|---|---|---|---|---|
+| 36 | HIGH | fast-uri | 3.1.3 | 3.1.5 | ajv (commitlint) | No (dev) |
+| 26 | HIGH | fast-uri | 3.1.3 | 3.1.4 | ajv (commitlint) | No (dev) |
+| 32 | HIGH | undici | 7.28.0 | 7.29.0 | jsdom (tests) | No (dev) |
+| 35 | MED | undici | 7.28.0 | 7.29.0 | jsdom (tests) | No (dev) |
+| 34 | MED | undici | 7.28.0 | 7.29.0 | jsdom (tests) | No (dev) |
+| 33 | MED | undici | 7.28.0 | 7.29.0 | jsdom (tests) | No (dev) |
+| 31 | MED | undici | 7.28.0 | 7.29.0 | jsdom (tests) | No (dev) |
+| 28 | HIGH | postcss | 8.5.15 | 8.5.18 | @vue/compiler-sfc, tailwind, vite | No (build) |
+| 24 | HIGH | brace-expansion | 5.0.6 | 5.0.7 | minimatch (glob/editorconfig) | No (dev) |
+| 25 | LOW | dompurify | 3.4.11 | 3.4.12 | dependencia directa | **Sí** |
+
+**Análisis de impacto:** 9 de 10 alertas eran de dependencias transitivas **dev/build** (commitlint, jsdom para tests, tooling de build). Ninguna llegaba al bundle de producción. La única alerta con impacto en runtime era **dompurify (LOW)**, cubierta por el PR #117 y subida a 3.4.13 por un advisory adicional (GHSA-55q2-fjhq-7xh7).
 
 - **Code scanning:** 0 alertas abiertas.
 - **Security advisories:** 0.
 
-### PRs abiertos (8, todos Dependabot)
+### Pendiente / recomendación
 
-| PR | Cambio | Estado CI | Veredicto |
-|---|---|---|---|
-| **#117** | dompurify 3.4.11 → 3.4.12 | CLEAN ✓ | ✅ **Merge** — cierra alerta LOW #25 (única runtime) |
-| #120 | @vitejs/plugin-vue 6.0.7 → 6.0.8 | CLEAN ✓ | ✅ Merge — patch dev |
-| #121 | happy-dom 20.10.5 → 20.11.1 | CLEAN ✓ | ✅ Merge — patch dev |
-| #123 | @vueuse/core 14.3.0 → 14.4.0 | CLEAN ✓ | ✅ Merge — minor |
-| #124 | github/codeql-action 4 → 4.37.3 | CLEAN ✓ | ✅ Merge — Action CI |
-| #119 | qodo-ai/pr-agent 0.38.0 → 0.41.0 | CLEAN ✓ | ✅ Merge — Action CI |
-| #118 | actions/setup-node 4 → 7 | CLEAN ✓ | ✅ Merge — Action CI (Node 24, ESM; rompe solo runners <20) |
-| #122 | tailwindcss 3.4.19 → 4.3.3 | CLEAN ✓ | ⚠️ **NO mergear** — major 3→4. Requiere migración: config CSS-first, plugin `@tailwindcss/vite`, `darkMode` class y tokens custom (`bg-page`, `bg-light`, `accent`) se pierden. Solo toca package.json/lock, el build fallaría. |
-
-### Plan de remediación para alertas sin PR
-
-1. **dompurify** → merge PR #117 (cierra #25).
-2. **postcss** → `npm install -D postcss@^8.5.18` (ya declarado `^8.4.0`, cierra #28).
-3. **fast-uri** → `overrides: { "fast-uri": "^3.1.5" }` en package.json (cierra #36 y #26).
-4. **undici** → `overrides: { "undici": "^7.29.0" }` o bump jsdom a ^30 (cierra #32, #31, #33, #34, #35).
-5. **brace-expansion** → `overrides: { "brace-expansion": "^5.0.7" }` (cierra #24).
-6. **tailwind** → cerrar PR #122 con `@dependabot ignore this major version` y planificar migración a Tailwind 4 por separado.
+- **Tailwind 4 (PR #122):** cerrar con `@dependabot ignore this major version` ya ejecutado. Migración 3→4 requiere: config CSS-first (no `tailwind.config.js`), plugin `@tailwindcss/vite`, revisar `darkMode` class y tokens custom (`bg-page`, `bg-light`, `accent`). Planificar como tarea separada.
 
 ---
 
