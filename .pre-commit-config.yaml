@@ -15,11 +15,11 @@ repos:
     hooks:
       - id: commitlint
         name: commitlint
-        entry: commitlint --edit
-        language: node
+        entry: npx --no-install commitlint --edit
+        language: system
         stages: [commit-msg]
       - id: eslint
         name: eslint
-        entry: eslint --
-        language: node
+        entry: npx --no-install eslint --
+        language: system
         files: \.(vue|[cm]?[jt]sx?)$

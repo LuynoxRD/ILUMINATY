@@ -46,6 +46,9 @@ export default [
         varsIgnorePattern: '^_',
       }],
       'vue/multi-word-component-names': 'off',
+      // El proyecto renderiza iconos como datos tipados, nunca HTML crudo.
+      // Si necesitas HTML externo, sanitízalo antes y justifica la excepción.
+      'vue/no-v-html': 'error',
     },
   },
 ]
