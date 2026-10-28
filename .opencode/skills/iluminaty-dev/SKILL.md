@@ -254,6 +254,7 @@ export function useTheme() {
 - **`__dirname` en configs**: usar `fileURLToPath(new URL(...))` (Vite 8 native config loader).
 - **DOMPurify en SSG**: el import por defecto en Node es la factory, no una instancia con `.sanitize`. No lo llames durante el render del servidor.
 - **CSP `connect-src 'self'`**: cualquier API externa nueva (Sanity, webhook, analytics) necesita añadirse o fallará silenciosamente en el navegador.
+- **Qodo review puede fallar sin ser culpa del código**: si el log muestra `AuthenticationError ... dummy_key` o `Missing Anthropic API Key`, faltan secretos del workflow. Revisa el log antes de bloquear el merge; el check `verify` (lint/test/build) es el que valida el cambio.
 
 ---
 
