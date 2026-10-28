@@ -201,7 +201,7 @@ export function useTheme() {
   2. Si es un **major**, revisa `npm view <pkg> peerDependencies` y busca el bump coordinado.
   3. `npm run lint && npm run test:run && npm run build`.
   4. Smoke test visual si tocó runtime (Vue, Vite, Tailwind, DOMPurify).
-- **Un PR verde en GitHub no basta:** hasta 2026-10-28 los PRs no ejecutaban lint/test/build (solo CodeQL/gitleaks/Qodo). El workflow `ci.yml` cierra ese hueco.
+- **Un PR verde en GitHub no basta:** hasta 2026-10-28 los PRs no ejecutaban lint/test/build (solo CodeQL/gitleaks). El workflow `ci.yml` cierra ese hueco.
 - Si un advisory no tiene fix, documenta el riesgo residual y el workaround en `security-audit-report.md`.
 
 ---
@@ -214,7 +214,6 @@ export function useTheme() {
 | `.github/workflows/main.yml` | `push` → `main` | Build + deploy a GitHub Pages |
 | `.github/workflows/codeql.yml` | PR/push/schedule | Análisis CodeQL |
 | `.github/workflows/gitleaks.yml` | PR/push | Escaneo de secretos |
-| `.github/workflows/qodo-review.yml` | PR | Review automático de Qodo |
 
 - **`main` está protegida: no hay push directo.** Todo va por rama + PR + squash merge.
 - Mensajes de commit con Conventional Commits (`commitlint`): `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `ci:`.
@@ -254,7 +253,7 @@ export function useTheme() {
 - **`__dirname` en configs**: usar `fileURLToPath(new URL(...))` (Vite 8 native config loader).
 - **DOMPurify en SSG**: el import por defecto en Node es la factory, no una instancia con `.sanitize`. No lo llames durante el render del servidor.
 - **CSP `connect-src 'self'`**: cualquier API externa nueva (Sanity, webhook, analytics) necesita añadirse o fallará silenciosamente en el navegador.
-- **Qodo review puede fallar sin ser culpa del código**: si el log muestra `AuthenticationError ... dummy_key` o `Missing Anthropic API Key`, faltan secretos del workflow. Revisa el log antes de bloquear el merge; el check `verify` (lint/test/build) es el que valida el cambio.
+- **Qodo no está activo**: el plan gratuito OSS exige **200+ estrellas** en el repo (ILUMINATY tiene 3) y el workflow self-hosted se eliminó por falta de API key. No lo reinstales sin cumplir el requisito o sin configurar una key de LLM.
 
 ---
 

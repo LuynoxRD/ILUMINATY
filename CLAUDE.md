@@ -50,5 +50,5 @@ La skill cubre: stack, convenciones TypeScript, patrones Vue 3, seguridad, depen
 - [M-001] CSP `style-src 'unsafe-inline'` — deuda aceptada (GitHub Pages estático).
 - [M-002] Rate limiting en webhooks — responsabilidad del receptor.
 - Tailwind 3→4 — tarea separada.
-- **Qodo:** el check `review` falla con `dummy_key` / `Missing Anthropic API Key`; faltan secretos en el workflow, no es un fallo de código.
+- **Qodo no aplica todavía:** el plan gratuito OSS exige 200+ estrellas (el repo tiene 3). La app puede quedar instalada, pero no revisa. Se eliminó `.github/workflows/qodo-review.yml` porque fallaba en cada PR por falta de `OPENAI_KEY`. Reinstalar solo al cumplir el requisito o con una key de LLM propia.
 - **Revisar override `unhead`/`@unhead/dom` 2.1.13** mientras `@unhead/vue` está en 2.1.15 (posible desalineación de versión).

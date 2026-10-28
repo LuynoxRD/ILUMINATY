@@ -150,7 +150,7 @@ Bloquea protocolos peligrosos, payloads URL-encoded y open redirects. Todos los 
 4. ✅ Escape de JSON-LD en `serializeJsonLd` (`src/lib/seo.ts`).
 5. ✅ `rel="noreferrer"` en enlaces externos.
 6. ✅ Focus trapping y restauración de foco en modales.
-7. ✅ CodeQL + gitleaks + Qodo en CI.
+7. ✅ CodeQL + gitleaks + CI propio (lint/tests/build) en cada PR.
 8. ✅ Tests (93) y build SSG verificados en cada PR desde octubre de 2026.
 
 ---
