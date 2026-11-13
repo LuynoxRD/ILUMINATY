@@ -29,12 +29,15 @@ whenToUse: Cuando se trabaje en cualquier tarea del proyecto ILUMINATY — compo
 | `@vueuse/core` | 14.3.0 | ^14.2.1 | Composables utilitarios |
 | `gsap` | 3.15.0 | ^3.12.0 | Animaciones |
 | `zod` | 4.6.7 | ^4.6.7 | Validación de schemas en runtime |
-| `@unhead/vue` | 2.1.15 | ^2.1.13 | Meta tags SEO (SSG-compatible) |
+| `@unhead/vue` | 2.1.17 | ^2.1.17 | Meta tags SEO (SSG-compatible) |
 | `dompurify` | 3.4.17 | ^3.4.17 | Sanitización de HTML (solo si es imprescindible) |
 | `vitest` | 5.0.5 | ^5.0.5 | Test runner |
 | `@vitest/coverage-v8` | 5.0.5 | ^5.0.5 | Cobertura (debe ir SIEMPRE con vitest) |
 | `happy-dom` | 21.0.4 | ^21.0.4 | Entorno DOM de tests |
-| `eslint` | 10.6.0 | ^10.6.0 | Linter (flat config) |
+| `eslint` | 10.13.0 | ^10.13.0 | Linter (flat config) |
+| `@typescript-eslint/eslint-plugin` | 8.72.1 | ^8.72.1 | Reglas TS para ESLint |
+| `@typescript-eslint/parser` | 8.72.2 | ^8.72.1 | Parser TS para ESLint |
+| `vue-tsc` | 3.3.13 | ^3.3.13 | Type-check de SFC |
 
 > Regla: `vitest` y `@vitest/coverage-v8` se actualizan **juntos y en la misma versión**. Un bump aislado de coverage rompe `npm install` por peer dependency (pasó en el PR #143).
 
@@ -194,6 +197,7 @@ export function useTheme() {
   - `brace-expansion ^5.0.12`
   - `js-yaml ^5.4.1`
   - `source-map-js 1.2.2`
+  - `minimatch ^11.0.1` y `glob ^14.0.6` (advisories de DoS en tooling, dev-only; audit 0)
   - `postcss-selector-parser`: `6.1.5` bajo `tailwindcss`/`postcss-nested`, `7.1.7` bajo `eslint-plugin-vue`
   - `picomatch` bajo `anymatch`/`micromatch`/`readdirp`/`tinyglobby`
 - **Antes de mergear un PR de Dependabot:**
@@ -201,6 +205,9 @@ export function useTheme() {
   2. Si es un **major**, revisa `npm view <pkg> peerDependencies` y busca el bump coordinado.
   3. `npm run lint && npm run test:run && npm run build`.
   4. Smoke test visual si tocó runtime (Vue, Vite, Tailwind, DOMPurify).
+- **Majors bloqueados por el ecosistema (Dependabot los ignora):**
+  - `typescript` 6+/7.x: `@typescript-eslint` exige `typescript >=4.8.4 <6.1.0`. No es mergeable hasta que el toolchain soporte el compilador nativo.
+  - `@unhead/vue` 3.x: `vite-ssg@28.3.0` solo soporta v2. Con v3 el build pasa, pero el SSG pierde el head por página (title, description, canonical, OG).
 - **Un PR verde en GitHub no basta:** hasta 2026-10-28 los PRs no ejecutaban lint/test/build (solo CodeQL/gitleaks/Qodo). El workflow `ci.yml` cierra ese hueco.
 - Si un advisory no tiene fix, documenta el riesgo residual y el workaround en `security-audit-report.md`.
 
@@ -254,6 +261,8 @@ export function useTheme() {
 - **`__dirname` en configs**: usar `fileURLToPath(new URL(...))` (Vite 8 native config loader).
 - **DOMPurify en SSG**: el import por defecto en Node es la factory, no una instancia con `.sanitize`. No lo llames durante el render del servidor.
 - **CSP `connect-src 'self'`**: cualquier API externa nueva (Sanity, webhook, analytics) necesita añadirse o fallará silenciosamente en el navegador.
+- **`@unhead/vue` v3 rompe el SSG**: vite-ssg 28 usa v2 internamente. Si se instala v3, los meta tags por página desaparecen de `dist/` aunque el build no falle. No quitarlo del ignore de Dependabot sin actualizar vite-ssg.
+- **TypeScript 7 no instala**: `npm ci` falla con ERESOLVE por el peer de `@typescript-eslint`. No usar `--legacy-peer-deps` para saltarlo.
 - **Qodo review puede fallar sin ser culpa del código**: si el log muestra `AuthenticationError ... dummy_key` o `Missing Anthropic API Key`, faltan secretos del workflow. Revisa el log antes de bloquear el merge; el check `verify` (lint/test/build) es el que valida el cambio.
 
 ---

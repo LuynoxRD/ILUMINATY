@@ -6,6 +6,17 @@
 
 ---
 
+## Actualización 2026-11-13 — advisories de tooling
+
+- Se revisaron las 7 PRs de Dependabot: 5 mergeadas (#151, #152, #153, #154, #157) y 2 cerradas (#155 TypeScript 7 y #156 @unhead/vue 3) por incompatibilidad real de peers/SSG.
+- `npm audit` detectó 13 advisories moderadas nuevas, todas en tooling de desarrollo: `minimatch` (GHSA-g3hv-75wg-m249, DoS por amplificación de globparts) y `glob` (GHSA-3g3m-2fjr-6pw4, bypass de AbortSignal), transitivas de `eslint`, `@typescript-eslint/*` y `@vue/test-utils`/`js-beautify`.
+- Corrección: overrides `minimatch ^11.0.1` (instalado 11.0.8) y `glob ^14.0.6` (instalado 14.0.6). No llegan al bundle de producción.
+- Familia `unhead` v2 alineada en 2.1.17 para eliminar el override desalineado 2.1.13.
+- Resultado: `npm audit` = **0**, `npm ci` + lint + 93 tests + build SSG verdes.
+- Política: Dependabot ignora majors de `typescript` y `@unhead/vue` hasta que `@typescript-eslint` y `vite-ssg` los soporten.
+
+---
+
 ## Estado actual — 2026-10-28
 
 | Métrica | Estado |
