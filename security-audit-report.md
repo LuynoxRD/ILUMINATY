@@ -14,6 +14,7 @@
 - Familia `unhead` v2 alineada en 2.1.17 para eliminar el override desalineado 2.1.13.
 - Resultado: `npm audit` = **0**, `npm ci` + lint + 93 tests + build SSG verdes.
 - Política: Dependabot ignora majors de `typescript` y `@unhead/vue` hasta que `@typescript-eslint` y `vite-ssg` los soporten.
+- **Segundo lote (2026-11-13):** 7 PRs adicionales mergeadas (#159–#165), incluido el major `@vueuse/core` 15.0.0 (verificado: solo `useStorage`/`usePreferredDark`) y `vitest`/`coverage-v8` 5.1.0 coordinados. `npm audit` sigue en **0**.
 
 ---
 

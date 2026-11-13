@@ -26,17 +26,19 @@ whenToUse: Cuando se trabaje en cualquier tarea del proyecto ILUMINATY — compo
 | `vite-ssg` | 28.3.0 | ^28.3.0 | Static Site Generation |
 | `tailwindcss` | 3.4.19 | ^3.4.0 | Estilos utilitarios |
 | `typescript` | 5.9.3 | ^5.6.0 | Tipado estático |
-| `@vueuse/core` | 14.3.0 | ^14.2.1 | Composables utilitarios |
+| `@vueuse/core` | 15.0.0 | ^15.0.0 | Composables utilitarios (Node >=22) |
 | `gsap` | 3.15.0 | ^3.12.0 | Animaciones |
 | `zod` | 4.6.7 | ^4.6.7 | Validación de schemas en runtime |
 | `@unhead/vue` | 2.1.17 | ^2.1.17 | Meta tags SEO (SSG-compatible) |
 | `dompurify` | 3.4.17 | ^3.4.17 | Sanitización de HTML (solo si es imprescindible) |
-| `vitest` | 5.0.5 | ^5.0.5 | Test runner |
-| `@vitest/coverage-v8` | 5.0.5 | ^5.0.5 | Cobertura (debe ir SIEMPRE con vitest) |
+| `vitest` | 5.1.0 | ^5.1.0 | Test runner |
+| `@vitest/coverage-v8` | 5.1.0 | ^5.1.0 | Cobertura (debe ir SIEMPRE con vitest) |
 | `happy-dom` | 21.0.4 | ^21.0.4 | Entorno DOM de tests |
 | `eslint` | 10.13.0 | ^10.13.0 | Linter (flat config) |
-| `@typescript-eslint/eslint-plugin` | 8.72.1 | ^8.72.1 | Reglas TS para ESLint |
-| `@typescript-eslint/parser` | 8.72.2 | ^8.72.1 | Parser TS para ESLint |
+| `@typescript-eslint/eslint-plugin` | 8.72.2 | ^8.72.2 | Reglas TS para ESLint |
+| `@typescript-eslint/parser` | 8.72.2 | ^8.72.2 | Parser TS para ESLint |
+| `eslint-plugin-vue` | 10.12.1 | ^10.12.1 | Reglas Vue para ESLint |
+| `vue-eslint-parser` | 10.4.2 | ^10.4.2 | Parser de SFC para ESLint |
 | `vue-tsc` | 3.3.13 | ^3.3.13 | Type-check de SFC |
 
 > Regla: `vitest` y `@vitest/coverage-v8` se actualizan **juntos y en la misma versión**. Un bump aislado de coverage rompe `npm install` por peer dependency (pasó en el PR #143).
@@ -262,6 +264,7 @@ export function useTheme() {
 - **DOMPurify en SSG**: el import por defecto en Node es la factory, no una instancia con `.sanitize`. No lo llames durante el render del servidor.
 - **CSP `connect-src 'self'`**: cualquier API externa nueva (Sanity, webhook, analytics) necesita añadirse o fallará silenciosamente en el navegador.
 - **`@unhead/vue` v3 rompe el SSG**: vite-ssg 28 usa v2 internamente. Si se instala v3, los meta tags por página desaparecen de `dist/` aunque el build no falle. No quitarlo del ignore de Dependabot sin actualizar vite-ssg.
+- **VueUse 15 exige Node >=22**: no bajar CI ni local a Node 20. El proyecto y CI usan Node 24.
 - **TypeScript 7 no instala**: `npm ci` falla con ERESOLVE por el peer de `@typescript-eslint`. No usar `--legacy-peer-deps` para saltarlo.
 - **Qodo review puede fallar sin ser culpa del código**: si el log muestra `AuthenticationError ... dummy_key` o `Missing Anthropic API Key`, faltan secretos del workflow. Revisa el log antes de bloquear el merge; el check `verify` (lint/test/build) es el que valida el cambio.
 
