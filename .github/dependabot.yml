@@ -11,6 +11,13 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    ignore:
+      # TS 7 es el compilador nativo; typescript-eslint exige typescript <6.1.0.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      # vite-ssg 28 solo soporta @unhead/vue v2; v3 rompe el head del SSG.
+      - dependency-name: "@unhead/vue"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

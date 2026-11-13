@@ -12,6 +12,16 @@ Antes de tocar cualquier archivo, invoca la skill del proyecto:
 
 La skill cubre: stack, convenciones TypeScript, patrones Vue 3, seguridad, dependencias, CI/PR, configuración Tailwind/Vite, arquitectura de carpetas y checklist de build.
 
+## Memoria — Sesión 2026-11-13 (Dependabot)
+
+- **7 PRs de Dependabot:** 5 mergeadas (#151 pr-agent 0.49.0, #152 eslint 10.13.0, #153 typescript-eslint 8.72.1 coordinado con parser 8.72.2, #154 vue-tsc 3.3.13, #157 codeql-action 4.39.1) y **2 cerradas con justificación**.
+- **#155 (TypeScript 7.0.2) cerrada:** `npm ci` falla con ERESOLVE porque `@typescript-eslint/eslint-plugin` exige `typescript >=4.8.4 <6.1.0` incluso en su última versión. TS 7 es el compilador nativo; el toolchain aún no lo soporta.
+- **#156 (@unhead/vue 3.4.3) cerrada:** `vite-ssg@28.3.0` depende de `@unhead/vue ^2.1.2`. Probado sin overrides: el build pasa, pero el SSG pierde title/description/canonical/OG por página y deja el HTML estático. Regresión SEO.
+- **Política:** `.github/dependabot.yml` ignora majors de `typescript` y `@unhead/vue` hasta que el ecosistema los soporte.
+- **Seguridad:** `npm audit` pasó de 13 moderadas (advisories nuevas de `minimatch` y `glob`, dev-only) a **0** con overrides `minimatch ^11.0.1` y `glob ^14.0.6`. Familia `unhead` v2 alineada en 2.1.17 (`@unhead/vue`, `@unhead/dom`, `unhead`).
+- **Verificación:** `npm ci`, lint, 93/93 tests, build SSG y `npm audit` 0. CI `verify` verde y deploy a Pages OK.
+- **Lección:** un PR verde en GitHub no basta para majors; hay que reproducir `npm ci` y revisar peers/salida SSG en local.
+
 ## Memoria — Seguridad (2026-10-28)
 
 - **`npm audit` = 0** y **Dependabot = 0** alertas abiertas tras la remediación de octubre.
