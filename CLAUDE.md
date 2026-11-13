@@ -12,6 +12,14 @@ Antes de tocar cualquier archivo, invoca la skill del proyecto:
 
 La skill cubre: stack, convenciones TypeScript, patrones Vue 3, seguridad, dependencias, CI/PR, configuración Tailwind/Vite, arquitectura de carpetas y checklist de build.
 
+## Memoria — Sesión 2026-11-13 (segundo lote)
+
+- **7 PRs adicionales de Dependabot, todas mergeadas:** #159 pr-agent 0.50.0, #160 codeql-action 4.39.3, #161 eslint-plugin-vue 10.12.1, #162 typescript-eslint 8.72.2, #163 @vueuse/core 15.0.0, #164 vue-eslint-parser 10.4.2, #165 vitest 5.1.0.
+- **Vitest 5.1.0 + coverage 5.1.0 coordinados:** el peer de vitest exige coverage exacta 5.1.0; Dependabot ya actualizó ambos en el lockfile. `npm run test:coverage` verificado.
+- **VueUse 15.0.0:** major seguro para este proyecto. Solo se usan `useStorage` y `usePreferredDark` (APIs sin cambios). Exige Node >=22; el proyecto y CI usan Node 24.
+- **Rangos declarados alineados:** `@typescript-eslint/parser ^8.72.2`, `@vitest/coverage-v8 ^5.1.0`.
+- **Verificación:** `npm ci`, lint, 93/93 tests, coverage, build SSG y `npm audit` 0. Deploy a Pages OK.
+
 ## Memoria — Sesión 2026-11-13 (Dependabot)
 
 - **7 PRs de Dependabot:** 5 mergeadas (#151 pr-agent 0.49.0, #152 eslint 10.13.0, #153 typescript-eslint 8.72.1 coordinado con parser 8.72.2, #154 vue-tsc 3.3.13, #157 codeql-action 4.39.1) y **2 cerradas con justificación**.
